@@ -1,0 +1,1 @@
+Read this repository's e2e suite and write the conventions a reviewer on this team would enforce for new end-to-end tests, as a section to add to AGENTS.md.
