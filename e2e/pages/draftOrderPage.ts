@@ -53,6 +53,19 @@ export class DraftOrderPage {
 
   readonly summary = this.page.getByTestId("OrderSummary");
 
+  readonly addDiscountButton = this.summary.getByRole("button", { name: "Add Discount" });
+
+  readonly percentageOption = this.dialog.getByRole("radio", { name: "Percentage" });
+
+  readonly discountValueInput = this.dialog.getByTestId("discount-value");
+
+  readonly discountReasonInput = this.dialog.getByTestId("discount-reason");
+
+  // Anchored: the outer discount section is also a list item and contains both words.
+  readonly manualDiscountRow = this.summary.getByRole("listitem").filter({ hasText: /^Manual/ });
+
+  readonly linePromotionRow = this.summary.getByRole("listitem").filter({ hasText: /^Promotion/ });
+
   readonly finalizeButton = this.page.getByTestId("button-bar-confirm");
 
   constructor(readonly page: Page) {}
@@ -99,6 +112,26 @@ export class DraftOrderPage {
     await this.customerInput.fill(email);
     await this.option.filter({ hasText: email }).click();
     await this.dialog.getByTestId("submit").click();
+  }
+
+  /** The reason is exposed only as this link's `title`, not as visible text. */
+  manualDiscountPercent(percent: number) {
+    return this.summary.getByRole("button", { name: `${percent}%` });
+  }
+
+  async addOrderDiscount({ percent, reason }: { percent: number; reason: string }) {
+    // With a line promotion on the draft, "Add Discount" exists only inside the expanded
+    // breakdown. The toggle flips, so this assumes it starts collapsed, as it is straight
+    // after adding lines or a reload.
+    await this.discountToggle.click();
+    await this.addDiscountButton.click();
+    await this.percentageOption.check();
+    await this.discountValueInput.fill(String(percent));
+    await this.discountReasonInput.fill(reason);
+    await this.dialog.getByTestId("submit").click();
+    // Closes once the mutation and refetch finish, but on an error too, so callers must
+    // assert the totals to know the discount landed.
+    await this.dialog.waitFor({ state: "hidden" });
   }
 
   async setFirstShippingMethod() {

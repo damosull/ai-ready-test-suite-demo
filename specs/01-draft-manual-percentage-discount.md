@@ -1,0 +1,114 @@
+# 01 - Draft order: manual 25% order discount on top of a catalogue promotion
+
+## Application Overview
+
+Ticket: tickets/01.md. Staff add a manual percentage discount with a reason to a draft order from the draft's Summary card. The manual order discount is applied after the catalogue promotion already on the line, and must be saved, not just shown.
+
+## Scope and conventions
+- One test, one user story, with a `test.step` per stage (CLAUDE.md E2E 2.2). Planned file: `e2e/tests/orders/draft-manual-discount.spec.ts`, opening with a comment that says what it covers and why (1.5). Title: `Draft total applies a manual percentage discount after the line promotion #e2e`.
+- Imports `test`/`expect` from `../../fixtures/test.ts` (1.2), and `CHANNEL`, `ORDERS_SCENARIO`, `PRODUCTS`, `PROMOTIONS` from `../../scenarios/orders.ts`. `test.use({ scenario: ORDERS_SCENARIO })` (3.1). Actor is the default `admin` (5.1). No new scenario and no API arrangement: the draft is started in Arrange with `DraftOrderPage.create({ from: "drafts", channel: CHANNEL.name })` and the tee is added with `DraftOrderPage.addProduct(PRODUCTS.tee)` (3.2).
+- The database is restored before the test, so there is no cleanup and no unique reason text (4.1). No `parallel()` tag, because the test writes (4.3). No fixed waits (7.1).
+- Money is compared as `amount.toFixed(2)` through a `money` helper, as in `draft-pricing.spec.ts` (2.6).
+- The manual discount input lives in a spec constant, since it is ticket data and not seed data: `const MANUAL = { percent: 25, reason: "Goodwill gesture" } as const;`
+
+## Expected values (derived, never typed)
+- `teePrice = PRODUCTS.tee.price` (10)
+- `teeDiscount = teePrice * PROMOTIONS.catalogue.percent / 100` (2)
+- `promotedSubtotal = teePrice - teeDiscount` (8)
+- `manualDiscount = promotedSubtotal * MANUAL.percent / 100` (2)
+- `expectedTotal = promotedSubtotal - manualDiscount` (6.00)
+- `totalDiscount = teeDiscount + manualDiscount` (4.00, the figure on the collapsed "Discount (applied)" row)
+
+Guards in Arrange (2.5), each with a why comment:
+- `expect(promotedSubtotal).toBeLessThan(PROMOTIONS.order.subtotalAtLeast)`. If the tee alone reached the "E2E big basket" threshold, the order promotion would apply, the Order subgroup would offer "Override with manual discount" instead of "Add Discount", and the arithmetic would change.
+- `expect(teeDiscount).toBeGreaterThan(0)`. The story is about a manual discount on top of a line promotion, so the line promotion has to exist.
+
+## Locators found in the running dashboard (stable target, http://localhost:9200)
+The dashboard build was explored on a draft in Channel-USD holding a product with a 40% catalogue promotion (10.00 to 6.00). The DB on the stack was not the orders scenario at the time, so the E2E Tee was not available. A manual 25% made the total 4.50, the manual row 1.50 and the toggle 5.50. That confirms the manual percentage applies to the already-promoted subtotal, and the result survived a reload. The figures below are for the E2E Tee.
+
+Summary card (existing `DraftOrderPage` fields):
+- Summary container: `getByTestId("OrderSummary")`, which is `draft.summary`
+- Order total: `getByTestId("order-total")`, which is `draft.total`. Plain number, e.g. `6.00`, with no currency; "USD" is a sibling element.
+- Subtotal row: `getByTestId("order-subtotal-line")`. Not on the page object yet. The manual order discount is folded into it: in exploration it showed the same 4.50 as the total, not the promoted 6.00.
+- Discount section toggle: `getByTestId("discount-section-toggle")`, which is `draft.discountToggle`. Text "Discount (applied) <total discount>". Its amount is `discountToggle.getByTitle("Discount amount")`.
+
+Discount breakdown (only rendered after clicking the toggle, and collapsed again after a reload):
+- "Add Discount" (opens the order discount dialog): `summary.getByRole("button", { name: "Add Discount" })`. It has no test id. While the draft has a line promotion and no order discount, this link exists ONLY inside the expanded breakdown, under the "Order" sub-header. The top-level "Add Discount" row shows only when the draft has no discount at all.
+- Manual discount row: `summary.getByRole("listitem").filter({ hasText: /^Manual/ })`. Text "Manual 25% 2.00". Its amount is `.getByTitle("Discount amount")`. The anchored regex matters: the outer discount section is also an `li` and contains "Manual". Verified to match exactly one element.
+- Manual percentage: `summary.getByRole("button", { name: "25%" })`. A ButtonLink that reopens the dialog. The reason is only exposed as its `title` attribute (`toHaveAttribute("title", MANUAL.reason)`), and is not visible text.
+- Line promotion row: `summary.getByRole("listitem").filter({ hasText: /^Promotion/ })`. Text "Promotion (1 line) 2.00". Its amount is `.getByTitle("Discount amount")`. Verified to match exactly one element.
+
+Order discount dialog (`getByRole("dialog")`, title "Order discount"):
+- Percentage / Fixed Amount: `dialog.getByRole("radio", { name: "Percentage" })` / `{ name: "Fixed Amount" }`. Wrapper divs also carry `data-test-id="PERCENTAGE"` / `"FIXED"`. Percentage is preselected.
+- Value: `dialog.getByTestId("discount-value")` (the input itself; "%" suffix shown beside it)
+- Reason: `dialog.getByTestId("discount-reason")` (input)
+- Confirm: `dialog.getByTestId("submit")`, disabled until a non-zero valid value is entered
+- Cancel: `dialog.getByTestId("back")`; close: `dialog.getByTestId("close-button")`; Remove (only when a manual discount exists): `dialog.getByTestId("button-remove")`
+
+## Page-object changes (extend `e2e/pages/draftOrderPage.ts`, no spec-local helpers; 6.3, 6.4)
+New `readonly` fields, scoped to their container (6.2):
+- `addDiscountButton = this.summary.getByRole("button", { name: "Add Discount" })`
+- `percentageOption = this.dialog.getByRole("radio", { name: "Percentage" })`
+- `discountValueInput = this.dialog.getByTestId("discount-value")`
+- `discountReasonInput = this.dialog.getByTestId("discount-reason")`
+- `manualDiscountRow = this.summary.getByRole("listitem").filter({ hasText: /^Manual/ })`
+- `linePromotionRow = this.summary.getByRole("listitem").filter({ hasText: /^Promotion/ })`
+
+New method `addOrderDiscount({ percent, reason }: { percent: number; reason: string })`:
+1. Click `discountToggle`, then `addDiscountButton`. Comment: with a line promotion on the draft, "Add Discount" only exists inside the expanded breakdown. Expanding is a toggle, so the method assumes it starts collapsed, which is true straight after adding lines or after a reload.
+2. Check `percentageOption` explicitly rather than relying on the default.
+3. Fill `discountValueInput` with `String(percent)` and `discountReasonInput` with `reason`.
+4. Click `this.dialog.getByTestId("submit")`, then `this.dialog.waitFor({ state: "hidden" })`. Comment: the dialog closes only after the mutation completes and the order is refetched, but it also closes on error, so the caller must still assert the totals.
+
+The breakdown stays expanded after the dialog closes. The spec therefore asserts the rows directly after the action, and clicks `discountToggle` again only after the reload.
+
+## Test Scenarios
+
+### 1. Draft order manual discount
+
+**Seed:** `e2e/tests/seed.spec.ts`
+
+#### 1.1. Draft total applies a manual percentage discount after the line promotion #e2e
+
+**File:** `e2e/tests/orders/draft-manual-discount.spec.ts`
+
+**Steps:**
+  1. // Arrange - `test.use({ scenario: ORDERS_SCENARIO })`, default admin actor. Derive teePrice, teeDiscount, promotedSubtotal, manualDiscount, expectedTotal and totalDiscount from PRODUCTS.tee and PROMOTIONS.catalogue plus the spec constant MANUAL = { percent: 25, reason: "Goodwill gesture" }. Guard: promotedSubtotal < PROMOTIONS.order.subtotalAtLeast (the tee alone must not trigger the order promotion) and teeDiscount > 0.
+    - expect: Both guard expectations pass (8 < 30 and 2 > 0 with the current constants); if the scenario constants change so the arithmetic no longer holds, the test fails here with a clear message rather than on a wrong total
+  2. // Arrange - `draft.create({ from: "drafts", channel: CHANNEL.name })` starts a draft in Channel-USD from /orders/drafts.
+    - expect: `draft.statusInfo` shows "Draft" (asserted inside `create`)
+  3. test.step("the tee is discounted by its catalogue promotion") - `draft.addProduct(PRODUCTS.tee)`.
+    - expect: `draft.total` has text money(promotedSubtotal), i.e. "8.00"
+    - expect: `draft.discountToggle` contains money(teeDiscount), i.e. "2.00" - the line promotion is in place before the manual discount, so the later total proves stacking, not replacement
+  4. test.step("a manual 25% order discount comes off the promoted subtotal") - `draft.addOrderDiscount({ percent: MANUAL.percent, reason: MANUAL.reason })` (expands the breakdown, clicks "Add Discount" under Order, keeps Percentage, fills discount-value 25 and discount-reason, confirms, waits for the dialog to close).
+    - expect: `draft.total` has text money(expectedTotal), i.e. "6.00". Wrong orders of operation give different numbers: 7.50 if the manual 25% replaced the line promotion, 5.50 if 25% of the undiscounted 10.00 came off the promoted 8.00
+    - expect: `draft.discountToggle.getByTitle("Discount amount")` has text money(totalDiscount), i.e. "4.00"
+  5. test.step("the breakdown shows the manual 25% alongside the line promotion") - the breakdown is still expanded after the dialog closes; assert on the scoped rows (teeDiscount and manualDiscount are both 2.00 with the current constants, so an unscoped `summary.toContainText("2.00")` could not tell them apart).
+    - expect: `draft.manualDiscountRow` contains "Manual" and `${MANUAL.percent}%` ("25%")
+    - expect: `draft.manualDiscountRow.getByTitle("Discount amount")` has text money(manualDiscount)
+    - expect: `draft.summary.getByRole("button", { name: `${MANUAL.percent}%` })` has attribute title = MANUAL.reason (the reason is only exposed as a tooltip title)
+    - expect: `draft.linePromotionRow` contains "Promotion" and "(1 line)"; its `getByTitle("Discount amount")` has text money(teeDiscount)
+  6. test.step("the discount is saved, not just shown") - `page.reload()`, then click `draft.discountToggle` to expand the breakdown again (it is collapsed after a reload).
+    - expect: `draft.statusInfo` shows "Draft" (still a draft, same page)
+    - expect: `draft.total` has text money(expectedTotal), i.e. "6.00"
+    - expect: `draft.manualDiscountRow` contains "25%" and its amount is money(manualDiscount)
+    - expect: `draft.linePromotionRow` amount is money(teeDiscount)
+    - expect: The "25%" button still carries title = MANUAL.reason (the reason persisted)
+
+### 2. Notes for the implementer (not separate tests)
+
+**Seed:** `e2e/tests/seed.spec.ts`
+
+#### 2.1. Observed behaviour and pitfalls to respect when writing the spec
+
+**File:** `e2e/tests/orders/draft-manual-discount.spec.ts`
+
+**Steps:**
+  1. Breakdown percentage rendering: the manual row label is the word "Manual"; the percentage is rendered as a ButtonLink whose text is `${value}%` (e.g. "25%") with the reason in its `title`; a fixed discount would show "Fixed amount" instead. The line promotion row is labelled generically "Promotion (1 line)" - the promotion name "E2E Tee sale" is NOT rendered for line discounts (order-level automatic promotions do show their name, which is why draft-pricing can assert PROMOTIONS.order.name).
+    - expect: Do not assert PROMOTIONS.catalogue.name in the summary - it is not there
+  2. The Subtotal row (`order-subtotal-line`) already includes the manual order discount (in exploration it showed the same figure as the total), so it is not a usable 'before manual discount' figure.
+    - expect: Assert on `order-total` and the breakdown rows, not on the subtotal row, for the manual discount arithmetic
+  3. The dialog closes after the mutation and refetch complete, but it also closes when the mutation returns errors (an error notification is shown instead of "Saved changes").
+    - expect: Never treat the dialog closing as proof of success; the total and row assertions are the proof
+  4. Out of scope for this ticket (one story per test, 2.2): fixed-amount discounts, editing/removing the manual discount (button-remove), validation (Confirm disabled for empty/0, error for >100% or non-numeric), and the 'Override with manual discount' path when the order promotion applies. Each would be a separate story/spec if wanted.
+    - expect: The spec contains exactly one test
