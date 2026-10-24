@@ -409,3 +409,25 @@ export const findOrderId = async (config: E2eConfig, ref: ScenarioOrder): Promis
 
   return order.node.id;
 };
+
+/** The id of one of `PROMOTIONS` in the restored database, found by its name. */
+export const findPromotionId = async (
+  config: E2eConfig,
+  ref: keyof typeof PROMOTIONS,
+): Promise<string> => {
+  const data = await gql<{ promotions: { edges: { node: { id: string } }[] } }>(
+    config,
+    `query($name: String!) {
+      promotions(first: 1, where: { name: { eq: $name } }) { edges { node { id } } }
+    }`,
+    { name: PROMOTIONS[ref].name },
+    await adminToken(config),
+  );
+  const [promotion] = data.promotions.edges;
+
+  if (!promotion) {
+    throw new Error(`the "${ORDERS_SCENARIO}" scenario has no promotion "${ref}"`);
+  }
+
+  return promotion.node.id;
+};
