@@ -1,0 +1,7 @@
+branch: baseline-plus-rules-r3-t06
+spec: tests/customers/customer-note.spec.ts
+command: pnpm e2e tests/customers/customer-note.spec.ts --workers=1 --repeat-each=20 --reporter=line,json
+runner exit: 0
+minutes: 3
+test line 17: 20/20 passed: customer service staff can save a note on a customer #e2e #customers
+spec passes: 20/20
