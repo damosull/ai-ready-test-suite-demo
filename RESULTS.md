@@ -1,6 +1,116 @@
 # Results
 
-## Version 1.1: held-out tickets, three arms (headline)
+## Version 1.2: a fourth arm, conventions the AI tool wrote itself (headline)
+
+Pre-registered in [SCORING.md, "Addendum for v1.2"](SCORING.md#addendum-for-v12-pre-registered-committed-before-any-v12-generation)
+and committed (`25051f9`) and pushed before any v1.2 generation.
+
+v1.1 compared conventions written by someone who knows the suite against no conventions. The free
+alternative a team actually has is to ask the AI tool to write the conventions itself. That is the
+fourth arm:
+
+- `ai-conventions`: the baseline (Playwright's test agents) plus an `AGENTS.md` section written by
+  one fresh Claude Code session from this prompt, verbatim: "Read this repository's e2e suite and
+  write the conventions a reviewer on this team would enforce for new end-to-end tests, as a
+  section to add to AGENTS.md." The session ran in a clean export of the Saleor commit, with none
+  of this demo's files and no other branches. It took 2 minutes, added a 76-line "End-to-end
+  tests" section to `AGENTS.md`, and the section was committed unedited. Its transcript, reply and
+  change are in [`evidence/ai-conventions/`](evidence/ai-conventions/).
+
+Tickets 06 to 08, one generation each, round 4 (`ai-conventions-r4-t06` to `t08`). The other three
+arms are their round-3 results, not rerun. Same blind whole-change review, same three runs, same
+breaks. Numbers come from [`demo/tally4.py`](demo/tally4.py).
+
+#### Held-out tickets 06 to 08, four arms
+
+##### Ticket 06
+
+| Arm                   | Blockers | Minors      | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | ----------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 0        | 2 (M1, M13) | 3/3     | yes                       | `fad76700` (round 3) |
+| `ai-conventions`      | 0        | 0           | 3/3     | yes                       | `c18bb572` (round 4) |
+| `baseline-plus-rules` | 0        | 1 (M1)      | 3/3     | yes                       | `a52faa49` (round 3) |
+| `with-setup`          | 0        | 0           | 3/3     | yes                       | `cdad8a58` (round 3) |
+
+##### Ticket 07
+
+| Arm                   | Blockers | Minors              | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | ------------------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 1 (B6)   | 4 (M1, M4, M8, M13) | 3/3     | yes                       | `80a33156` (round 3) |
+| `ai-conventions`      | 0        | 0                   | 3/3     | yes                       | `06940040` (round 4) |
+| `baseline-plus-rules` | 0        | 1 (M13)             | 3/3     | yes                       | `264e9819` (round 3) |
+| `with-setup`          | 0        | 0                   | 3/3     | yes                       | `e78cc5bf` (round 3) |
+
+##### Ticket 08
+
+| Arm                   | Blockers | Minors          | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | --------------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 0        | 3 (M1, M8, M13) | 3/3     | yes                       | `baa7f8e0` (round 3) |
+| `ai-conventions`      | 0        | 1 (M1)          | 3/3     | yes                       | `ed1fd1d2` (round 4) |
+| `baseline-plus-rules` | 0        | 0               | 3/3     | yes                       | `f0549153` (round 3) |
+| `with-setup`          | 0        | 0               | 3/3     | yes                       | `4e7e3762` (round 3) |
+
+##### Totals
+
+| Arm                   | Blockers | Minors | Findings | Green 3/3 | Caught the broken feature |
+| --------------------- | -------- | ------ | -------- | --------- | ------------------------- |
+| `baseline`            | 1        | 9      | 10       | 3/3       | 3/3                       |
+| `ai-conventions`      | 0        | 1      | 1        | 3/3       | 3/3                       |
+| `baseline-plus-rules` | 0        | 2      | 2        | 3/3       | 3/3                       |
+| `with-setup`          | 0        | 0      | 0        | 3/3       | 3/3                       |
+
+Pass rule, `with-setup` against `baseline`: zero blockers yes; at most half its findings (0 vs 10) yes; green 3/3 yes. **PASS**
+
+Pass rule, `with-setup` against `ai-conventions`: zero blockers yes; at most half its findings (0 vs 1) yes; green 3/3 yes. **PASS**
+
+Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at most half its findings (0 vs 2) yes; green 3/3 yes. **PASS**
+
+#### `ai-conventions` against `baseline-plus-rules`
+
+| Ticket | `ai-conventions`            | `baseline-plus-rules`        |
+| ------ | --------------------------- | ---------------------------- |
+| 06     | 0 + 0, 3/3, caught yes      | 0 + 1 (M1), 3/3, caught yes  |
+| 07     | 0 + 0, 3/3, caught yes      | 0 + 1 (M13), 3/3, caught yes |
+| 08     | 0 + 1 (M1), 3/3, caught yes | 0 + 0, 3/3, caught yes       |
+| Total  | 0 + 1 = 1                   | 0 + 2 = 2                    |
+
+#### Every failed item, `ai-conventions`
+
+- `ai-conventions` 08 **M1**: Line 119 (spec): the locator rule.getByTestId("rule-value-chip") is written inline in the spec instead of on PromotionPage.
+
+**Verdict.** The conventions the AI tool wrote for itself did as well as the expert's, here:
+`ai-conventions` scored 0 blockers and 1 minor finding over three tickets, `baseline-plus-rules`
+0 and 2, `with-setup` 0 and 0, `baseline` 1 and 9. All four arms were green 3/3 and caught every
+broken feature. The difference between the two written-convention arms is one minor finding the
+other way, in one generation per ticket: they are level. `with-setup` still passes the pass rule
+against every arm, including `ai-conventions` (0 findings against 1).
+
+What the AI-written section covers is close to CONVENTIONS.md on the points that cost the baseline
+its findings: locators and multi-step actions belong on page objects in `e2e/pages/`, no CSS
+selectors, one `test.step` per stage, comments explain why rather than narrate. All three
+`ai-conventions` changes added or extended page objects; none left the planner's `// spec:` or
+`// seed:` lines in the code. Its one finding is a single inline locator in ticket 08.
+
+One caution on reading this: the reviewer scores against CHECKLIST.md and CONVENTIONS.md, which the
+`baseline-plus-rules` arm was handed and the `ai-conventions` arm was not. `ai-conventions` reached
+the same level without seeing the rules it was scored against.
+
+### v1.2 notes
+
+- **Generation time.** Per session, round 4: 12.8, 8.6 and 10.1 minutes (06, 07, 08), plus 2
+  minutes once to write the conventions. The other arms' times are in the v1.1 notes below.
+- **MCP tool cap.** Playwright MCP calls were capped at 5 minutes for this arm
+  (`MCP_TOOL_TIMEOUT=300000`). The cap never fired; no session hung. The MCP errors in the
+  transcripts are ordinary 5 to 15 second locator timeouts while the agents explored the pages.
+- **Formatting.** The conventions session asked for Prettier to be run on `AGENTS.md`; its tool
+  permissions did not allow it. As pre-registered, the section was committed as written, without
+  formatting.
+- **Whole-diff review.** Each round-4 change touched only `e2e/` (new spec, new or extended page
+  objects) and the agents' plan under `specs/`.
+- No infrastructure re-runs, and no verdict looked plainly wrong, so there are no notes against
+  any number.
+
+## Version 1.1: held-out tickets, three arms
 
 Pre-registered in [SCORING.md, "Addendum for v1.1"](SCORING.md#addendum-for-v11-pre-registered-committed-before-any-v11-generation)
 and committed before any v1.1 generation. Three arms, each generated once per ticket as round 3:

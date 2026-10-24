@@ -1,10 +1,11 @@
 # Does your AI tool write tests your team would merge?
 
 A side-by-side test on a real open-source suite: Playwright's free test agents, the same agents
-given the team's written conventions, and an AI setup tailored to the suite, on tickets none of
-them was built for, reviewed blind against the team's own conventions.
+given conventions the AI tool wrote for itself, the same agents given conventions written by
+someone who knows the suite, and an AI setup tailored to the suite. All on tickets none of them
+was built for, reviewed blind against the team's own conventions.
 
-<!-- RESULTS GRAPHIC: placeholder. Three-arm totals for the held-out tickets go here. -->
+<!-- RESULTS GRAPHIC: placeholder. Four-arm totals for the held-out tickets go here. -->
 
 ## Results
 
@@ -12,38 +13,47 @@ Three held-out tickets (customers, products, discounts) on the Saleor Dashboard'
 suite. One AI-written test change per ticket per arm, every change reviewed by a fresh AI reviewer
 that did not know which arm wrote it.
 
-|                                                  | Playwright agents | Agents + written conventions | Tailored setup |
-| ------------------------------------------------ | ----------------- | ---------------------------- | -------------- |
-| Blockers (would not merge)                       | 1                 | 0                            | **0**          |
-| Minor findings (would be sent back)              | 9                 | 2                            | **0**          |
-| Green three runs out of three                    | 3/3               | 3/3                          | 3/3            |
-| Failed when the feature was broken, as it should | 3/3               | 3/3                          | 3/3            |
-| Minutes per ticket                               | 8 to 40           | 6 to 40                      | 1.5 to 1.7     |
+|                                                  | Playwright agents | Agents + AI-written conventions | Agents + expert conventions | Tailored setup |
+| ------------------------------------------------ | ----------------- | ------------------------------- | --------------------------- | -------------- |
+| Blockers (would not merge)                       | 1                 | 0                               | 0                           | **0**          |
+| Minor findings (would be sent back)              | 9                 | 1                               | 2                           | **0**          |
+| Green three runs out of three                    | 3/3               | 3/3                             | 3/3                         | 3/3            |
+| Failed when the feature was broken, as it should | 3/3               | 3/3                             | 3/3                         | 3/3            |
+| Minutes per ticket                               | 8 to 40           | 8.6 to 12.8                     | 6 to 40                     | 1.5 to 1.7     |
 
-**Most of the gain comes from writing the conventions down.** Putting the team's conventions in
-the file the AI reads every time took the free agents from 1 blocker and 9 minor findings to none
-and 2. The tailored setup, which adds a write-test workflow and a self-review step on top of the
-same conventions, scored 0. That passes the rule set before the run against both arms, but against
-the conventions-only arm it is close to a tie: the difference is two minor findings in three
-tickets. Its other advantage is speed (the two 40-minute sessions were a tool hang, explained in
-[RESULTS.md](RESULTS.md)).
+The tailored setup skips Playwright's planner, generator and healer loop, so part of its speed
+lead is a shorter workflow, not better tests. The two 40-minute sessions were a tool call that
+hung, explained in [RESULTS.md](RESULTS.md).
 
-All three arms wrote tests that work. The difference is whether the tests belong to the suite.
-Without the conventions, the agents put locators and multi-step actions in the test files instead
-of the page objects the team keeps for them, left generated narration in the code, and once picked
-an element by position. With them, they mostly did not.
+**Written-down conventions make the difference, and the AI tool can write them itself.** Asked
+once to write the conventions a reviewer on this team would enforce, a fresh AI session read the
+suite for two minutes and wrote an `AGENTS.md` section. With it, the free agents went from 1
+blocker and 9 minor findings to none and 1. Conventions written by someone who knows the suite
+scored none and 2: on these three tickets, the two are level. The tailored setup, which adds a
+write-test workflow and a self-review step, scored 0 and was several times faster. Over the
+convention-bearing arms, that is a difference of one or two minor findings in three tickets.
+
+All four arms wrote tests that work. The difference is whether the tests belong to the suite.
+Without conventions, the agents put locators and multi-step actions in the test files instead of
+the page objects the team keeps for them, left generated narration in the code, and once picked
+an element by position. With conventions, from either source, they mostly did not.
 
 The first version of this demo used five order-management tickets and two arms. Its results,
 including the tailored setup's failed first round and what was changed, stay in
 [RESULTS.md](RESULTS.md) below the headline. On those five tickets the totals were baseline 1 + 12,
-conventions-only 0 + 1, tailored setup 0 + 0.
+expert conventions 0 + 1, tailored setup 0 + 0. The AI-written conventions were not run on them.
+
+Want this measured on your own suite and tickets? Start with a repo check:
+
+<!-- LINK: offer page, added when it exists -->
 
 ## The claim
 
 An AI coding tool writes tests a team would merge when the team's conventions are written down
-where the tool reads them every time. A workflow that applies and checks those conventions makes
-it faster and a little cleaner still. Without the conventions, it writes tests that work but that
-a reviewer sends back.
+where the tool reads them every time, and on this suite the tool could write those conventions
+itself from the existing tests, as well as an expert did. Without them, it writes tests that work
+but that a reviewer sends back. A workflow that applies and checks the conventions made it faster
+and scored one or two minor findings cleaner, a gap too small to call on three tickets.
 
 ## What was compared
 
@@ -52,6 +62,11 @@ own `CLAUDE.md`, skills and Claude hooks.
 
 - **`baseline`**: Playwright's test agents (Planner, Generator, Healer) from
   `npx playwright init-agents --loop=claude`, set up as Playwright's documentation describes.
+- **`ai-conventions`**: the same agents, plus an `AGENTS.md` section written by a fresh Claude
+  Code session that saw only Saleor's repository and one prompt: "Read this repository's e2e
+  suite and write the conventions a reviewer on this team would enforce for new end-to-end tests,
+  as a section to add to AGENTS.md." Committed unedited
+  ([`evidence/ai-conventions/`](evidence/ai-conventions/)).
 - **`baseline-plus-rules`**: the same agents, plus the text of [CONVENTIONS.md](CONVENTIONS.md)
   appended to `AGENTS.md` (which Saleor's `CLAUDE.md` links to). Nothing else.
 - **`with-setup`**: a rules section in `CLAUDE.md` and two skills: `write-test` (ticket in, test
@@ -74,7 +89,8 @@ ticket, no human edits to anything generated.
 - the pass rule above.
 
 The tickets are in [`tickets/`](tickets/). Each ticket's tests are on their own branch. Held-out
-tickets: `baseline-r3-t06`..`t08`, `baseline-plus-rules-r3-t06`..`t08`, `with-setup-r3-t06`..`t08`.
+tickets: `baseline-r3-t06`..`t08`, `ai-conventions-r4-t06`..`t08`, `baseline-plus-rules-r3-t06`..`t08`,
+`with-setup-r3-t06`..`t08`.
 Version 1: `baseline-t01`..`t05`, `baseline-plus-rules-r3-t01`..`t05`, `with-setup-r2-t01`..`t05`.
 
 ## Reproduce it
@@ -85,6 +101,7 @@ You need Node 24, pnpm 11, Docker, and Claude Code signed in to a subscription. 
 pnpm install
 pnpm e2e                 # brings up Saleor in Docker and runs the existing suite (first run ~5 min)
 demo/reproduce.sh        # the held-out run: three arms, tickets 06-08, prints the tables (~1-2 h)
+demo/reproduce.sh v1.2   # then the fourth arm: AI-written conventions, tickets 06-08 (~45 min)
 ```
 
 `demo/reproduce.sh v1` repeats version 1 instead. Either overwrites the per-ticket branches in your clone and adds its evidence to
@@ -94,10 +111,15 @@ numbers.
 ## What this is not
 
 Eight tickets on one suite (three held out), one generation per ticket per arm, scored by an AI
-reviewer. That is a demonstration, not a study. A gap of two minor findings between the two
-rule-bearing arms is well within what a second generation could change. It shows what the difference looks like and makes the method open to
-checking; it does not measure how large the difference is in general. The reviewer's full verdicts
-are published so you can disagree with them.
+reviewer. That is a demonstration, not a study. Gaps of one or two minor findings between the
+convention-bearing arms are well within what a second generation could change. It shows what the
+difference looks like and makes the method open to checking; it does not measure how large the
+difference is in general. The reviewer's full verdicts are published so you can disagree with
+them.
+
+The checklist and the expert conventions come from the same reading of the suite, so the arm
+given those conventions was scored against rules it was handed; the baseline and ai-conventions
+arms were not.
 
 ## Credit
 

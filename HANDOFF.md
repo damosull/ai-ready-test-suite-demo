@@ -1,11 +1,12 @@
 # Handoff
 
-## State (2026-10-24, after v1.1)
+## State (2026-10-24, after v1.2)
 
-v1.1 is complete and written up. Headline (held-out tickets 06-08, three arms): baseline 1
-blocker + 9 minors, baseline-plus-rules 0 + 2, with-setup 0 + 0. with-setup passes the pass rule
-against both arms, but against baseline-plus-rules it is close to a tie. See README.md and
-RESULTS.md.
+v1.2 is complete and written up. Held-out tickets 06-08, four arms, blockers + minors: baseline
+1 + 9, ai-conventions 0 + 1, baseline-plus-rules 0 + 2, with-setup 0 + 0. All green 3/3, all
+caught the breaks. Conventions the AI wrote for itself (one fixed prompt, unedited) matched the
+expert conventions. with-setup passes the pass rule against every arm, by one or two minor
+findings against the convention-bearing arms. See README.md and RESULTS.md (v1.2 heading).
 
 Nothing is published. The repo is private; Damien decides when it goes public.
 
@@ -19,17 +20,23 @@ Nothing is published. The repo is private; Damien decides when it goes public.
   stops it. The stack was left stopped.
 - Branches:
   - `main`: Saleor Dashboard at `77dc49b` plus the demo (docs, `tickets/`, `demo/`, `evidence/`).
-  - Arms: `baseline` (Playwright agents, `model: inherit`), `baseline-plus-rules` (plus
+  - Arms: `baseline` (Playwright agents, `model: inherit`), `ai-conventions` (plus the
+    AGENTS.md section written by `demo/write-conventions.sh`), `baseline-plus-rules` (plus
     CONVENTIONS.md in `AGENTS.md`), `with-setup` (rules + skills; **frozen** at `ba60244`, tag
     `with-setup-frozen-v1`).
   - Generated tests, one branch per ticket: `<arm>-t0N` (round 1), `with-setup-r2-t0N` (round 2),
-    `<arm>-r3-t0N` (round 3, v1.1). Never edit these; they are what was scored.
+    `<arm>-r3-t0N` (round 3, v1.1), `ai-conventions-r4-t0N` (round 4, v1.2). Never edit these; they
+    are what was scored.
 - Scripts (always run copies from outside the repo, with `REPO` set, because they switch branches):
   `demo/generate.sh <arm> <ticket> <round>`, `demo/review.sh`, `demo/run-checks.sh`, then
-  `demo/tally.py <round>` (v1) or `demo/tally3.py` (v1.1). `demo/reproduce.sh` wraps them.
+  `demo/tally.py <round>` (v1), `demo/tally3.py` (v1.1) or `demo/tally4.py` (v1.2).
+  `demo/reproduce.sh [v1|v1.2]` wraps them. Long runs: copy it outside the repo and start it
+  detached, as v1.2 was:
+  `cd ~/.cache/ai-ready-demo && nohup bash -c 'source ~/.nvm/nvm.sh && nvm use 24 && REPO=$HOME/Projects/ai-ready-test-suite-demo ./reproduce.sh v1.2' > v1.2.log 2>&1 &`.
+  Do not edit the checkout while a run is going: it switches branches and needs a clean tree.
   Sessions and scoring share one database and one checkout: strictly one at a time.
-- Rounds used so far: 1 and 2 (v1), 3 (v1.1). A new experiment uses round 4 and a new SCORING.md
-  addendum committed before generation.
+- Rounds used so far: 1 and 2 (v1), 3 (v1.1), 4 (v1.2). A new experiment uses round 5 and a new
+  SCORING.md addendum committed before generation.
 - Rule for any new version: pre-register in SCORING.md and commit before generating; one
   generation per ticket per arm; never change tickets, checklist, breaks or a frozen arm to move a
   number.
@@ -38,27 +45,30 @@ Nothing is published. The repo is private; Damien decides when it goes public.
 
 1. **Parallel stacks before the next big run.** Two or three isolated e2e stacks: git worktrees,
    port and compose-project offsets in `e2e/config.ts` (via an env var, defaulting to today's
-   values), Docker Desktop memory raised from 7.65 GB (one stack uses about 2.5 GB). Prove a
-   parallel run gives the same results as a serial one before relying on it. Then add the method,
-   generically, to qa-setup-kit.
-2. **Cap MCP tool calls** (`MCP_TOOL_TIMEOUT`, a few minutes) for agent-based arms: two v1.1
-   sessions each lost 30 minutes to a Playwright MCP `test_run` call that never returned.
-3. Results graphic: placeholder comment near the top of README.md.
-4. Before publishing: someone other than the author reads RESULTS.md and both disclosures in
+   values), Docker Desktop memory raised from 7.65 GB (one stack uses about 2.5 GB; fleet-pilot's
+   Supabase stack also takes about 3.4 GB when running). Prove a parallel run gives the same
+   results as a serial one before relying on it. Then add the method, generically, to
+   qa-setup-kit.
+2. Results graphic: placeholder comment near the top of README.md (now four arms).
+3. Offer-page link: `<!-- LINK: offer page, added when it exists -->` at the end of the README
+   Results section.
+4. Before publishing: someone other than the author reads RESULTS.md and the disclosures in
    SCORING.md.
 
 ## Open problems
 
-- Close call between baseline-plus-rules and with-setup rests on two minor findings in one
-  generation per ticket. More tickets or repeated generations would be needed to say more.
-- Long runs are tied to the session that started them. Start them detached (`nohup ... &` with a
-  log) so a new session can pick them up.
+- The three convention-bearing arms are separated by one or two minor findings in one generation
+  per ticket. More tickets or repeated generations would be needed to rank them.
+- The reviewer scores against CHECKLIST.md and CONVENTIONS.md, which come from the same reading
+  of the suite as the baseline-plus-rules arm's rules. Disclosed in SCORING.md and the README.
+- The MCP tool cap (`MCP_TOOL_TIMEOUT=300000`) is set only for `ai-conventions` in
+  `demo/generate.sh`; the v1.1 arms ran without it. Any rerun of them should add it, pre-registered.
 
-## Done in v1.1
+## Done in v1.2
 
-- Deleted Saleor's `.github/workflows` from `main`, the three Actions build artifacts, and the empty
-  `deploy-staging` environment.
-- Pre-registered and ran the third arm, the held-out tickets and the whole-diff review.
+- Pre-registered the fourth arm (`25051f9`, pushed before generation), wrote the conventions once
+  in a clean export of the Saleor commit, ran tickets 06-08 as round 4, tallied with
+  `demo/tally4.py`. The MCP cap never fired.
 
 ## GitHub Actions incident (2026-10-24, 08:23-08:35 UTC)
 
