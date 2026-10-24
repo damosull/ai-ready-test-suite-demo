@@ -55,6 +55,14 @@ export class DraftOrderPage {
 
   readonly finalizeButton = this.page.getByTestId("button-bar-confirm");
 
+  readonly moreActionsButton = this.page.getByTestId("show-more-button");
+
+  /** The menu labels it "Cancel order", but on a draft it deletes the draft. */
+  readonly deleteMenuItem = this.page.getByTestId("cancel-order");
+
+  /** `NotFoundPage` has no test id; this is its message. */
+  readonly notFoundMessage = this.page.getByText("Sorry, the page was not found");
+
   constructor(readonly page: Page) {}
 
   /** Both lists create the same draft; they differ only in where the button lives. */
@@ -107,6 +115,14 @@ export class DraftOrderPage {
     await this.option.filter({ hasNotText: "No shipping method" }).first().click();
     await this.confirmShippingButton.click();
     await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  /** The dashboard only leaves the draft once the deletion succeeded, for the drafts list. */
+  async delete() {
+    await this.moreActionsButton.click();
+    await this.deleteMenuItem.click();
+    await this.dialog.getByTestId("submit").click();
+    await this.page.waitForURL(url => url.pathname.endsWith("/orders/drafts"));
   }
 
   /** Lands on the order it became, which no longer lives under `/orders/drafts/`. */
