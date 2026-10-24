@@ -14,6 +14,11 @@ export class OrderPage {
 
   readonly statusInfo = this.page.getByTestId("status-info");
 
+  // The header's trigger shares its test id with the order line rows, so scope it.
+  readonly moreActionsButton = this.page.getByTestId("page-header").getByTestId("show-more-button");
+
+  readonly cancelOrderMenuItem = this.page.getByTestId("cancel-order");
+
   readonly markAsPaidButton = this.page.getByTestId("mark-as-paid-button");
 
   readonly transactionReferenceInput = this.page.getByTestId("transaction-reference-input");
