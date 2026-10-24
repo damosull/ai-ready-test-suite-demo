@@ -1,0 +1,1630 @@
+{
+  "config": {
+    "configFile": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/playwright.config.ts",
+    "rootDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:default",
+        "name": "restore:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:default",
+        "name": "parallel:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:orders",
+        "name": "restore:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:orders",
+        "name": "parallel:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:product-media-translations",
+        "name": "restore:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:product-media-translations",
+        "name": "parallel:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 20,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "stable",
+        "name": "stable",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "../setup/restore.setup.ts",
+      "file": "../setup/restore.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:default",
+              "projectName": "restore:default",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1079,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:11:27.491Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-default/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-af330fc030239f5177a4",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:orders",
+              "projectName": "restore:orders",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1112,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:11:29.063Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-orders/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-fc1389ba4e72a3e73b35",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:product-media-translations",
+              "projectName": "restore:product-media-translations",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1088,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:11:30.677Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-product-media-translations/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-17c4f1f7e6e20fabdfb3",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "feedback.spec.ts",
+      "file": "feedback.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Feedback availability",
+          "file": "feedback.spec.ts",
+          "line": 97,
+          "column": 6,
+          "specs": [
+            {
+              "title": "reveals the trigger after loading and opens and submits the real survey",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:11:28.592Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-70e9ce2cefeb29806d2b",
+              "file": "feedback.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "hides the trigger when the survey api is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:11:28.592Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-aed0f647a075c702365c",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when the survey script is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:11:28.592Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-de77fc4f03c0e874846d",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when no survey matches",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:11:28.592Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-1ec3f7d18c937d6e357a",
+              "file": "feedback.spec.ts",
+              "line": 166,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "discounts/promotion-remove-rule.spec.ts",
+      "file": "discounts/promotion-remove-rule.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Promotion rules - removal",
+          "file": "discounts/promotion-remove-rule.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2709,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 60
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 155
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 678
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:11:32.251Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-dad0abdd32bc75f49c9c",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2687,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 63
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 156
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 676
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:11:35.921Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat1/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-b9702d078f1da4600045",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2925,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 58
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 161
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 680
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:11:39.572Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat2/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-545ec0459d56a770d523",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2743,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 61
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 163
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 685
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:11:43.458Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat3/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-a7c815b91e7703366f1d",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2734,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 65
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 156
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 688
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:11:47.074Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat4/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-eaf89039128db209a4e7",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2700,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 62
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 158
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 668
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:11:50.696Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat5/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-6daad1e70a3459c641c1",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2754,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 66
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 154
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 685
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:11:54.343Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat6/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-d34d8ad9d8e275f2a6bf",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2655,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 65
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 165
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 580
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:11:57.961Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat7/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-716faafcae6e7eaa500c",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2736,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 62
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 163
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 701
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:01.479Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat8/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-d3f143c7be2af5cb7bb0",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2768,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 68
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 166
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 692
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:05.084Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat9/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-ffcac687d49340a0c0d1",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2635,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 77
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 163
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 576
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:08.728Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat10/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-4e8d4beb3788bd9d0a4e",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2738,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 70
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 163
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 665
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:12.315Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat11/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-fa7e1e629df84dbf1a20",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2686,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 63
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 160
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 570
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:15.912Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat12/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-7270a953e6aa8160384d",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2725,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 63
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 163
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 674
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:19.544Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat13/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-c62c2fba665ddbdc11bf",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2678,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 65
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 155
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 693
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:23.218Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat14/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-059c1b5604d1a43707c0",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2718,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 64
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 156
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 675
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:26.763Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat15/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-32a118e1f1f7418bcf1c",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2740,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 61
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 158
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 697
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:30.339Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat16/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-5fbcb25ec0c260404736",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2705,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 64
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 158
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 670
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:33.942Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat17/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-9549721e9f882cce8a68",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2745,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 60
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 164
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 699
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:37.547Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat18/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-63bbf39746adcf973a74",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Removing the only rule leaves the promotion in place with no rules #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 22,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2613,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "the rule's delete button asks for confirmation",
+                          "duration": 62
+                        },
+                        {
+                          "title": "confirming removes the rule and keeps the promotion",
+                          "duration": 154
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 588
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:12:41.155Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-remove-6da71--in-place-with-no-rules-e2e-stable-repeat19/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d74571bc809f81a7d815-5afe5cfd83b9dd72a57b",
+              "file": "discounts/promotion-remove-rule.spec.ts",
+              "line": 17,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-24T16:11:17.812Z",
+    "duration": 86385.246,
+    "expected": 23,
+    "skipped": 4,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

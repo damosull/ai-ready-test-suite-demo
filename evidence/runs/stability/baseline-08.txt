@@ -1,0 +1,7 @@
+branch: baseline-r3-t08
+spec: tests/discounts/promotion-remove-rule.spec.ts
+command: pnpm e2e tests/discounts/promotion-remove-rule.spec.ts --workers=1 --repeat-each=20 --reporter=line,json
+runner exit: 0
+minutes: 1
+test line 17: 20/20 passed: Removing the only rule leaves the promotion in place with no rules #e2e
+spec passes: 20/20
