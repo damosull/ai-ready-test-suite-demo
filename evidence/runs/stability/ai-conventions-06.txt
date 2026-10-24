@@ -1,0 +1,7 @@
+branch: ai-conventions-r4-t06
+spec: tests/customers/customer-note.spec.ts
+command: pnpm e2e tests/customers/customer-note.spec.ts --workers=1 --repeat-each=20 --reporter=line,json
+runner exit: 0
+minutes: 2
+test line 16: 20/20 passed: Customer manager saves a note on a customer #e2e
+spec passes: 20/20
