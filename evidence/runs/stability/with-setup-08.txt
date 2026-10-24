@@ -1,0 +1,7 @@
+branch: with-setup-r3-t08
+spec: tests/discounts/promotion-rule-delete.spec.ts
+command: pnpm e2e tests/discounts/promotion-rule-delete.spec.ts --workers=1 --repeat-each=20 --reporter=line,json
+runner exit: 0
+minutes: 1
+test line 14: 20/20 passed: Staff removes the only rule from a promotion and the promotion stays #e2e
+spec passes: 20/20
