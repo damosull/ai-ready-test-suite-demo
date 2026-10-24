@@ -211,3 +211,30 @@ adds that as a fourth arm.
 - **Disclosure.** The checklist and CONVENTIONS.md come from the same reading of the suite. The
   `baseline-plus-rules` arm was handed rules the reviewer then scored it against; the `baseline`
   and `ai-conventions` arms were not.
+
+## Supplementary: stability (pre-registered, committed before any stability run)
+
+A supplementary check of how stable the scored held-out tests are over many runs. It does not
+change any pre-registered verdict: the v1.1 and v1.2 results, the pass rule outcomes and every
+number in them stand, whatever this shows.
+
+- **Scope.** The 12 held-out specs: tickets 06 to 08 on all four arms, each from its scored branch
+  (`baseline-r3-t0N`, `ai-conventions-r4-t0N`, `baseline-plus-rules-r3-t0N`, `with-setup-r3-t0N`),
+  unedited. The spec is the one that ticket's scored checks ran, as named on the `specs:` line of
+  `evidence/runs/round-3/` or `round-4/`.
+- **Run.** Each spec once with the suite's own runner and config:
+  `pnpm e2e <spec> --workers=1 --repeat-each=20`. No retries (the config has none), the config's
+  timeouts, and every test restores its scenario first, as always. A JSON reporter is added next to
+  the line reporter so repetitions can be counted; nothing else is changed.
+- **One stack, one arm at a time.** The default stack, in the order `baseline`, `ai-conventions`,
+  `baseline-plus-rules`, `with-setup`, tickets 06, 07, 08 within each. Nothing else uses the stack
+  while it runs. Run detached, with a log.
+- **Counting.** A spec passes a repetition when every test in it passes in that repetition.
+  Reported as passes out of 20 per spec, with per-test passes in the evidence.
+- **Failures.** A test that starts and fails counts as a failure, whatever the cause, and its line
+  and cause are named in RESULTS.md. Only a run in which no test of the spec ran (the stack or the
+  build failing first) is run again, once, with the reason recorded.
+- **Scripts and evidence.** [`demo/stability.sh`](demo/stability.sh),
+  [`demo/stability-count.py`](demo/stability-count.py), [`demo/tally-stability.py`](demo/tally-stability.py);
+  results in `evidence/runs/stability/`. Before this commit the counting was tried on one of the
+  suite's own specs (`feedback.spec.ts`, two repetitions), not on any held-out spec.
