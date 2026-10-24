@@ -1,0 +1,7 @@
+branch: baseline-r3-t06
+spec: tests/customers/customer-note.spec.ts
+command: pnpm e2e tests/customers/customer-note.spec.ts --workers=1 --repeat-each=20 --reporter=line,json
+runner exit: 0
+minutes: 3
+test line 13: 20/20 passed: Customer manager saves a note on a customer and it persists after reload #e2e
+spec passes: 20/20

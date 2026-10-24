@@ -1,0 +1,1790 @@
+{
+  "config": {
+    "configFile": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/playwright.config.ts",
+    "rootDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:default",
+        "name": "restore:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:default",
+        "name": "parallel:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:orders",
+        "name": "restore:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:orders",
+        "name": "parallel:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:product-media-translations",
+        "name": "restore:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:product-media-translations",
+        "name": "parallel:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 20,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "stable",
+        "name": "stable",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "../setup/restore.setup.ts",
+      "file": "../setup/restore.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:default",
+              "projectName": "restore:default",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1177,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:05:17.425Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-default/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-af330fc030239f5177a4",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:orders",
+              "projectName": "restore:orders",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1078,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:05:19.095Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-orders/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-fc1389ba4e72a3e73b35",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:product-media-translations",
+              "projectName": "restore:product-media-translations",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1068,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:05:20.655Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-product-media-translations/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-17c4f1f7e6e20fabdfb3",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "feedback.spec.ts",
+      "file": "feedback.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Feedback availability",
+          "file": "feedback.spec.ts",
+          "line": 97,
+          "column": 6,
+          "specs": [
+            {
+              "title": "reveals the trigger after loading and opens and submits the real survey",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:05:18.625Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-70e9ce2cefeb29806d2b",
+              "file": "feedback.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "hides the trigger when the survey api is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:05:18.626Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-aed0f647a075c702365c",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when the survey script is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:05:18.626Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-de77fc4f03c0e874846d",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when no survey matches",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:05:18.626Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-1ec3f7d18c937d6e357a",
+              "file": "feedback.spec.ts",
+              "line": 166,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "customers/customer-note.spec.ts",
+      "file": "customers/customer-note.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Customer note (customer-manager actor, orders scenario)",
+          "file": "customers/customer-note.spec.ts",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7739,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1805
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 197
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 161
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3868
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 680
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:05:22.210Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-afdb82239d277da09e3b",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7415,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1710
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 194
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 156
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3872
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 677
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:05:31.177Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat1/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-ca760cacd6661162dc97",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7604,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1706
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 207
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 168
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3873
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 678
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:05:39.531Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat2/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-3cbd3de06db3fecd5c0e",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7479,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1704
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 203
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 169
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3873
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 685
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:05:48.023Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat3/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-638cbec3ed7f954d1984",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7397,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1693
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 192
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 161
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3871
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 671
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:05:56.421Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat4/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-6db7bc1d086067ecaab5",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7402,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1709
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 200
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 154
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3872
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 679
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:06:04.727Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat5/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-7da205e93c33eb944c26",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7391,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1698
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 196
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 161
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3873
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 673
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:06:13.019Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat6/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-e0300685c15a1f46fe26",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7466,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1704
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 186
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 160
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3875
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 693
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:06:21.311Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat7/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-e5dccc10d2a645046546",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7377,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1714
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 192
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 159
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3870
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 666
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:06:29.773Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat8/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-acc95c5d1559d10c6ae5",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7485,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1701
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 189
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 159
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3874
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 690
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:06:38.064Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat9/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-88a4502899376f4fec83",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7423,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1691
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 197
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 157
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3871
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 681
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:06:46.515Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat10/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-c84310b1b4a69f1cbd4b",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7479,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1725
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 193
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 158
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3874
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 696
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:06:54.918Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat11/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-3edf0eeae315c8a0caf8",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7432,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1697
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 194
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 157
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3874
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 674
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:07:03.394Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat12/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-c7ee235a5253dc0729a3",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7441,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1697
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 194
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 154
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3872
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 672
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:07:11.737Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat13/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-c4cc932020cda8ef8b98",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7395,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1710
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 204
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 154
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3876
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 672
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:07:20.102Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat14/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-131885a523721fc4331e",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7373,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1690
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 197
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 156
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3872
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 682
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:07:28.401Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat15/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-a418089687f8228ee47c",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7474,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1706
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 203
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 157
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3875
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 673
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:07:36.689Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat16/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-de09efc8748f8b58b16b",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7453,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1716
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 211
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 159
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3873
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 668
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:07:45.062Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat17/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-a3c3ff52580cd7239e20",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7422,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1710
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 191
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 159
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3872
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 688
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:07:53.539Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat18/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-7ef5a2ea259ad224cc1f",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "Customer manager saves a note on a customer and it persists after reload #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 22,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7426,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "find the customer from the customers list",
+                          "duration": 1705
+                        },
+                        {
+                          "title": "open the customer",
+                          "duration": 190
+                        },
+                        {
+                          "title": "write a note and save",
+                          "duration": 154
+                        },
+                        {
+                          "title": "the note field shows the new note",
+                          "duration": 3869
+                        },
+                        {
+                          "title": "the note survives a reload",
+                          "duration": 660
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:08:01.865Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-c3ab8-t-persists-after-reload-e2e-stable-repeat19/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5c0f8fe32320dac4443d-a6ff9b61ebab59f81195",
+              "file": "customers/customer-note.spec.ts",
+              "line": 13,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-24T16:05:07.369Z",
+    "duration": 182362.755,
+    "expected": 23,
+    "skipped": 4,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
