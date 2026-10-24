@@ -54,6 +54,12 @@ export class OrderPage {
 
   readonly editBillingAddressButton = this.page.getByTestId("edit-billing-address");
 
+  readonly history = this.page.getByTestId("order-history");
+
+  readonly noteInput = this.history.getByRole("textbox", { name: "Comment" });
+
+  readonly addNoteButton = this.history.getByRole("button", { name: "Add Comment" });
+
   constructor(readonly page: Page) {}
 
   async goto(orderId: string) {
@@ -90,6 +96,13 @@ export class OrderPage {
     await this.trackingNumberInput.fill(trackingNumber);
     await this.confirmTrackingButton.click();
     await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  /** The form clears before the mutation returns, so wait for the note in the history instead. */
+  async addNote(note: string) {
+    await this.noteInput.fill(note);
+    await this.addNoteButton.click();
+    await this.history.getByText(note).waitFor();
   }
 
   /** The order total as a number - it is rendered without its currency. */

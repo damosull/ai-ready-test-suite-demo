@@ -51,7 +51,7 @@ const OrderHistory = ({
   const intl = useIntl();
 
   return (
-    <DashboardCard>
+    <DashboardCard data-test-id="order-history">
       <DashboardCard.Header flexDirection="column" alignItems="start" paddingTop={0}>
         <DashboardCard.Title>
           <FormattedMessage id="XBfvKN" defaultMessage="Order History" />

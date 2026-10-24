@@ -1,1 +1,48 @@
-{"type":"object","additionalProperties":false,"required":["items","summary"],"properties":{"summary":{"type":"string"},"items":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["id","verdict","evidence"],"properties":{"id":{"type":"string","enum":["B1","B2","B3","B4","B5","B6","B7","B8","B9","B10","M1","M2","M3","M4","M5","M6","M7","M8","M9","M10","M11","M12","M13"]},"verdict":{"type":"string","enum":["met","failed"]},"evidence":{"type":"string"}}}}}}
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["items", "summary"],
+  "properties": {
+    "summary": { "type": "string" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "verdict", "evidence"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "B1",
+              "B2",
+              "B3",
+              "B4",
+              "B5",
+              "B6",
+              "B7",
+              "B8",
+              "B9",
+              "B10",
+              "M1",
+              "M2",
+              "M3",
+              "M4",
+              "M5",
+              "M6",
+              "M7",
+              "M8",
+              "M9",
+              "M10",
+              "M11",
+              "M12",
+              "M13"
+            ]
+          },
+          "verdict": { "type": "string", "enum": ["met", "failed"] },
+          "evidence": { "type": "string" }
+        }
+      }
+    }
+  }
+}
