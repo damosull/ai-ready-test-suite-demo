@@ -1,0 +1,173 @@
+diff --git a/e2e/tests/customers/customer-note.spec.ts b/e2e/tests/customers/customer-note.spec.ts
+new file mode 100644
+index 0000000..48e63c2
+--- /dev/null
++++ b/e2e/tests/customers/customer-note.spec.ts
+@@ -0,0 +1,95 @@
++// spec: specs/customer-note.md
++// seed: e2e/tests/seed.spec.ts
++import { expect, test } from "../../fixtures/test.ts";
++import { CUSTOMER, ORDERS_SCENARIO } from "../../scenarios/orders.ts";
++
++/**
++ * A staff member who can only manage customers writes a note on a customer and saves it:
++ * the note shows after saving and is still there after a reload.
++ */
++test.use({ scenario: ORDERS_SCENARIO, actor: "customer" });
++
++test.describe("Customer note (customer-manager actor, orders scenario)", () => {
++  test("Customer manager saves a note on a customer and it persists after reload #e2e", async ({
++    page,
++  }) => {
++    // Arrange
++    // 1. The "orders" scenario is restored and the browser is signed in as the customer manager
++    const note = "Prefers a phone call before any order is shipped.";
++    const searchInput = page.getByTestId("search-input");
++    const gridCanvas = page.locator('[data-testid="data-grid-canvas"]');
++    const rowAnchor = page.getByTestId("datagrid-row-anchor");
++    const emailInput = page.getByTestId("customer-email");
++    const firstNameInput = page.getByTestId("customer-first-name");
++    const lastNameInput = page.getByTestId("customer-last-name");
++    const noteInput = page.getByTestId("customer-note");
++    const saveButton = page.getByTestId("button-bar-confirm");
++    const notification = page.getByRole("region", { name: /Notifications/ }).getByRole("listitem");
++
++    // Act & Assert
++    // 2. Find the customer from the customers list
++    await test.step("find the customer from the customers list", async () => {
++      await page.goto("/customers/");
++      await expect(searchInput).toBeVisible();
++      await searchInput.fill(CUSTOMER.email);
++      await expect(page).toHaveURL(new RegExp(`query=${encodeURIComponent(CUSTOMER.email)}`));
++      // Glide renders its accessible table as <canvas> fallback content, which is never
++      // rendered, so the grid cells are only reachable with includeHidden
++      await expect(
++        page.getByRole("gridcell", { name: CUSTOMER.email, exact: true, includeHidden: true }),
++      ).toHaveCount(1);
++      await expect(
++        page.getByRole("gridcell", {
++          name: `${CUSTOMER.firstName} ${CUSTOMER.lastName}`,
++          exact: true,
++          includeHidden: true,
++        }),
++      ).toHaveCount(1);
++    });
++
++    // 3. Open the customer
++    await test.step("open the customer", async () => {
++      const box = await gridCanvas.boundingBox();
++
++      if (!box) {
++        throw new Error("the customers datagrid canvas is not rendered");
++      }
++
++      // Glide draws rows on a canvas under an overlay; hovering the single row reveals its link
++      await page.mouse.move(box.x + 200, box.y + box.height - 20);
++      await rowAnchor.click();
++      await page.waitForURL(url => /\/customers\/[^/]+$/.test(url.pathname));
++      await expect(page).toHaveTitle(new RegExp(CUSTOMER.email.replace(/\./g, "\\.")));
++      await expect(emailInput).toHaveValue(CUSTOMER.email);
++      await expect(firstNameInput).toHaveValue(CUSTOMER.firstName);
++      await expect(lastNameInput).toHaveValue(CUSTOMER.lastName);
++      await expect(noteInput).toBeEditable();
++      await expect(saveButton).toBeDisabled();
++    });
++
++    // 4. Write a note and save
++    await test.step("write a note and save", async () => {
++      await noteInput.fill(note);
++      await expect(saveButton).toBeEnabled();
++      await saveButton.click();
++      await expect(notification).toHaveCount(1);
++      await expect(notification).toContainText("Success");
++      await expect(notification).toContainText("Customer updated");
++    });
++
++    // 5. The note field shows the new note
++    await test.step("the note field shows the new note", async () => {
++      await expect(noteInput).toHaveValue(note);
++      await expect(saveButton).toBeDisabled();
++    });
++
++    // 6. The note survives a reload
++    await test.step("the note survives a reload", async () => {
++      await page.reload();
++      await expect(noteInput).toBeVisible();
++      await expect(noteInput).toHaveValue(note);
++      await expect(emailInput).toHaveValue(CUSTOMER.email);
++      await expect(saveButton).toBeDisabled();
++    });
++  });
++});
+diff --git a/specs/customer-note.md b/specs/customer-note.md
+new file mode 100644
+index 0000000..a9273ea
+--- /dev/null
++++ b/specs/customer-note.md
+@@ -0,0 +1,66 @@
++# Customers: customer-manager saves a note on a customer
++
++## Application Overview
++
++Ticket 06. A staff member who can only manage customers (actor "customer" = user.manager@example.com, populatedb's single-permission customer-management group) opens the "orders" scenario customer Ada Lovelace (CUSTOMER constant, e2e.customer@example.com), writes a note, saves the page, and the note is saved: the field shows it after saving and still shows it after a reload.
++
++Target spec: e2e/tests/customers/customer-note.spec.ts. Exactly one test (the happy path covering all three acceptance criteria). It must NOT run as the superuser.
++
++Spec setup (required):
++- `import { expect, test } from "../../fixtures/test.ts";`
++- `import { CUSTOMER, ORDERS_SCENARIO } from "../../scenarios/orders.ts";` - reuse CUSTOMER.email / firstName / lastName, never hardcode the email.
++- `test.use({ scenario: ORDERS_SCENARIO, actor: "customer" });` - Ada only exists in the "orders" scenario (built on "default"), and "customer" maps to user.manager@example.com in e2e/lib/actors.ts. The fixture restores the database before the test, so no cleanup is needed.
++- `// Arrange`, `// Act`, `// Assert` comments (as in order-creation.spec.ts: `// Act & Assert` around test.step blocks is acceptable); one test.step per stage; tag the title with #e2e like the order specs.
++- Note: e2e/tests/seed.spec.ts signs in as admin on the "default" scenario; it was only used for exploring the UI. Exploration was also repeated signed in as user.manager@example.com and the full flow succeeded for that account (on a populatedb customer, since Ada is not in "default"). Observed: that account's token reports userPermissions [MANAGE_USERS, IMPERSONATE_USER]. The sidebar shows only Home, Customers (All) and Extensions; the user menu shows "William Archer".
++
++Page object (new, e2e/pages/customerPage.ts; readonly fields initialised from this.page, empty `constructor(readonly page: Page) {}`; locators were checked against the live dashboard):
++- searchInput = page.getByTestId("search-input")  (textbox "Search customers" on /customers/; typing updates the URL with ?query=<email>)
++- list = page.getByTestId("list")  (customers datagrid wrapper)
++- gridCanvas = page.locator('[data-testid="data-grid-canvas"]')  (Glide datagrid canvas; note Glide uses data-testid, not the dashboard's data-test-id, so getByTestId does not match it)
++- result cell for waiting: page.getByRole("gridcell", { name: CUSTOMER.email }) / locator('[role="gridcell"]', { hasText: email }) - cells live in Glide's accessibility table (ids glide-cell-<col>-<row>), attached but not clickable
++- rowAnchor = page.getByTestId("datagrid-row-anchor")  (gets href /customers/<id>? on row hover)
++- firstNameInput = getByTestId("customer-first-name"), lastNameInput = getByTestId("customer-last-name"), emailInput = getByTestId("customer-email")  (labels "First Name", "Last Name", "Email address" in the "Contact" card, data-test-id="customer-details")
++- noteInput = page.getByTestId("customer-note")  - a <textarea name="note">, accessible name/label "Note" (getByRole("textbox", { name: "Note" }) also works)
++- saveButton = page.getByTestId("button-bar-confirm")  (Savebar "Save"; disabled until the form is dirty, disabled again after a successful save/reload)
++- backButton = page.getByTestId("button-bar-cancel")  ("Back")
++- notification = page.getByRole("region", { name: /Notifications/ }).getByRole("listitem")  - success toast reads title "Success", text "Customer updated" (src/customers/views/CustomerDetails.tsx, message id PeEood). The ticket's example "Saved changes" is NOT what this page shows; assert on "Customer updated".
++
++Opening a row: Glide renders rows on a canvas that an overlay div (.dvn-scroller) covers, so locator.click()/hover() on the canvas or gridcell fails with "intercepts pointer events". After the search narrows the grid to one row, click by coordinates: `const box = await gridCanvas.boundingBox(); await page.mouse.click(box.x + 200, box.y + box.height - 20);` (header row plus one data row, canvas height ~82px), then `page.waitForURL(u => /\/customers\/[^/]+$/.test(u.pathname))`. Alternatively hover the row with page.mouse.move and click the datagrid-row-anchor. (The legacy BasePage.clickGridCell fiber hack is the fallback if coordinates prove flaky.)
++
++Customer-manager view of the details page (useful to prove the actor): "Total orders", "Recent total", "Avg order value" tiles, the "Recent Orders" card and the "Gift cards" card are hidden for this actor (admin sees them); "Last login", "Attributes", "Contact" and "Address Information" are present.
++
++## Test Scenarios
++
++### 1. Customer note (customer-manager actor, orders scenario)
++
++**Seed:** `e2e/tests/seed.spec.ts`
++
++#### 1.1. Customer manager saves a note on a customer and it persists after reload #e2e
++
++**File:** `e2e/tests/customers/customer-note.spec.ts`
++
++**Steps:**
++  1. Arrange: the spec declares test.use({ scenario: ORDERS_SCENARIO, actor: "customer" }) so the database is restored to the "orders" scenario and the browser is signed in as user.manager@example.com (customer management only, not the superuser). Define a unique note text in the test body, e.g. const note = "Prefers a phone call before any order is shipped."; instantiate new CustomerPage(page).
++    - expect: No UI login is performed; the stored session for the "customer" actor is used
++    - expect: The test does not use the admin actor
++  2. test.step "find the customer from the customers list": go to /customers/ and wait for the search input (getByTestId("search-input")). Fill it with CUSTOMER.email.
++    - expect: The URL gains query=e2e.customer%40example.com
++    - expect: Exactly one grid row is shown, with a gridcell containing CUSTOMER.email (and one containing `${CUSTOMER.firstName} ${CUSTOMER.lastName}`, i.e. "Ada Lovelace")
++    - expect: The sidebar has no Catalog/Fulfillment/Discounts entries, confirming the restricted actor (optional sanity check)
++  3. test.step "open the customer": click the single result row on the datagrid canvas by coordinates (page.mouse.click inside the data-grid-canvas bounding box, below the header row), then wait for the URL /customers/<id>.
++    - expect: The details page loads, titled with the customer's email
++    - expect: getByTestId("customer-email") has value CUSTOMER.email
++    - expect: getByTestId("customer-first-name") has value CUSTOMER.firstName and getByTestId("customer-last-name") has value CUSTOMER.lastName
++    - expect: The Note field (getByTestId("customer-note"), label "Note") is visible and editable
++    - expect: The Save button (getByTestId("button-bar-confirm")) is disabled before any edit
++  4. test.step "write a note and save": fill the Note textarea with the note text, then click Save (button-bar-confirm).
++    - expect: Save becomes enabled after filling the note
++    - expect: After clicking Save, a notification appears in the "Notifications" region with "Success" and "Customer updated"
++    - expect: No error notification is shown
++  5. test.step "the note field shows the new note": read the Note field immediately after the save confirmation.
++    - expect: expect(noteInput).toHaveValue(note) - acceptance criterion 2
++    - expect: The Save button is disabled again (form no longer dirty)
++  6. test.step "the note survives a reload": page.reload(), wait for the Note field to be visible.
++    - expect: expect(noteInput).toHaveValue(note) after reload - acceptance criterion 3, proving the note was persisted on the customer server-side
++    - expect: The page still shows CUSTOMER.email in the email field (same customer)
++    - expect: The Save button is disabled
