@@ -1,0 +1,7 @@
+branch: with-setup-r2-t04
+specs: tests/orders/order-fulfillment-cancel.spec.ts
+run 1: FAIL (0 failing)
+run 2: FAIL (0 failing)
+run 3: FAIL (0 failing)
+runs: 0/3
+broken feature caught: yes (specs failed with demo/breaks/04.patch applied)

@@ -4,6 +4,9 @@ broken-feature check. A spec that passed with its feature broken adds a B1 block
 reviewer had marked B1 as met (SCORING.md, "Does the test catch the feature breaking?").
 
     python3 demo/tally.py [round]
+
+The baseline is generated once (round 1); a later round compares the with-setup branch's
+regenerated tests against that same baseline.
 """
 import json
 import re
@@ -20,7 +23,8 @@ def load():
     rows = {}
     for line in (ROOT / "reviews" / "key.tsv").read_text().splitlines():
         rid, branch, ticket, rnd = line.split("\t")
-        if rnd != ROUND:
+        wanted = "1" if branch == "baseline" else ROUND
+        if rnd != wanted:
             continue
         review = json.loads((ROOT / "reviews" / f"round-{rnd}" / f"{rid}.json").read_text())
         items = review["structured_output"]["items"]
