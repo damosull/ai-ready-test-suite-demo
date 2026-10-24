@@ -1,0 +1,1621 @@
+{
+  "config": {
+    "configFile": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/playwright.config.ts",
+    "rootDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:default",
+        "name": "restore:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:default",
+        "name": "parallel:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:orders",
+        "name": "restore:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:orders",
+        "name": "parallel:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:product-media-translations",
+        "name": "restore:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:product-media-translations",
+        "name": "parallel:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 20,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "stable",
+        "name": "stable",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "../setup/restore.setup.ts",
+      "file": "../setup/restore.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:default",
+              "projectName": "restore:default",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1160,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:14:38.967Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-default/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-af330fc030239f5177a4",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:orders",
+              "projectName": "restore:orders",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1095,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:14:40.625Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-orders/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-fc1389ba4e72a3e73b35",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:product-media-translations",
+              "projectName": "restore:product-media-translations",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1144,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:14:42.207Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-product-media-translations/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-17c4f1f7e6e20fabdfb3",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "feedback.spec.ts",
+      "file": "feedback.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Feedback availability",
+          "file": "feedback.spec.ts",
+          "line": 97,
+          "column": 6,
+          "specs": [
+            {
+              "title": "reveals the trigger after loading and opens and submits the real survey",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:14:40.152Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-70e9ce2cefeb29806d2b",
+              "file": "feedback.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "hides the trigger when the survey api is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:14:40.152Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-aed0f647a075c702365c",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when the survey script is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:14:40.152Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-de77fc4f03c0e874846d",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when no survey matches",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:14:40.152Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-1ec3f7d18c937d6e357a",
+              "file": "feedback.spec.ts",
+              "line": 166,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "products/product-rename.spec.ts",
+      "file": "products/product-rename.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7516,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1951
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3970
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 641
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:14:43.837Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-7226c95a1b06ab54c385",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7107,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1723
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3969
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 589
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:14:52.470Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-bd5c3de6113c84f36bd9",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7202,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1784
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3969
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 597
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:15:00.611Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-1d8777f7cd5b8a2e1f8a",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7199,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1816
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3965
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 586
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:15:08.726Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-4cabd6812db1e2863994",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7239,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1838
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3971
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 607
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:15:16.827Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-e03f4cc53b0ab9fd3d82",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7155,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1805
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3963
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 588
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:15:25.045Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat5/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-e17be89b5bdfcce61179",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7160,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1771
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3964
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 601
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:15:33.122Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat6/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-bdaf28e8b77d9b6078d3",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7130,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1734
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3971
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 592
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:15:41.181Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat7/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-85208836c0732f169f70",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7252,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1813
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3965
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 618
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:15:49.224Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat8/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-e2106bf6b0380517a5c1",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7285,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1852
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3965
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 642
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:15:57.388Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat9/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-204ca931cec5ce40aaa1",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7139,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1746
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3969
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 596
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:16:05.673Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat10/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-35db8d04e6a4d8404db9",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7173,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1760
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3965
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 605
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:16:13.813Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat11/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-da8b93d6ef0fff954b88",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7207,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1799
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3963
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 635
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:16:21.871Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat12/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-80a62149ae8a66482689",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7229,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1804
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3973
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 635
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:16:29.970Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat13/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-99028bf020e62d15327c",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7218,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1778
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3965
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 634
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:16:38.191Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat14/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-48efda9e2df0419d0dd0",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7151,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1773
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3959
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 601
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:16:46.298Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat15/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-16afc903534adca19aa2",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7183,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1789
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3966
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 595
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:16:54.426Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat16/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-9a3b23b4ffae5b799738",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7132,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1753
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3971
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 603
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:17:02.607Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat17/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-24566da4116957555b7a",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7198,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1797
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3963
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 613
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:17:10.702Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat18/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-f6c588c94f7abc234413",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Staff renames a product #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7263,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Staff opens the product",
+                      "duration": 1794
+                    },
+                    {
+                      "title": "Staff renames it and saves",
+                      "duration": 3974
+                    },
+                    {
+                      "title": "The new name persists after a reload",
+                      "duration": 628
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:17:18.794Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/products-product-rename-Staff-renames-a-product-e2e-stable-repeat19/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c93d519f2c89d7681ded-f20ab4027615c8226782",
+          "file": "products/product-rename.spec.ts",
+          "line": 17,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-24T16:14:29.167Z",
+    "duration": 177333.589,
+    "expected": 23,
+    "skipped": 4,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
