@@ -103,3 +103,35 @@ back implementation work, and report any checks that could not run.
 - Prefer the `gh` CLI for GitHub operations.
 - No agent-driven issue tracker is configured. Return issue or triage findings in
   the conversation; see `docs/agents/issue-tracker.md` when a skill expects a tracker.
+
+## E2E tests (`e2e/`)
+
+Rules for writing and reviewing Playwright specs. `CONVENTIONS.md` has the reasons and file
+references; `CHECKLIST.md` is what a reviewer checks. To write a test from a ticket use the
+`write-test` skill; before handing a test back use the `review-test` skill.
+
+- New specs go in `e2e/tests/`. Never edit `e2e-legacy/` (frozen).
+- Import `test` and `expect` from `e2e/fixtures/test.ts`, never from `@playwright/test`. That
+  fixture restores the database before every test and loads the actor's session.
+- Relative imports keep the `.ts` extension.
+- Data comes from a scenario: `test.use({ scenario: ORDERS_SCENARIO })`, importing the name and
+  the known values (`PRODUCTS`, `PROMOTIONS`, `CUSTOMER`, `CHANNEL`) from `e2e/scenarios/`. Find
+  scenario rows at test time by stable key (`findOrderId(config, "unpaid")`); never hard-code
+  ids or assert on values `populatedb` randomises. Do not arrange data with API calls in a spec;
+  a state a spec needs is a scenario. Starting a draft with `DraftOrderPage.create` is fine.
+- No cleanup code, no unique names, no retries: the database is reset before each test.
+- Sign in with `test.use({ actor: "order" })` etc. from `e2e/lib/actors.ts` (default `admin`).
+  Never through the login form outside `login.spec.ts`; never type credentials.
+- Locate by `getByTestId` (the attribute is `data-test-id`); otherwise `getByRole` with a name.
+  Scope to the container (`this.dialog.getByTestId("submit")`). No CSS classes, XPath or
+  positional `nth`. Find test ids in `src/` with grep.
+- Locators and multi-step actions live on the page object for that screen, as `readonly` fields
+  from `this.page` with `constructor(readonly page: Page) {}`. Extend `DraftOrderPage`,
+  `OrderPage` or `AddressDialog` rather than writing a new class or a spec-local helper.
+- Never wait a fixed time. Wait on the state that proves the step finished: a web-first
+  assertion, a dialog hidden, `waitForURL`.
+- Web-first assertions only. Assert the outcome the ticket is about, and prove persistence with a
+  `page.reload()` when the ticket says "saved". Every assertion must fail if the feature broke.
+- Shape: header comment saying what the spec covers; title is a sentence ending `#e2e`;
+  `// Arrange`, then `// Act & Assert` with one `test.step` per stage; money as `toFixed(2)`.
+- Done means: `pnpm e2e <spec> --repeat-each=3` passes and `pnpm run check-types:e2e` is clean.
