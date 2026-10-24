@@ -54,6 +54,12 @@ export class OrderPage {
 
   readonly editBillingAddressButton = this.page.getByTestId("edit-billing-address");
 
+  // Scoped to the page header: `show-more-button` also appears twice in the lines datagrid.
+  readonly moreActionsButton = this.page.getByTestId("page-header").getByTestId("show-more-button");
+
+  // Rendered in a portal outside the header, so located from the page.
+  readonly cancelOrderMenuItem = this.page.getByTestId("cancel-order");
+
   constructor(readonly page: Page) {}
 
   async goto(orderId: string) {
@@ -64,6 +70,13 @@ export class OrderPage {
   async markAsPaid(reference: string) {
     await this.markAsPaidButton.click();
     await this.transactionReferenceInput.fill(reference);
+    await this.dialog.getByTestId("submit").click();
+    await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  async cancel() {
+    await this.moreActionsButton.click();
+    await this.cancelOrderMenuItem.click();
     await this.dialog.getByTestId("submit").click();
     await this.dialog.waitFor({ state: "hidden" });
   }
