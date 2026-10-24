@@ -1,0 +1,13 @@
+commit 09a07c6b3169318b3c2ed4ae61b26b536330f7f2
+Author: damosull <damienosullivan3266@gmail.com>
+Date:   Sat Oct 24 17:35:14 2026 +0100
+
+    repo-check: Playwright test agents (init-agents --loop=claude), model: inherit, seed adapted
+
+ .claude/agents/playwright-test-generator.md | 59 +++++++++++++++++++++++++++++
+ .claude/agents/playwright-test-healer.md    | 45 ++++++++++++++++++++++
+ .claude/agents/playwright-test-planner.md   | 52 +++++++++++++++++++++++++
+ .mcp.json                                   | 11 ++++--
+ e2e/tests/seed.spec.ts                      | 10 +++++
+ specs/README.md                             |  3 ++
+ 6 files changed, 176 insertions(+), 4 deletions(-)

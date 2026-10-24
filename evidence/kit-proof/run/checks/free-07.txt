@@ -1,0 +1,8 @@
+branch: repo-check/free-t07
+specs: tests/products/product-rename.spec.ts
+run 1: pass
+run 2: pass
+run 3: pass
+runs: 3/3
+stability: 20/20
+break caught: yes (specs failed with the break applied)

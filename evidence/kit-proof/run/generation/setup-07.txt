@@ -1,0 +1,5 @@
+branch: repo-check/setup-t07
+from: with-setup-frozen-v1 (ba60244)
+commit: 4d6e619
+session exit: 0
+minutes: 1.9

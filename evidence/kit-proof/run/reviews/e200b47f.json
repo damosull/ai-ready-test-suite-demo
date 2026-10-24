@@ -1,0 +1,196 @@
+{
+  "duration_api_ms": 31567,
+  "stop_reason": "tool_use",
+  "session_id": "11034d3c-ca52-4b06-92f0-0f8ae736ab09",
+  "total_cost_usd": 0.25204899999999997,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 21931,
+    "cache_read_input_tokens": 61945,
+    "output_tokens": 3209,
+    "output_tokens_details": { "thinking_tokens": 771 },
+    "server_tool_use": { "web_search_requests": 0, "web_fetch_requests": 0 },
+    "service_tier": "standard",
+    "cache_creation": { "ephemeral_1h_input_tokens": 21931, "ephemeral_5m_input_tokens": 0 },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 2307,
+        "cache_read_input_tokens": 25275,
+        "cache_creation_input_tokens": 1131,
+        "cache_creation": { "ephemeral_5m_input_tokens": 0, "ephemeral_1h_input_tokens": 1131 },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3209,
+      "cacheReadInputTokens": 61945,
+      "cacheCreationInputTokens": 21931,
+      "webSearchRequests": 0,
+      "costUSD": 0.25204899999999997,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 771,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": { "background": 0, "foreground": 0, "unset": 0 },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": { "parent": 0, "user": 0, "system": 0 },
+    "refused": { "depth_limit": 0, "concurrency_limit": 0, "budget": 0 },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 10,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"items\":[{\"id\":\"B1\",\"verdict\":\"met\",\"evidence\":\"After page.reload() the spec asserts the name field holds the new name (toHaveValue), and the header title and browser tab title show it too. Those reads come from the server, so the test fails if ProductUpdate never persisted.\"},{\"id\":\"B2\",\"verdict\":\"met\",\"evidence\":\"Criterion 1: the header title is checked after save (spec line 128). Criterion 2: the name field, the header title and the tab title are all checked after reload (lines 135-137).\"},{\"id\":\"B3\",\"verdict\":\"met\",\"evidence\":\"No existing page object covers the product details page, and there is no existing product-id lookup. findProductId sits next to findOrderId, uses gql/adminToken from e2e/lib/graphql.ts, and reuses PRODUCTS and ORDERS_SCENARIO.\"},{\"id\":\"B4\",\"verdict\":\"met\",\"evidence\":\"No waitForTimeout, sleeps or polling loops. It waits on the ProductUpdate response, the save-success state and web-first assertions.\"},{\"id\":\"B5\",\"verdict\":\"met\",\"evidence\":\"It imports test/expect from fixtures/test.ts, has no parallel() tag, and does not write to the cache or the dumps.\"},{\"id\":\"B6\",\"verdict\":\"met\",\"evidence\":\"Locators use data-test-id or role plus name (textbox \\\"Name\\\", exact). Using button-bar-confirm unscoped follows OrderPage/DraftOrderPage, and the header title is scoped to page-header.\"},{\"id\":\"B7\",\"verdict\":\"met\",\"evidence\":\"The product comes from the orders scenario. The only API call is a read-only id lookup, and the rename done through the UI is the action under test.\"},{\"id\":\"B8\",\"verdict\":\"met\",\"evidence\":\"No hard-coded ids: the id is looked up by SKU at test time. It asserts on scenario values (PRODUCTS.hoodie) and the ticket's new name, not on populatedb data.\"},{\"id\":\"B9\",\"verdict\":\"met\",\"evidence\":\"It uses the default admin actor through the fixture: no UI login and no credentials in the spec.\"},{\"id\":\"B10\",\"verdict\":\"met\",\"evidence\":\"The type check exits 0. The spec is at e2e/tests/products/product-rename.spec.ts.\"},{\"id\":\"M1\",\"verdict\":\"failed\",\"evidence\":\"e2e/tests/products/product-rename.spec.ts:126 the toast locator page.getByText(\\\"Product updated\\\") and the header-title locators pageHeader.getByTitle(...) (lines 115, 128, 129, 136) are built inline in the spec instead of being exposed on ProductPage.\"},{\"id\":\"M2\",\"verdict\":\"met\",\"evidence\":\"All members are readonly fields initialised from this.page (or from a field derived from it), with constructor(readonly page: Page) {}.\"},{\"id\":\"M3\",\"verdict\":\"met\",\"evidence\":\"It has // Arrange and // Act & Assert comments.\"},{\"id\":\"M4\",\"verdict\":\"met\",\"evidence\":\"One test for the story, with test.step blocks for 'rename and save' and 'reload'.\"},{\"id\":\"M5\",\"verdict\":\"met\",\"evidence\":\"The title describes the behaviour and carries #e2e #products.\"},{\"id\":\"M6\",\"verdict\":\"met\",\"evidence\":\"A header doc comment says what the spec covers and that it is not ported from legacy coverage.\"},{\"id\":\"M7\",\"verdict\":\"met\",\"evidence\":\"UI assertions are web-first. expect(errors).toEqual([]) checks the mutation response, not text read off the page.\"},{\"id\":\"M8\",\"verdict\":\"met\",\"evidence\":\"It uses PRODUCTS.hoodie.name/sku and ORDERS_SCENARIO. The new name is the ticket's literal, which no scenario holds.\"},{\"id\":\"M9\",\"verdict\":\"met\",\"evidence\":\"No cleanup steps and no unique or timestamped names.\"},{\"id\":\"M10\",\"verdict\":\"met\",\"evidence\":\"No timeouts, retries or networkidle. waitForResponse is there to read and return the mutation's errors, which the spec then asserts.\"},{\"id\":\"M11\",\"verdict\":\"met\",\"evidence\":\"Relative imports keep .ts, and only the Page type comes from @playwright/test.\"},{\"id\":\"M12\",\"verdict\":\"met\",\"evidence\":\"gql is typed, the response body has a declared type, and there is no any or cast.\"},{\"id\":\"M13\",\"verdict\":\"met\",\"evidence\":\"The comments explain why: the header follows the refetched product, and the field is empty until the product loads.\"}],\"summary\":\"A solid change. It proves the rename persists by checking the name field and title after a reload, and covers both acceptance criteria. It uses the orders scenario and adds a new ProductPage, since no existing page object covers the product page. The type check passes. The one finding is minor (M1): the spec builds the toast and header-title locators inline instead of putting them on ProductPage.\"}",
+  "structured_output": {
+    "items": [
+      {
+        "id": "B1",
+        "verdict": "met",
+        "evidence": "After page.reload() the spec asserts the name field holds the new name (toHaveValue), and the header title and browser tab title show it too. Those reads come from the server, so the test fails if ProductUpdate never persisted."
+      },
+      {
+        "id": "B2",
+        "verdict": "met",
+        "evidence": "Criterion 1: the header title is checked after save (spec line 128). Criterion 2: the name field, the header title and the tab title are all checked after reload (lines 135-137)."
+      },
+      {
+        "id": "B3",
+        "verdict": "met",
+        "evidence": "No existing page object covers the product details page, and there is no existing product-id lookup. findProductId sits next to findOrderId, uses gql/adminToken from e2e/lib/graphql.ts, and reuses PRODUCTS and ORDERS_SCENARIO."
+      },
+      {
+        "id": "B4",
+        "verdict": "met",
+        "evidence": "No waitForTimeout, sleeps or polling loops. It waits on the ProductUpdate response, the save-success state and web-first assertions."
+      },
+      {
+        "id": "B5",
+        "verdict": "met",
+        "evidence": "It imports test/expect from fixtures/test.ts, has no parallel() tag, and does not write to the cache or the dumps."
+      },
+      {
+        "id": "B6",
+        "verdict": "met",
+        "evidence": "Locators use data-test-id or role plus name (textbox \"Name\", exact). Using button-bar-confirm unscoped follows OrderPage/DraftOrderPage, and the header title is scoped to page-header."
+      },
+      {
+        "id": "B7",
+        "verdict": "met",
+        "evidence": "The product comes from the orders scenario. The only API call is a read-only id lookup, and the rename done through the UI is the action under test."
+      },
+      {
+        "id": "B8",
+        "verdict": "met",
+        "evidence": "No hard-coded ids: the id is looked up by SKU at test time. It asserts on scenario values (PRODUCTS.hoodie) and the ticket's new name, not on populatedb data."
+      },
+      {
+        "id": "B9",
+        "verdict": "met",
+        "evidence": "It uses the default admin actor through the fixture: no UI login and no credentials in the spec."
+      },
+      {
+        "id": "B10",
+        "verdict": "met",
+        "evidence": "The type check exits 0. The spec is at e2e/tests/products/product-rename.spec.ts."
+      },
+      {
+        "id": "M1",
+        "verdict": "failed",
+        "evidence": "e2e/tests/products/product-rename.spec.ts:126 the toast locator page.getByText(\"Product updated\") and the header-title locators pageHeader.getByTitle(...) (lines 115, 128, 129, 136) are built inline in the spec instead of being exposed on ProductPage."
+      },
+      {
+        "id": "M2",
+        "verdict": "met",
+        "evidence": "All members are readonly fields initialised from this.page (or from a field derived from it), with constructor(readonly page: Page) {}."
+      },
+      {
+        "id": "M3",
+        "verdict": "met",
+        "evidence": "It has // Arrange and // Act & Assert comments."
+      },
+      {
+        "id": "M4",
+        "verdict": "met",
+        "evidence": "One test for the story, with test.step blocks for 'rename and save' and 'reload'."
+      },
+      {
+        "id": "M5",
+        "verdict": "met",
+        "evidence": "The title describes the behaviour and carries #e2e #products."
+      },
+      {
+        "id": "M6",
+        "verdict": "met",
+        "evidence": "A header doc comment says what the spec covers and that it is not ported from legacy coverage."
+      },
+      {
+        "id": "M7",
+        "verdict": "met",
+        "evidence": "UI assertions are web-first. expect(errors).toEqual([]) checks the mutation response, not text read off the page."
+      },
+      {
+        "id": "M8",
+        "verdict": "met",
+        "evidence": "It uses PRODUCTS.hoodie.name/sku and ORDERS_SCENARIO. The new name is the ticket's literal, which no scenario holds."
+      },
+      {
+        "id": "M9",
+        "verdict": "met",
+        "evidence": "No cleanup steps and no unique or timestamped names."
+      },
+      {
+        "id": "M10",
+        "verdict": "met",
+        "evidence": "No timeouts, retries or networkidle. waitForResponse is there to read and return the mutation's errors, which the spec then asserts."
+      },
+      {
+        "id": "M11",
+        "verdict": "met",
+        "evidence": "Relative imports keep .ts, and only the Page type comes from @playwright/test."
+      },
+      {
+        "id": "M12",
+        "verdict": "met",
+        "evidence": "gql is typed, the response body has a declared type, and there is no any or cast."
+      },
+      {
+        "id": "M13",
+        "verdict": "met",
+        "evidence": "The comments explain why: the header follows the refetched product, and the field is empty until the product loads."
+      }
+    ],
+    "summary": "A solid change. It proves the rename persists by checking the name field and title after a reload, and covers both acceptance criteria. It uses the orders scenario and adds a new ProductPage, since no existing page object covers the product page. The type check passes. The one finding is minor (M1): the spec builds the toast and header-title locators inline instead of putting them on ProductPage."
+  },
+  "ttft_ms": 2071,
+  "type": "result",
+  "duration_ms": 31788,
+  "uuid": "ebdc4fd6-9e08-4627-b8f4-6de47d013f93",
+  "ttft_stream_ms": 1266,
+  "time_to_request_ms": 152,
+  "first_content_frame_ms": 1266,
+  "queued_turn_count": 0,
+  "result_index": 0
+}

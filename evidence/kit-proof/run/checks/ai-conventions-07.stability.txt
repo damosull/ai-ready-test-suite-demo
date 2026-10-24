@@ -1,0 +1,3 @@
+tests seen: 1
+test products/product-rename.spec.ts:15: 20/20 passed: Staff can rename a product and the new name persists #e2e #products
+spec passes: 20/20

@@ -1,0 +1,19 @@
+# Pre-registration
+
+Written 2026-10-24 16:35:13 UTC, before any test was generated.
+
+- Repository: `/Users/damien/Projects/ai-ready-test-suite-demo`
+- BASE_REF `28bf90d` = `28bf90df15bed7002cfdf74ca0dabaf37e7b3583`
+- SETUP_REF `with-setup-frozen-v1` = `ba6024472c872c21287a036adf383a88503f8911`
+- Tickets: 07
+- Sides: free ai-conventions setup
+- Runs: 3 in a row; stability: --repeat-each=20; model: opus
+
+Inputs (sha256):
+
+    e408f7415aa99d4af925cf8106fc215f471ac9510ccd92352d901ab1b225daec  /Users/damien/.cache/ai-ready-demo/kit-proof/CHECKLIST.md
+    e22fd64cdbfaefb67295a6e8f59991735528cdbcfdd5cec79607b8d42592e954  /Users/damien/.cache/ai-ready-demo/kit-proof/CONVENTIONS.md
+    7095dfc3ef102b9f794a4e544ff1ace40e8fdf50ebeb76fbee708c0f79c4358d  /Users/damien/.cache/ai-ready-demo/kit-proof/saleor.env
+    99e77904627a257623cdbe31213c52fe00eab31b375a24d1664dc11b54bdcdaf  /Users/damien/.cache/ai-ready-demo/kit-proof/seed.spec.ts
+    e6884134976fd0575f87a8ec39a0d8b6140e5eae0fd0477a85a70382410b9427  /Users/damien/.cache/ai-ready-demo/kit-proof/tickets/07.md
+    aec8138cec808abcbdd54726e17888044654c189f2680e44bb34a8e7737b2a90  /Users/damien/.cache/ai-ready-demo/kit-proof/breaks/07.patch

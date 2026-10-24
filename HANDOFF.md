@@ -8,6 +8,14 @@ caught the breaks. Conventions the AI wrote for itself (one fixed prompt, unedit
 expert conventions. with-setup passes the pass rule against every arm, by one or two minor
 findings against the convention-bearing arms. See README.md and RESULTS.md (v1.2 heading).
 
+Supplementary stability (2026-10-24, pre-registered in SCORING.md, `bb74f56`): the 12 held-out
+specs, 20 repetitions each, `demo/stability.sh`: 240/240, every arm 60/60. In RESULTS.md (v1.2
+section) and one line in the README. No verdict changed.
+
+qa-setup-kit's generic `repo-check/` runner was proven on this repo, ticket 07: free 1 + 4,
+AI-conventions 0 + 1, setup 0 + 0, all green, all caught, stability 20/20 each. Evidence and the
+comparison with v1.2 are in `evidence/kit-proof/`; branches `repo-check/*`.
+
 Nothing is published. The repo is private; Damien decides when it goes public.
 
 ## How to resume (start a fresh session with "Read HANDOFF.md and carry on")
@@ -35,6 +43,8 @@ Nothing is published. The repo is private; Damien decides when it goes public.
   `cd ~/.cache/ai-ready-demo && nohup bash -c 'source ~/.nvm/nvm.sh && nvm use 24 && REPO=$HOME/Projects/ai-ready-test-suite-demo ./reproduce.sh v1.2' > v1.2.log 2>&1 &`.
   Do not edit the checkout while a run is going: it switches branches and needs a clean tree.
   Sessions and scoring share one database and one checkout: strictly one at a time.
+- Stability: `demo/stability.sh` (run a copy from outside the repo; it skips specs already in
+  `evidence/runs/stability/` so a stopped run resumes). Last run log: `~/.cache/ai-ready-demo/stability.log`.
 - Rounds used so far: 1 and 2 (v1), 3 (v1.1), 4 (v1.2). A new experiment uses round 5 and a new
   SCORING.md addendum committed before generation.
 - Rule for any new version: pre-register in SCORING.md and commit before generating; one

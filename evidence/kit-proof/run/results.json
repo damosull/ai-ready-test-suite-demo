@@ -1,0 +1,99 @@
+{
+  "sides": ["free", "ai-conventions", "setup"],
+  "tickets": ["07"],
+  "runs": 3,
+  "repeats": 20,
+  "rows": [
+    {
+      "side": "free",
+      "ticket": "07",
+      "review": "ebc55959",
+      "specs": "tests/products/product-rename.spec.ts",
+      "blockers": ["B6"],
+      "minors": ["M1", "M8", "M10", "M13"],
+      "evidence": {
+        "B6": "e2e/tests/products/product-rename.spec.ts:41 finds the product-name cell with the CSS selector 'td[role=\"gridcell\"][id^=\"glide-cell-1-\"]', which relies on Glide's generated cell ids and a column position. A role-based gridcell locator filtered by name could be used instead.",
+        "M1": "e2e/tests/products/product-rename.spec.ts:25 defines every locator (search input, grid canvas, row anchor, name input, save button, header, toast) and the multi-step hover-and-open-row flow inline in the spec, instead of on a new ProductPage page object.",
+        "M8": "e2e/tests/products/product-rename.spec.ts:38 types the product name into the URL regex /query=E2E(%20|\\+)Hoodie/ instead of building it from PRODUCTS.hoodie.name.",
+        "M10": "e2e/tests/products/product-rename.spec.ts:50 passes explicit { timeout: 1000 } to getAttribute, boundingBox and toHaveAttribute (also line 61), and no comment gives a reason.",
+        "M13": "e2e/tests/products/product-rename.spec.ts:72 has numbered comments that repeat the next line, such as \"// 4. Fill the Name textbox with the new name\" and \"// 5. Click Save\" (also lines 35 and 86)."
+      },
+      "runs": [3, 3],
+      "stability": [20, 20],
+      "stability_failures": [],
+      "caught": true,
+      "break": "yes (specs failed with the break applied)",
+      "minutes": 8.8,
+      "session_exit": "0",
+      "complete": true
+    },
+    {
+      "side": "ai-conventions",
+      "ticket": "07",
+      "review": "e200b47f",
+      "specs": "tests/products/product-rename.spec.ts",
+      "blockers": [],
+      "minors": ["M1"],
+      "evidence": {
+        "M1": "e2e/tests/products/product-rename.spec.ts:126 the toast locator page.getByText(\"Product updated\") and the header-title locators pageHeader.getByTitle(...) (lines 115, 128, 129, 136) are built inline in the spec instead of being exposed on ProductPage."
+      },
+      "runs": [3, 3],
+      "stability": [20, 20],
+      "stability_failures": [],
+      "caught": true,
+      "break": "yes (specs failed with the break applied)",
+      "minutes": 7.8,
+      "session_exit": "0",
+      "complete": true
+    },
+    {
+      "side": "setup",
+      "ticket": "07",
+      "review": "9841cb29",
+      "specs": "tests/products/product-rename.spec.ts",
+      "blockers": [],
+      "minors": [],
+      "evidence": {},
+      "runs": [3, 3],
+      "stability": [20, 20],
+      "stability_failures": [],
+      "caught": true,
+      "break": "yes (specs failed with the break applied)",
+      "minutes": 1.9,
+      "session_exit": "0",
+      "complete": true
+    }
+  ],
+  "totals": {
+    "free": {
+      "blockers": 1,
+      "minors": 4,
+      "green": 1,
+      "stability": [20, 20],
+      "stable_specs": 1,
+      "caught": 1,
+      "minutes": [8.8, 8.8],
+      "tickets": 1
+    },
+    "ai-conventions": {
+      "blockers": 0,
+      "minors": 1,
+      "green": 1,
+      "stability": [20, 20],
+      "stable_specs": 1,
+      "caught": 1,
+      "minutes": [7.8, 7.8],
+      "tickets": 1
+    },
+    "setup": {
+      "blockers": 0,
+      "minors": 0,
+      "green": 1,
+      "stability": [20, 20],
+      "stable_specs": 1,
+      "caught": 1,
+      "minutes": [1.9, 1.9],
+      "tickets": 1
+    }
+  }
+}
