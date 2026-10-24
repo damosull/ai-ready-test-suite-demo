@@ -4,7 +4,7 @@
 # (round 2 onwards: `<branch>-r<round>-t<ticket>`). Every ticket starts from the setup
 # itself, never from another ticket's output.
 #
-#   demo/generate.sh <baseline|baseline-plus-rules|with-setup> <01..08> [round]
+#   demo/generate.sh <baseline|baseline-plus-rules|ai-conventions|with-setup> <01..08> [round]
 #
 # It checks out the branch, so run a copy from outside the repository with REPO set:
 #   cp demo/generate.sh /tmp/ && REPO=$PWD /tmp/generate.sh baseline 01
@@ -31,11 +31,19 @@ case "$branch" in
     hide=(CONVENTIONS.md CHECKLIST.md SCORING.md RESULTS.md demo/breaks demo/prompts/review.md evidence)
     mcp="demo/playwright-mcp.json"
     ;;
+  ai-conventions)
+    # v1.2. Same as the baseline: its conventions are in AGENTS.md on its branch, written by
+    # demo/write-conventions.sh. Its MCP tool calls are capped at 5 minutes (MCP_TOOL_TIMEOUT),
+    # after two v1.1 sessions each lost 30 minutes to a call that never returned.
+    hide=(CONVENTIONS.md CHECKLIST.md SCORING.md RESULTS.md demo/breaks demo/prompts/review.md evidence)
+    mcp="demo/playwright-mcp.json"
+    export MCP_TOOL_TIMEOUT=300000
+    ;;
   with-setup)
     hide=(SCORING.md RESULTS.md demo/breaks demo/prompts/review.md evidence)
     mcp="demo/no-mcp.json"
     ;;
-  *) echo "branch must be baseline, baseline-plus-rules or with-setup" >&2; exit 1 ;;
+  *) echo "branch must be baseline, baseline-plus-rules, ai-conventions or with-setup" >&2; exit 1 ;;
 esac
 
 if [[ -n "$(git status --porcelain -- . ':!evidence')" ]]; then

@@ -164,3 +164,50 @@ workflow that applies and checks them".
   for three arms (baseline round 1, with-setup round 2, baseline-plus-rules round 3), noting that
   the rounds were reviewed with different diff scopes.
 - **Tally.** [`demo/tally3.py`](demo/tally3.py).
+
+## Addendum for v1.2 (pre-registered, committed before any v1.2 generation)
+
+v1.1 compared conventions written by someone who knows the suite against no conventions. A buyer's
+real free alternative is neither: it is asking the AI tool to write the conventions itself. v1.2
+adds that as a fourth arm.
+
+- **Fourth arm, `ai-conventions`.** The baseline as it stands (Playwright's agents, set to
+  `model: inherit`, the same seed and MCP configuration) plus a conventions section in `AGENTS.md`
+  written by a fresh Claude Code session, with no expert involved. Its generation sessions use the
+  baseline prompt ([`demo/prompts/ai-conventions.md`](demo/prompts/ai-conventions.md) is a copy of
+  it) and see the same files the baseline sees; the conventions reach them only through
+  `AGENTS.md`.
+- **How the conventions are written.** [`demo/write-conventions.sh`](demo/write-conventions.sh)
+  runs one fresh headless session (same model, same isolation flags as the other sessions, no MCP
+  servers, tools limited to reading, writing files and read-only shell) with this one fixed prompt,
+  verbatim:
+
+  > Read this repository's e2e suite and write the conventions a reviewer on this team would
+  > enforce for new end-to-end tests, as a section to add to AGENTS.md.
+
+  It runs in a fresh export of the Saleor import commit (`28bf90d`, upstream `77dc49b`) with a
+  one-commit git history of its own. CONVENTIONS.md, CHECKLIST.md, SCORING.md, RESULTS.md,
+  HANDOFF.md, `tickets/`, `demo/`, `evidence/` and every generated-test branch are absent, so it
+  sees only what Saleor ships. It runs once.
+
+- **Its output is used as-is.** If the session changes `AGENTS.md`, that change is applied to the
+  `ai-conventions` branch (made from `baseline`) unedited. If it does not, its final reply is
+  appended to `AGENTS.md` verbatim. Anything else it writes is not used. The transcript, the reply
+  and the change are published in [`evidence/ai-conventions/`](evidence/ai-conventions/).
+- **Generation.** Tickets 06 to 08 only, one generation each, as round 4 (branches
+  `ai-conventions-r4-t06` to `t08`). Whatever comes out is the result: no regeneration, no edits.
+  The other three arms are not rerun; their round-3 results stand.
+- **One harness change, this arm only.** Playwright MCP tool calls are capped at 5 minutes
+  (`MCP_TOOL_TIMEOUT=300000`). Two v1.1 sessions each lost 30 minutes to one `test_run` call that
+  never returned; a warm spec run takes about a minute. The cap affects time, not what is scored.
+  The stack is warmed before the first session, so no capped call has to start it cold.
+- **Review, stability and breaks.** Exactly as v1.1: blind whole-change review against the same
+  CHECKLIST.md and CONVENTIONS.md, the same three runs, the same breaks.
+- **Reported.** The four-arm table for tickets 06 to 08, from
+  [`demo/tally4.py`](demo/tally4.py), and a direct comparison of `ai-conventions` against
+  `baseline-plus-rules`, ticket by ticket. The v1 pass rule is also stated for `with-setup`
+  against `ai-conventions`. Generation time is wall-clock per session from the run log. Whatever
+  comes out is the result.
+- **Disclosure.** The checklist and CONVENTIONS.md come from the same reading of the suite. The
+  `baseline-plus-rules` arm was handed rules the reviewer then scored it against; the `baseline`
+  and `ai-conventions` arms were not.
