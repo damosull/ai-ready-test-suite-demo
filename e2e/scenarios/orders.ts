@@ -409,3 +409,23 @@ export const findOrderId = async (config: E2eConfig, ref: ScenarioOrder): Promis
 
   return order.node.id;
 };
+
+/**
+ * The id of the product behind one of `PRODUCTS`, by its variant's SKU. A read, so it is safe
+ * at test time; ids are not constants because every build of the dump mints new ones. An
+ * exact SKU match, so it does not wait on the search index.
+ */
+export const findProductId = async (config: E2eConfig, sku: string): Promise<string> => {
+  const data = await gql<{ productVariant: { product: { id: string } } | null }>(
+    config,
+    `query($sku: String!) { productVariant(sku: $sku) { product { id } } }`,
+    { sku },
+    await adminToken(config),
+  );
+
+  if (!data.productVariant) {
+    throw new Error(`the "${ORDERS_SCENARIO}" scenario has no product with SKU "${sku}"`);
+  }
+
+  return data.productVariant.product.id;
+};
