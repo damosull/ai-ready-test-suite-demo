@@ -1,0 +1,95 @@
+diff --git a/e2e/pages/customerPage.ts b/e2e/pages/customerPage.ts
+new file mode 100644
+index 0000000..c89577f
+--- /dev/null
++++ b/e2e/pages/customerPage.ts
+@@ -0,0 +1,27 @@
++import { expect, type Page } from "@playwright/test";
++
++/** A customer's details page: contact fields, saved with the page's save bar. */
++export class CustomerPage {
++  readonly details = this.page.getByTestId("customer-details");
++
++  readonly noteInput = this.details.getByTestId("customer-note");
++
++  readonly saveButton = this.page.getByTestId("button-bar-confirm");
++
++  constructor(readonly page: Page) {}
++
++  async goto(customerId: string) {
++    await this.page.goto(`/customers/${encodeURIComponent(customerId)}`);
++    await this.noteInput.waitFor();
++  }
++
++  /**
++   * The save button disables itself until the form is dirty again, which is the sign the
++   * mutation came back and the form took the saved values.
++   */
++  async saveNote(note: string) {
++    await this.noteInput.fill(note);
++    await this.saveButton.click();
++    await expect(this.saveButton).toBeDisabled();
++  }
++}
+diff --git a/e2e/scenarios/orders.ts b/e2e/scenarios/orders.ts
+index bd01602..0845f3a 100644
+--- a/e2e/scenarios/orders.ts
++++ b/e2e/scenarios/orders.ts
+@@ -409,3 +409,19 @@ export const findOrderId = async (config: E2eConfig, ref: ScenarioOrder): Promis
+ 
+   return order.node.id;
+ };
++
++/** The id of `CUSTOMER` in the restored database - like `findOrderId`, a read. */
++export const findCustomerId = async (config: E2eConfig): Promise<string> => {
++  const data = await gql<{ user: { id: string } | null }>(
++    config,
++    `query($email: String!) { user(email: $email) { id } }`,
++    { email: CUSTOMER.email },
++    await adminToken(config),
++  );
++
++  if (!data.user) {
++    throw new Error(`the "${ORDERS_SCENARIO}" scenario has no customer ${CUSTOMER.email}`);
++  }
++
++  return data.user.id;
++};
+diff --git a/e2e/tests/customers/customer-note.spec.ts b/e2e/tests/customers/customer-note.spec.ts
+new file mode 100644
+index 0000000..b288837
+--- /dev/null
++++ b/e2e/tests/customers/customer-note.spec.ts
+@@ -0,0 +1,32 @@
++import { e2eConfig } from "../../config.ts";
++import { expect, test } from "../../fixtures/test.ts";
++import { CustomerPage } from "../../pages/customerPage.ts";
++import { findCustomerId, ORDERS_SCENARIO } from "../../scenarios/orders.ts";
++
++/**
++ * Customer service keeps notes on a customer's record, and the people who write them hold
++ * only the customer-management permission - so the story runs as that staff user, not the
++ * superuser, on the orders scenario's customer.
++ */
++test.use({ scenario: ORDERS_SCENARIO, actor: "customer" });
++
++const config = e2eConfig();
++
++test("Customer-management staff saves a note on a customer #e2e", async ({ page }) => {
++  // Arrange
++  const customerPage = new CustomerPage(page);
++  const note = "VIP, call before cancelling";
++
++  await customerPage.goto(await findCustomerId(config));
++
++  // Act & Assert
++  await test.step("write a note and save the page", async () => {
++    await customerPage.saveNote(note);
++    await expect(customerPage.noteInput).toHaveValue(note);
++  });
++
++  await test.step("the note is saved on the customer", async () => {
++    await page.reload();
++    await expect(customerPage.noteInput).toHaveValue(note);
++  });
++});
