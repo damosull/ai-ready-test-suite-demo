@@ -1,0 +1,233 @@
+diff --git a/e2e/pages/productPage.ts b/e2e/pages/productPage.ts
+new file mode 100644
+index 0000000..273c0e9
+--- /dev/null
++++ b/e2e/pages/productPage.ts
+@@ -0,0 +1,45 @@
++import { expect, type Page } from "@playwright/test";
++
++/** A product's detail page: its header, the general information form and the save bar. */
++export class ProductPage {
++  readonly header = this.page.getByTestId("page-header");
++
++  readonly titleSkeleton = this.page.getByTestId("product-details-title-skeleton");
++
++  readonly nameInput = this.page.getByRole("textbox", { name: "Name", exact: true });
++
++  readonly saveButton = this.page.getByTestId("button-bar-confirm");
++
++  readonly unsavedChanges = this.page.getByTestId("product-save-composition");
++
++  constructor(readonly page: Page) {}
++
++  /** The header renders the name as a `title`, next to the product type chip. */
++  title(name: string) {
++    return this.header.getByTitle(name, { exact: true });
++  }
++
++  async waitForLoaded() {
++    await this.nameInput.waitFor();
++    await this.titleSkeleton.waitFor({ state: "hidden" });
++  }
++
++  async rename(name: string) {
++    await this.nameInput.fill(name);
++  }
++
++  /**
++   * Save stays enabled, showing a spinner, while the mutation runs, and is disabled again
++   * only once the form is clean - so that, not the short-lived toast, marks completion.
++   */
++  async save() {
++    await this.saveButton.click();
++    await expect(this.saveButton).toBeDisabled();
++    await this.unsavedChanges.waitFor({ state: "hidden" });
++  }
++
++  async reload() {
++    await this.page.reload();
++    await this.waitForLoaded();
++  }
++}
+diff --git a/e2e/pages/searchPage.ts b/e2e/pages/searchPage.ts
+new file mode 100644
+index 0000000..97d9e5b
+--- /dev/null
++++ b/e2e/pages/searchPage.ts
+@@ -0,0 +1,32 @@
++import { type Page } from "@playwright/test";
++
++/**
++ * The global Search page. It is the accessible way to a product: the Products list is a
++ * canvas datagrid whose rows expose no roles, while search results are real links.
++ */
++export class SearchPage {
++  readonly searchInput = this.page.getByTestId("search-input");
++
++  readonly productsScope = this.page.getByRole("radio", { name: "Products", exact: true });
++
++  constructor(readonly page: Page) {}
++
++  /**
++   * Each result row links to the product three times (kind, name, date). Filtering on the
++   * exact name text picks the name link alone, and one of no other product whose name
++   * merely contains it.
++   */
++  productLink(name: string) {
++    return this.page.getByRole("link").filter({ has: this.page.getByText(name, { exact: true }) });
++  }
++
++  /** Lands on the product's detail page. */
++  async openProduct(name: string) {
++    await this.page.goto("/search");
++    await this.searchInput.fill(name);
++    await this.productsScope.click();
++    await this.page.waitForURL(url => url.searchParams.get("scope") === "products");
++    await this.productLink(name).click();
++    await this.page.waitForURL(/\/products\/[^/]+$/);
++  }
++}
+diff --git a/e2e/tests/products/product-rename.spec.ts b/e2e/tests/products/product-rename.spec.ts
+new file mode 100644
+index 0000000..cea2daa
+--- /dev/null
++++ b/e2e/tests/products/product-rename.spec.ts
+@@ -0,0 +1,50 @@
++import { expect, test } from "../../fixtures/test.ts";
++import { ProductPage } from "../../pages/productPage.ts";
++import { SearchPage } from "../../pages/searchPage.ts";
++import { ORDERS_SCENARIO, PRODUCTS } from "../../scenarios/orders.ts";
++
++/**
++ * Staff opens a product through the global search, renames it and saves. The header
++ * follows the name only once it is saved, and the name survives a reload.
++ *
++ * The rename is deliberately not re-checked through search: without beat the search index
++ * keeps the old name (see `e2e/README.md`).
++ */
++test.use({ scenario: ORDERS_SCENARIO });
++
++const NEW_NAME = "E2E Zip Hoodie";
++
++test("Staff renames a product #e2e", async ({ page }) => {
++  // Arrange
++  const search = new SearchPage(page);
++  const product = new ProductPage(page);
++  const oldName = PRODUCTS.hoodie.name;
++
++  // Act & Assert
++  await test.step("Staff opens the product", async () => {
++    await search.openProduct(oldName);
++    await product.waitForLoaded();
++    await expect(product.title(oldName)).toBeVisible();
++    await expect(product.nameInput).toHaveValue(oldName);
++    await expect(product.saveButton).toBeDisabled();
++  });
++
++  await test.step("Staff renames it and saves", async () => {
++    await product.rename(NEW_NAME);
++    await expect(product.saveButton).toBeEnabled();
++    await expect(product.unsavedChanges).toHaveText("Unsaved changes: details");
++    // The header shows the saved name, not the edited one.
++    await expect(product.title(oldName)).toBeVisible();
++
++    await product.save();
++    await expect(product.title(NEW_NAME)).toBeVisible();
++    await expect(product.title(oldName)).toBeHidden();
++    await expect(page).toHaveTitle(`${NEW_NAME} | Saleor e-commerce`);
++  });
++
++  await test.step("The new name persists after a reload", async () => {
++    await product.reload();
++    await expect(product.nameInput).toHaveValue(NEW_NAME);
++    await expect(product.title(NEW_NAME)).toBeVisible();
++  });
++});
+diff --git a/specs/product-rename.md b/specs/product-rename.md
+new file mode 100644
+index 0000000..87007a3
+--- /dev/null
++++ b/specs/product-rename.md
+@@ -0,0 +1,82 @@
++# Products: staff can rename a product
++
++## Application Overview
++
++Ticket 07. A merchandiser renames a product on its detail page and saves it with the save bar's Save button. The page header (and browser tab title) follow the saved name, and the name persists across a reload.
++
++Data: the `orders` scenario (`e2e/scenarios/orders.ts`). Select it with `test.use({ scenario: ORDERS_SCENARIO })` and use `PRODUCTS.hoodie.name` ("E2E Hoodie") as the source name. Its product type is "E2E Simple". The seed spec's default scenario does NOT contain E2E Hoodie. Exploration was done on the populatedb product "Monospace Tee", whose product page has the same structure. Actor is `admin` (the default). The test writes data, so it gets no `parallel()` tag and runs serially with a reset.
++
++Target files:
++
++- Spec: `e2e/tests/products/product-rename.spec.ts`, titled "Staff renames a product #e2e". Import `test`/`expect` from `e2e/fixtures/test.ts`. Start it with a doc comment describing the flow. Use `// Arrange` then `// Act & Assert` with named `test.step`s.
++- Page objects in `e2e/pages/`: `productPage.ts` (ProductPage) and `searchPage.ts` (SearchPage), or a `goto`-by-search helper. Use `readonly` fields from `this.page` and an empty `constructor(readonly page: Page) {}`.
++
++How to reach the product (no hardcoded IDs):
++
++- The Products list (`/products/`) is a Glide canvas datagrid. Its rows are not exposed as role-accessible elements: `getByRole('gridcell')` times out, and the legacy suite clicks canvas coordinates. Avoid it.
++- Use the global Search page (`/search`) instead. It renders a real table with accessible links. Typing in the search box updates the URL to `/search?q=<term>&scope=all`, and the "Products" radio switches it to `scope=products`. Each result row contains links to `/products/<id>`. The product-name link's accessible name is "<product name> <product type>", e.g. "Monospace Tee T-shirts" (for the hoodie: "E2E Hoodie E2E Simple").
++- Alternatively, look up the ID via the API (read-only lookup is allowed) and `goto('/products/<id>')`. The UI search route is preferred because it needs no new API helper.
++
++Observed locators:
++
++- Search page input: `getByTestId('search-input')` (also `getByRole('textbox', { name: 'Search', exact: true })`).
++- Search scope: `getByRole('radio', { name: 'Products', exact: true })`.
++- Product result link: `page.getByRole('link').filter({ has: page.getByText(PRODUCTS.hoodie.name, { exact: true }) })`. Each row also has a "Product" kind link and a date link pointing to the same URL; this filter selects only the name link.
++- Products list search (not used; listed for reference): `getByTestId('search-input')`, placeholder "Search products...", inside `getByTestId('list-search-field')`. Canvas: `[data-testid="data-grid-canvas"]` (note: `data-testid`, not `data-test-id`).
++- Product page form: `getByTestId('product-update-form')`.
++- Product page header: `getByTestId('page-header')`. Its innerText is "<name>\n<product type>". The name element is a div with `title=<name>` and no test ID, so use `getByTestId('page-header').getByTitle(name, { exact: true })` or `expect(pageHeader).toContainText(name)`.
++- Product type chip in the header: `getByTestId('product-type-display')`.
++- Header skeleton while loading: `getByTestId('product-details-title-skeleton')`.
++- Name input: `getByRole('textbox', { name: 'Name', exact: true })` (`input[name=name]`, no test ID; the legacy suite used `[name='name']`, which is a CSS selector and not allowed).
++- Save button: `getByTestId('button-bar-confirm')` (role button "Save"). It is disabled when the form is clean, enabled after an edit, and disabled again once the save completes. It also carries `data-test-state`.
++- Back button: `getByTestId('button-bar-cancel')`.
++- Unsaved-changes hint: `getByTestId('product-save-composition')`, text "Unsaved changes: details". It appears after an edit and disappears after the save.
++- Save confirmation: a sonner toast in `getByRole('region', { name: /Notifications/ })`, with an inner div `data-test-type="success"` and message "Saved changes" (`commonMessages.savedChanges`). The toast is short-lived: it was already marked removed within a few seconds. Do not make it the primary wait. Prefer waiting for the Save button to be disabled again or the composition hint to be hidden.
++- Browser tab title: "<name> | Saleor e-commerce".
++
++Observed behaviour:
++
++- While the edit is unsaved, the header keeps the OLD name and only changes after a successful save.
++- After a reload, both the name input and the header show the new name.
++- Saleor's product search index is NOT updated on rename, because the stack has no beat (see `e2e/README.md`). After renaming to "Monospace Zip Tee", searching that new name returned nothing, while searching the old term "Monospace" listed the product under its new name. The test must not verify the rename by searching for the new name.
++
++## Test Scenarios
++
++### 1. Products: rename
++
++**Seed:** `e2e/tests/seed.spec.ts`
++
++#### 1.1. Staff renames a product #e2e
++
++**File:** `e2e/tests/products/product-rename.spec.ts`
++
++**Steps:**
++
++1. Arrange: the spec uses `test.use({ scenario: ORDERS_SCENARIO })` (actor defaults to admin). Fresh restored `orders` database; the session is already signed in. Define `const newName = "E2E Zip Hoodie"` and use `PRODUCTS.hoodie.name` for the original name.
++
++
++    - expect: The scenario provides a product named exactly "E2E Hoodie"
++
++2. test.step "Staff opens the product": go to `/search`, fill `getByTestId('search-input')` with `PRODUCTS.hoodie.name`, select `getByRole('radio', { name: 'Products', exact: true })`, then click the result link filtered by `getByText(PRODUCTS.hoodie.name, { exact: true })`. The page-object method waits for `waitForURL(/\/products\/[^/]+$/)` and for the name input to be visible.
++
++
++    - expect: URL matches /products/<id>
++    - expect: `getByTestId('page-header')` contains "E2E Hoodie" (guards the scenario assumption before acting)
++    - expect: The Name textbox has value "E2E Hoodie"
++    - expect: The Save button `getByTestId('button-bar-confirm')` is disabled (clean form)
++
++3. test.step "Staff renames it and saves": fill `getByRole('textbox', { name: 'Name', exact: true })` with "E2E Zip Hoodie". Click `getByTestId('button-bar-confirm')`. The ProductPage.save() method waits for the result: the Save button becomes disabled again or `getByTestId('product-save-composition')` is hidden. Before clicking, the spec may assert that Save is enabled and that the header still shows the old name.
++
++
++    - expect: Before saving: Save is enabled, the 'Unsaved changes: details' hint is visible, and the header still shows "E2E Hoodie" (the header does not follow unsaved edits)
++    - expect: After saving: `getByTestId('page-header').getByTitle('E2E Zip Hoodie', { exact: true })` is visible (acceptance criterion 1)
++    - expect: The page header no longer shows "E2E Hoodie" as its title
++    - expect: The Save button is disabled again
++    - expect: Optional: `expect(page).toHaveTitle(/^E2E Zip Hoodie \|/)`
++
++4. test.step "The new name persists after a reload": `page.reload()`, then wait for the name input (the page-object `waitForLoaded`, i.e. the name textbox is visible and the header skeleton is hidden).
++
++
++    - expect: The Name textbox has value "E2E Zip Hoodie" (acceptance criterion 2)
++    - expect: `getByTestId('page-header')` shows the title "E2E Zip Hoodie" (acceptance criterion 2)
++    - expect: Do NOT re-verify through search by the new name: the search index is not refreshed without beat, so it would fail falsely
