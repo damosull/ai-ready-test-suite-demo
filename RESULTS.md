@@ -1,5 +1,172 @@
 # Results
 
+## Version 1.1: held-out tickets, three arms (headline)
+
+Pre-registered in [SCORING.md, "Addendum for v1.1"](SCORING.md#addendum-for-v11-pre-registered-committed-before-any-v11-generation)
+and committed before any v1.1 generation. Three arms, each generated once per ticket as round 3:
+
+- `baseline`: Playwright's test agents, as in version 1.
+- `baseline-plus-rules`: the same, plus the full text of CONVENTIONS.md in `AGENTS.md`. No skills,
+  no checklist, no review step.
+- `with-setup`: frozen at its round-2 commit (`with-setup-frozen-v1`), unchanged since version 1.
+
+Tickets 06 to 08 cover customers, products and discounts, areas none of the setups was written
+against. Reviews in v1.1 see the whole change, not only `e2e/`. Numbers come from
+[`demo/tally3.py`](demo/tally3.py).
+
+#### Held-out tickets 06 to 08
+
+##### Ticket 06
+
+| Arm                   | Blockers | Minors      | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | ----------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 0        | 2 (M1, M13) | 3/3     | yes                       | `fad76700` (round 3) |
+| `baseline-plus-rules` | 0        | 1 (M1)      | 3/3     | yes                       | `a52faa49` (round 3) |
+| `with-setup`          | 0        | 0           | 3/3     | yes                       | `cdad8a58` (round 3) |
+
+##### Ticket 07
+
+| Arm                   | Blockers | Minors              | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | ------------------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 1 (B6)   | 4 (M1, M4, M8, M13) | 3/3     | yes                       | `80a33156` (round 3) |
+| `baseline-plus-rules` | 0        | 1 (M13)             | 3/3     | yes                       | `264e9819` (round 3) |
+| `with-setup`          | 0        | 0                   | 3/3     | yes                       | `e78cc5bf` (round 3) |
+
+##### Ticket 08
+
+| Arm                   | Blockers | Minors          | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | --------------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 0        | 3 (M1, M8, M13) | 3/3     | yes                       | `baa7f8e0` (round 3) |
+| `baseline-plus-rules` | 0        | 0               | 3/3     | yes                       | `f0549153` (round 3) |
+| `with-setup`          | 0        | 0               | 3/3     | yes                       | `4e7e3762` (round 3) |
+
+##### Totals
+
+| Arm                   | Blockers | Minors | Findings | Green 3/3 | Caught the broken feature |
+| --------------------- | -------- | ------ | -------- | --------- | ------------------------- |
+| `baseline`            | 1        | 9      | 10       | 3/3       | 3/3                       |
+| `baseline-plus-rules` | 0        | 2      | 2        | 3/3       | 3/3                       |
+| `with-setup`          | 0        | 0      | 0        | 3/3       | 3/3                       |
+
+Pass rule, `with-setup` against `baseline`: zero blockers yes; at most half its findings (0 vs 10) yes; green 3/3 yes. **PASS**
+
+Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at most half its findings (0 vs 2) yes; green 3/3 yes. **PASS**
+
+**Verdict.** `with-setup` passes the pass rule against both arms on the held-out tickets: no
+blockers, green 3/3, and fewer than half the findings of `baseline` (0 against 10) and of
+`baseline-plus-rules` (0 against 2).
+
+**Against `baseline-plus-rules` it is close to a tie, and that is the main finding of v1.1.**
+Giving the AI the conventions as plain rules removed nearly all of the baseline's problems: no
+blockers, and two minor findings in three tickets (one inline locator group, one leftover planner
+comment) against the baseline's one blocker and nine minors. The skills' measurable extra on these
+tickets is those two minors. The other difference is speed: with-setup sessions took 1.5 to 1.7
+minutes per held-out ticket, the agent-based arms 6 to 10 (40 when a tool call hung, below).
+
+### Tickets 01 to 05, three arms
+
+Baseline from round 1, with-setup from round 2, baseline-plus-rules from round 3. Rounds 1 and 2
+were reviewed on the `e2e/` part of each change, round 3 on the whole change.
+
+#### Tickets 01 to 05
+
+##### Ticket 01
+
+| Arm                   | Blockers | Minors      | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | ----------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 0        | 2 (M1, M13) | 3/3     | yes                       | `f2a17f9c` (round 1) |
+| `baseline-plus-rules` | 0        | 1 (M1)      | 3/3     | yes                       | `e9a832b5` (round 3) |
+| `with-setup`          | 0        | 0           | 3/3     | yes                       | `e035a918` (round 2) |
+
+##### Ticket 02
+
+| Arm                   | Blockers | Minors      | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | ----------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 0        | 2 (M1, M13) | 3/3     | yes                       | `b4332ed0` (round 1) |
+| `baseline-plus-rules` | 0        | 0           | 3/3     | yes                       | `a53e5c32` (round 3) |
+| `with-setup`          | 0        | 0           | 3/3     | yes                       | `93b27983` (round 2) |
+
+##### Ticket 03
+
+| Arm                   | Blockers | Minors      | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | ----------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 0        | 2 (M1, M13) | 3/3     | yes                       | `ef6b1959` (round 1) |
+| `baseline-plus-rules` | 0        | 0           | 3/3     | yes                       | `4b11fbde` (round 3) |
+| `with-setup`          | 0        | 0           | 3/3     | yes                       | `7af20371` (round 2) |
+
+##### Ticket 04
+
+| Arm                   | Blockers | Minors      | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | ----------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 0        | 2 (M1, M13) | 3/3     | yes                       | `4e4276b9` (round 1) |
+| `baseline-plus-rules` | 0        | 0           | 3/3     | yes                       | `1e0c7803` (round 3) |
+| `with-setup`          | 0        | 0           | 3/3     | yes                       | `0c5b93c0` (round 2) |
+
+##### Ticket 05
+
+| Arm                   | Blockers | Minors              | 3x runs | Caught the broken feature | Review               |
+| --------------------- | -------- | ------------------- | ------- | ------------------------- | -------------------- |
+| `baseline`            | 1 (B6)   | 4 (M1, M4, M9, M13) | 3/3     | yes                       | `abe124a6` (round 1) |
+| `baseline-plus-rules` | 0        | 0                   | 3/3     | yes                       | `67b1e44f` (round 3) |
+| `with-setup`          | 0        | 0                   | 3/3     | yes                       | `13a1f536` (round 2) |
+
+##### Totals
+
+| Arm                   | Blockers | Minors | Findings | Green 3/3 | Caught the broken feature |
+| --------------------- | -------- | ------ | -------- | --------- | ------------------------- |
+| `baseline`            | 1        | 12     | 13       | 5/5       | 5/5                       |
+| `baseline-plus-rules` | 0        | 1      | 1        | 5/5       | 5/5                       |
+| `with-setup`          | 0        | 0      | 0        | 5/5       | 5/5                       |
+
+Pass rule, `with-setup` against `baseline`: zero blockers yes; at most half its findings (0 vs 13) yes; green 3/3 yes. **PASS**
+
+Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at most half its findings (0 vs 1) yes; green 3/3 yes. **PASS**
+
+### Every failed item, v1.1 comparison
+
+- `baseline` 06 **M1**: e2e/tests/customers/customer-note.spec.ts lines 25-33 and 58-66: every locator, plus the multi-step hover-and-click row opening, is defined inline in the spec instead of on a new customer page object in e2e/pages/ (the spec's own plan in specs/customer-note.md asks for one).
+- `baseline` 06 **M13**: e2e/tests/customers/customer-note.spec.ts lines 7-8, 23, 36, 56, 76, 86 and 92: generated boilerplate ("// spec: ...", "// seed: ...") and numbered step comments ("// 2. Find the customer from the customers list") that repeat the next test.step title instead of explaining why.
+- `baseline-plus-rules` 06 **M1**: `e2e/tests/customers/customer-note.spec.ts` (diff lines 102-106 and 115) builds locators inline in the spec (`customerPage.contactCard.getByTestId("customer-email")`, `"customer-first-name"`, `notifications.getByText("Customer updated")`) instead of defining them as fields on `CustomerPage`.
+- `baseline` 07 **B6**: e2e/tests/products/product-rename.spec.ts diff lines 42-51 (spec lines 35-44): the row is found by the generated, positional id `#glide-cell-1-0` and opened by hovering at hard-coded pixel offsets for the first row, where text-filtering the grid (as the legacy `gridCanvas.getByText` pattern did) would work. The grid itself is found with a CSS attribute selector (diff line 35).
+- `baseline` 07 **M1**: e2e/tests/products/product-rename.spec.ts diff lines 31-36 and 39-53: every locator (header, nameInput, saveButton, notifications, grid, rowAnchor) and the multi-step search-and-open flow are written inline in the spec instead of on a page object.
+- `baseline` 07 **M4**: e2e/tests/products/product-rename.spec.ts diff lines 38-79: the test has four stages (open, rename, check after save, check after reload), marked by numbered comments instead of `test.step`.
+- `baseline` 07 **M8**: e2e/tests/products/product-rename.spec.ts diff line 41: the URL assertion `/query=E2E%20Hoodie/` types in the product name instead of deriving it from `PRODUCTS.hoodie.name`.
+- `baseline` 07 **M13**: e2e/tests/products/product-rename.spec.ts diff lines 7-8, 38, 61, 68, 74: generator boilerplate (`// spec: ...`, `// seed: ...`) and numbered step comments that restate the next lines instead of explaining why.
+- `baseline-plus-rules` 07 **M13**: e2e/tests/products/product-rename.spec.ts diff lines 77-78: '// spec: specs/product-rename.md' and '// seed: e2e/tests/seed.spec.ts' are generated planner boilerplate, and the second one points to a seed file that does not exist.
+- `baseline` 08 **M1**: promotion-remove-rule.spec.ts lines 62-70 (diff lines 62-70) define every locator inline in the spec, and the delete/confirm flow (93, 105) is clicked inline instead of living on a new promotion page object in e2e/pages/.
+- `baseline` 08 **M8**: Line 87 types the literal "Channel-USD" instead of the scenario's exported CHANNEL.name.
+- `baseline` 08 **M13**: Numbered step comments that restate the next line, such as '// 1. Open the "E2E Tee sale" promotion' (74), '// 4. Confirm by clicking "Delete" inside the dialog' (104) and '// 5. Reload the page' (117), narrate instead of explaining why.
+- `baseline` 01 **M1**: e2e/tests/orders/draft-manual-discount.spec.ts:34-37 (diff lines 40-43) and :74-76 (diff lines 80-82): the spec defines the Add Discount button, subtotal amount, manual and promotion row locators, and the multi-step fill-and-submit discount action inline instead of on DraftOrderPage.
+- `baseline` 01 **M13**: e2e/tests/orders/draft-manual-discount.spec.ts:21 (diff line 27), and similar at :39, :47, :74: generated numbered step comments ('// 1. Compute the expected amounts...', '// 3. Add one E2E Tee', '// 6. Fill the value and reason, then confirm') restate the next line, and lines 1-2 point to spec and seed files that do not exist.
+- `baseline-plus-rules` 01 **M1**: e2e/tests/orders/draft-manual-discount.spec.ts (diff lines 107, 117, 126, 138, 141): the spec writes the locator getByTitle("Discount amount") inline five times, chained on page-object locators, instead of putting a discount-amount locator on DraftOrderPage.
+- `baseline` 02 **M1**: change.diff:24, 38, 40 and 54 define the page-header, show-more-button, 'Cancel order' menu item and dialog 'Delete' button locators, plus the delete action itself, inline in the spec instead of on DraftOrderPage.
+- `baseline` 02 **M13**: change.diff:7-8 are generated boilerplate ('// spec: specs/02-draft-order-delete.md', '// seed: ...') pointing at files that aren't in the change. The numbered comments at change.diff:27, 35, 51 and 64 only repeat the test.step titles.
+- `baseline` 03 **M1**: e2e/tests/orders/order-cancel.spec.ts diff lines 43 and 51-66: the confirm-button locator (dialog.getByTestId("submit")), page.getByRole("menu") and the whole multi-step cancel flow are written inline in the spec instead of as a cancel method on OrderPage (like markAsPaid).
+- `baseline` 03 **M13**: e2e/tests/orders/order-cancel.spec.ts diff lines 23-24, 45, 52, 63, 70 and 76: generated boilerplate ("// spec: specs/order-cancel.md", "// seed: ...") and numbered step comments ("// 2. Click \"More actions\"...", "// 5. Reload and check again") narrate the next lines instead of explaining why.
+- `baseline` 04 **M1**: e2e/tests/orders/order-cancel-fulfillment.spec.ts:27-31 and 40-59: the fulfillment-menu, cancel-menu-item and warehouse-select locators, and the whole multi-step cancel flow, are written inline in the spec instead of as locators and a `cancelFulfillment` method on `OrderPage`.
+- `baseline` 04 **M13**: e2e/tests/orders/order-cancel-fulfillment.spec.ts:1-2 and 34-72: generator boilerplate (`// spec: specs/...`, `// seed: ...`) plus numbered step comments ("// 3. Open the fulfillment card's \"Show more\" menu", "// 8. Reload the page and check the state again") that restate the next line instead of explaining why.
+- `baseline` 05 **B6**: e2e/tests/orders/order-notes.spec.ts:33-37 (diff lines 39-43): the Order History card is found by filtering every generic `div` on the page and taking `.last()`, which is a positional pick over untargeted elements instead of a test-id or role-based locator.
+- `baseline` 05 **M1**: e2e/tests/orders/order-notes.spec.ts:29-37 (diff lines 35-43): the comment input, the Add Comment button and the history-card locators, plus the add-note action, are written inline in the spec instead of on OrderPage.
+- `baseline` 05 **M4**: e2e/tests/orders/order-notes.spec.ts:39-68 (diff lines 45-74): opening the order, adding the note and reloading are separate stages in one test with no test.step.
+- `baseline` 05 **M9**: e2e/tests/orders/order-notes.spec.ts:26 (diff line 32): the note text gets a randomUUID suffix to make it unique, which is unnecessary because the database is reset before each test.
+- `baseline` 05 **M13**: e2e/tests/orders/order-notes.spec.ts:15,25,39,47,63 (diff lines 21,31,45,53,69): numbered generated step comments such as "// 3. Open the order" and "// 5. Fill the Comment textbox ... and click Add Comment" restate the next line instead of explaining why.
+
+### v1.1 notes
+
+- **Generation time.** Per session, round 3: baseline 8.5, 40.4, 8.2 minutes (06, 07, 08);
+  baseline-plus-rules 5.8 to 10.8 minutes, except 39.5 on ticket 08; with-setup 1.5 to 1.7. The two
+  40-minute sessions each lost 30 minutes to one call to the Playwright MCP server's `test_run`
+  tool that never answered; Claude Code aborts an MCP tool call after 1800 seconds, and the session
+  then carried on. It affects time only: scoring judges the code produced. A per-call MCP timeout
+  of a few minutes would have avoided it; it was not changed mid-run.
+- **Whole-diff review.** No round-3 session changed anything outside `e2e/` (and the agents' plan
+  files under `specs/`).
+- **Housekeeping.** Saleor's `.github/workflows` were removed from `main`; Actions stays disabled.
+
+---
+
+# Version 1 results (unchanged)
+
 Scored exactly as [SCORING.md](SCORING.md) describes. Every number below is produced by
 [`demo/tally.py`](demo/tally.py) from the files in [`evidence/`](evidence/): the blind
 reviewers' verdicts (`evidence/reviews/`, with the submission-to-branch key in `key.tsv`), the
