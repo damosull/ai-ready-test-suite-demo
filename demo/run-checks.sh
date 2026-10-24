@@ -18,7 +18,7 @@ repo="${REPO:?set REPO to the repository root}"
 cd "$repo"
 
 if [[ "$round" == "1" ]]; then out="$branch-t$ticket"; else out="$branch-r$round-t$ticket"; fi
-if [[ -n "$(git status --porcelain)" ]]; then echo "working tree is not clean" >&2; exit 1; fi
+if [[ -n "$(git status --porcelain -- . ':!evidence')" ]]; then echo "working tree is not clean" >&2; exit 1; fi
 
 patch="$(git show "main:demo/breaks/$ticket.patch")"
 git checkout -q "$out"

@@ -33,7 +33,7 @@ case "$branch" in
   *) echo "branch must be baseline or with-setup" >&2; exit 1 ;;
 esac
 
-if [[ -n "$(git status --porcelain)" ]]; then
+if [[ -n "$(git status --porcelain -- . ':!evidence')" ]]; then
   echo "working tree is not clean" >&2
   exit 1
 fi

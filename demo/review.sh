@@ -33,7 +33,7 @@ mkdir -p "$inputs"
 git diff "$branch" "$out" -- e2e/ > "$inputs/change.diff"
 
 # Type check with the change applied, in the main checkout (which has node_modules).
-if [[ -n "$(git status --porcelain)" ]]; then echo "working tree is not clean" >&2; exit 1; fi
+if [[ -n "$(git status --porcelain -- . ':!evidence')" ]]; then echo "working tree is not clean" >&2; exit 1; fi
 git checkout -q "$out"
 typecheck="$(pnpm run --silent check-types:e2e 2>&1 && echo "exit 0: no errors" || echo "exit non-zero: the above are type errors")"
 git checkout -q main
