@@ -1,0 +1,72 @@
+// spec: specs/02-draft-order-delete.md
+// seed: e2e/tests/seed.spec.ts
+import { expect, test } from "../../fixtures/test.ts";
+import { DraftOrderPage } from "../../pages/draftOrderPage.ts";
+import { CHANNEL, ORDERS_SCENARIO } from "../../scenarios/orders.ts";
+
+/**
+ * Ticket 02: staff delete a draft they no longer need from the draft's "More actions" menu.
+ * If deletion silently failed, the drafts list would keep filling with orders nobody can
+ * get rid of - so the last step revisits the draft's address and expects it to be gone.
+ */
+test.use({ scenario: ORDERS_SCENARIO });
+
+test.describe("Draft order deletion", () => {
+  test("Staff deletes a draft order from its menu #e2e", async ({ page }) => {
+    // Arrange
+    const draft = new DraftOrderPage(page);
+    const pageHeader = page.getByTestId("page-header");
+    let draftUrl = "";
+
+    // 1. Start a draft in the USD channel
+    await test.step("start a draft in the USD channel", async () => {
+      await draft.create({ from: "drafts", channel: CHANNEL.name });
+      await expect(page).toHaveURL(/\/orders\/drafts\/[^/?]+$/);
+      await expect(pageHeader).toContainText(CHANNEL.name);
+      draftUrl = page.url();
+    });
+
+    // 2. Delete it from the draft's menu
+    await test.step("delete it from the draft's menu", async () => {
+      // Act
+      await page.getByTestId("show-more-button").click();
+      // The label says "Cancel order" even though, on a draft, the action deletes it.
+      await page.getByRole("menuitem", { name: "Cancel order" }).click();
+
+      // Assert
+      await expect(draft.dialog).toBeVisible();
+      await expect(draft.dialog).toContainText("Delete Draft Order");
+      await expect(draft.dialog).toContainText("Are you sure you want to delete draft");
+      await expect(draft.dialog.getByRole("button", { name: "Keep draft" })).toBeVisible();
+      await expect(draft.dialog.getByRole("button", { name: "Delete" })).toBeVisible();
+      await expect(page).toHaveURL(`${draftUrl}?action=cancel`);
+    });
+
+    // 3. Confirm
+    await test.step("confirm", async () => {
+      // Act
+      await draft.dialog.getByRole("button", { name: "Delete" }).click();
+
+      // Assert
+      await expect(draft.dialog).toBeHidden();
+      await expect(page).toHaveURL(/\/orders\/drafts(\?|$)/);
+      await expect(pageHeader).toContainText("Drafts");
+      await expect(pageHeader).toContainText("All draft orders");
+      await expect(draft.createDraftButton).toBeVisible();
+    });
+
+    // 4. The deleted draft's address is gone
+    await test.step("the deleted draft's address is gone", async () => {
+      // Act
+      await page.goto(draftUrl);
+
+      // Assert
+      await expect(page.getByText("Sorry, the page was not found")).toBeVisible();
+      await expect(page.getByText("Something's missing")).toBeVisible();
+      await expect(page.getByRole("button", { name: "Go back to dashboard" })).toBeVisible();
+      await expect(draft.statusInfo).toBeHidden();
+      await expect(draft.finalizeButton).toBeHidden();
+      await expect(page.getByText(/Order #\d+/)).toBeHidden();
+    });
+  });
+});
