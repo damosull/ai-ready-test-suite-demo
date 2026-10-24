@@ -44,6 +44,20 @@ export class OrderPage {
 
   readonly trackingNumber = this.page.getByTestId("tracking-number-set");
 
+  readonly fulfillmentCard = this.page.getByTestId("fulfilled-order-section");
+
+  readonly fulfillmentMenuButton = this.fulfillmentCard.getByTestId("fulfillment-menu-button");
+
+  // The card's dropdown is portaled to the document body, so it is scoped to the open menu.
+  readonly cancelFulfillmentMenuItem = this.page.getByRole("menu").getByTestId("cancel-fulfillment");
+
+  readonly cancelFulfillmentWarehouse = this.dialog
+    .getByTestId("cancel-fulfillment-select-field")
+    .getByRole("combobox");
+
+  // The picker's listbox is portaled outside the dialog, so it cannot be scoped to it.
+  readonly warehouseOptions = this.page.getByRole("listbox").getByRole("option");
+
   readonly total = this.page.getByTestId("order-total");
 
   readonly shippingAddressSection = this.page.getByTestId("shipping-address-section");
@@ -89,6 +103,20 @@ export class OrderPage {
     await this.addTrackingButton.click();
     await this.trackingNumberInput.fill(trackingNumber);
     await this.confirmTrackingButton.click();
+    await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  async cancelFulfillment() {
+    // The fulfillment card only renders in the Timeline view; the default is Line matrix.
+    await this.timelineView.click();
+    await this.fulfillmentMenuButton.click();
+    await this.cancelFulfillmentMenuItem.click();
+    await this.dialog.waitFor();
+    // The warehouse the fulfillment shipped from is pre-selected; one is chosen explicitly so
+    // the restock choice is exercised. Any warehouse offered is valid.
+    await this.cancelFulfillmentWarehouse.click();
+    await this.warehouseOptions.first().click();
+    await this.dialog.getByTestId("submit").click();
     await this.dialog.waitFor({ state: "hidden" });
   }
 

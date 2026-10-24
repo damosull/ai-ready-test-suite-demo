@@ -1,0 +1,61 @@
+# Order: cancelling a fulfillment puts the order back to Unfulfilled (ticket 04)
+
+## Application Overview
+
+Covers ticket tickets/04.md: a staff member cancels the fulfillment of a paid, fulfilled order from the fulfillment card's menu, choosing the warehouse the stock goes back to. The order must go back to needing fulfillment ("Unfulfilled", fulfil action offered) and stay that way after a reload. Today `e2e/tests/orders/order-payment-fulfillment.spec.ts` covers fulfilling but not cancelling.
+
+TARGET FILE: `e2e/tests/orders/order-cancel-fulfillment.spec.ts`. One test (one user story), staged with `test.step`, title e.g. `"Cancelling a fulfillment puts the order back to Unfulfilled #e2e"`. File opens with a comment saying what it covers and why (the fulfil side is in order-payment-fulfillment.spec.ts; this is the reverse). Imports `expect`/`test` from `../../fixtures/test.ts`, `e2eConfig` from `../../config.ts`, `OrderPage` from `../../pages/orderPage.ts`, `findOrderId`/`ORDERS_SCENARIO` from `../../scenarios/orders.ts` (relative, with `.ts`). `// Arrange` then `// Act & Assert` comments, as in the sibling spec.
+
+STARTING STATE / DATA: `test.use({ scenario: ORDERS_SCENARIO })`; default actor (`admin`), no UI sign-in. The fixture restores the database before the test, so no cleanup, no unique names. The order is the scenario's existing "fulfilled" order (one E2E Tee, paid via orderMarkAsPaid, fulfilled from the warehouse that ships to US in Channel-USD), looked up at test time with `await findOrderId(config, "fulfilled")`. No order creation, no API arrangement, no hard-coded ids, no `parallel()` (the test writes). No fixed waits, no `networkidle`, no retries/timeout changes.
+
+PAGE OBJECT: extend `e2e/pages/orderPage.ts` (OrderPage); do not create a new class or spec-local helper. Proposed additions (readonly fields from `this.page`, reusing existing `dialog`, `statusInfo`, `fulfillButton`, `timelineView`):
+- `fulfillmentCard = this.page.getByTestId("fulfilled-order-section")` - the fulfillment card (only rendered in the Timeline view).
+- `fulfillmentMenuButton = this.fulfillmentCard.getByTestId("fulfillment-menu-button")` - the card's kebab button, accessible name "Show more" (title). Scoped to the card because "Show more" buttons also exist in the datagrid toolbars.
+- `cancelFulfillmentMenuItem = this.page.getByRole("menu").getByTestId("cancel-fulfillment")` - the "Cancel fulfillment" item. The dropdown is portaled to the document body, NOT inside the card, so scope to the open `menu` role rather than the card. (`cancel-fulfillment` also exists in the Line-matrix expanded panel, another reason to scope.)
+- `cancelFulfillmentWarehouse = this.dialog.getByTestId("cancel-fulfillment-select-field").getByRole("combobox")` - the "Select Warehouse" combobox. Its accessible name includes the current value ("Select Warehouse Americas"), so do not locate it by exact name.
+- `warehouseOptions = this.page.getByRole("listbox").getByRole("option")` - the picker's options (each also carries `data-test-id="select-option"`). The listbox is portaled OUTSIDE the dialog, so it cannot be scoped to `this.dialog`.
+- Confirm button: `this.dialog.getByTestId("submit")` (text "Cancel fulfillment", variant error) - same scoping as `markAsPaid`. Dialog also has `back` ("Back") and `close-button`.
+- `canceledFulfillmentsToggle = this.page.getByTestId("toggle-canceled-fulfillments")` - optional; reads "Show 1 canceled shipment" after cancelling.
+
+Proposed method `cancelFulfillment()` (named for the user action; comment the non-obvious parts):
+1. `await this.timelineView.click()` - comment: the fulfillment card only renders in the Timeline view; the default view is "Line matrix" (same reason `addTracking` clicks it). Clicking it when already selected is harmless.
+2. `await this.fulfillmentMenuButton.click()`, then `await this.cancelFulfillmentMenuItem.click()`.
+3. `await this.dialog.waitFor()` (URL also gains `?action=cancel-fulfillment&id=...`).
+4. Choose the warehouse: `await this.cancelFulfillmentWarehouse.click()`, then `await this.warehouseOptions.first().click()` - comment: the dialog pre-selects the warehouse the fulfillment shipped from, so the picker is opened and an option chosen explicitly to exercise the restock choice; any warehouse offered is valid (ticket note). Optionally take a `warehouse?: string` param and use `.filter({ hasText })` / `getByRole("option", { name })`, but do not assert on populatedb warehouse names (they are populatedb data, see rule 3.6).
+5. `await this.dialog.getByTestId("submit").click()` then `await this.dialog.waitFor({ state: "hidden" })` - the dialog closing proves the mutation completed (on error it stays open with `dialog-error` text).
+
+OBSERVED IN THE BROWSER (Saleor 3.23 stack, populatedb fulfilled order used to learn the UI; the scenario order behaves the same):
+- Before: `status-info` = "Fulfilled"; NO `order-items-fulfill-button` in the DOM (fully fulfilled order); `order-items-return-button` present; one `fulfilled-order-section` card with status "Fulfilled" and "From <warehouse>".
+- Menu: role `menu` containing one `menuitem` "Cancel fulfillment" (`data-test-id="cancel-fulfillment"`).
+- Dialog (role `dialog`): heading "Cancel Fulfillment"; text "Are you sure you want to cancel fulfillment? Canceling a fulfillment will restock products at the selected warehouse. The warehouse this fulfillment shipped from is pre-selected."; test ids inside: `close-button`, `cancel-fulfillment-select-field`, `back`, `submit`. Combobox value pre-filled with the source warehouse; `submit` enabled. Options listed in a portaled `listbox`.
+- After confirm: dialog hidden, URL back to `/orders/<id>` (no action param); toast "Success / Fulfillment cancelled"; `status-info` = "Unfulfilled"; `order-items-fulfill-button` ("Fulfill") visible and enabled; no `fulfilled-order-section` card (cancelled shipments are hidden behind `toggle-canceled-fulfillments` "Show 1 canceled shipment"); "Unfulfilled order lines" card shown; order history gains "Fulfillment was cancelled" and "Restocked 1 item to <warehouse>".
+- After `page.reload()`: `status-info` still "Unfulfilled", `order-items-fulfill-button` still visible. Note: the chosen Timeline view persists in the browser after reload, but a fresh test context starts on Line matrix - the fulfil button sits in the section header and is visible in both views.
+
+OUT OF SCOPE (separate stories if ever wanted, not part of this ticket's one test): confirm button disabled when the warehouse is cleared; cancelling a fulfillment "waiting for approval" (no warehouse picker); stock levels per warehouse after restock; permission actors without MANAGE_ORDERS.
+
+## Test Scenarios
+
+### 1. Order cancel fulfillment
+
+**Seed:** `e2e/tests/seed.spec.ts`
+
+#### 1.1. Cancelling a fulfillment puts the order back to Unfulfilled #e2e
+
+**File:** `e2e/tests/orders/order-cancel-fulfillment.spec.ts`
+
+**Steps:**
+  1. Arrange: with `test.use({ scenario: ORDERS_SCENARIO })` (admin actor, restored DB), create `new OrderPage(page)` and call `orderPage.goto(await findOrderId(config, "fulfilled"))`. `goto` already waits for `status-info`.
+    - expect: `orderPage.statusInfo` has text "Fulfilled" (precondition, web-first `toHaveText`) - proves the test starts from the fulfilled order, so the later "Unfulfilled" is caused by the cancellation
+    - expect: `orderPage.fulfillButton` (`order-items-fulfill-button`) is not visible / has count 0 - precondition that makes the later "fulfil action offered" assertion meaningful
+  2. test.step "cancel the fulfillment, restocking to a warehouse": call `orderPage.cancelFulfillment()` (new OrderPage method): switch to Timeline (`order-items-view-timeline`), click the card's `fulfillment-menu-button` inside `fulfilled-order-section`, click `cancel-fulfillment` inside the open `menu`, wait for the dialog, open the `cancel-fulfillment-select-field` combobox inside the dialog, pick the first `option` from the portaled `listbox`, click `submit` inside the dialog, and wait for the dialog to be hidden.
+    - expect: The "Cancel Fulfillment" dialog opens with the warehouse combobox pre-filled and `submit` enabled
+    - expect: After picking an option the combobox shows the chosen warehouse
+    - expect: After clicking `submit` the dialog closes (`dialog.waitFor({ state: "hidden" })`) - this is the UI state proving the step finished; if the API returned errors the dialog would stay open showing `dialog-error`
+  3. test.step "the order needs fulfilling again": assert on the order page without navigating.
+    - expect: `await expect(orderPage.statusInfo).toHaveText("Unfulfilled")`
+    - expect: `await expect(orderPage.fulfillButton).toBeVisible()` (optionally `toBeEnabled()` - the order is paid, so it is not blocked by the unpaid rule)
+    - expect: Optional supporting check: `orderPage.fulfillmentCard` has count 0 (the cancelled shipment is hidden) - not required by the ticket
+  4. test.step "it stays unfulfilled after a reload": `await page.reload()` then wait for `orderPage.statusInfo` (or call `orderPage.goto` with the same id again) to prove persistence on the server rather than in client state.
+    - expect: `await expect(orderPage.statusInfo).toHaveText("Unfulfilled")` after the reload
+    - expect: `await expect(orderPage.fulfillButton).toBeVisible()` after the reload
+    - expect: Failure conditions: status reverts to "Fulfilled", the fulfil button is missing, or the dialog never closes - any of these fails the named step
