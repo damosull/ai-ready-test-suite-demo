@@ -64,4 +64,7 @@ for f in "$logs"/*.log; do
   [[ -e "$f" ]] && sed 's/\x1b\[[0-9;]*m//g' "$f" > "evidence/runs/round-$round/$branch-$ticket.$(basename "$f")"
 done
 rm -rf "$report" "$logs"
+# Committed straight away: the next script switches branches, and git will not do that over
+# modified tracked files.
+git add evidence && git commit -q --no-verify -m "evidence: $out (checks)"
 cat "evidence/runs/round-$round/$branch-$ticket.txt"

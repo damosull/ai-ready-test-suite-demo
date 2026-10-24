@@ -63,4 +63,7 @@ result="$repo/evidence/reviews/round-$round/$id.json"
 printf '%s\t%s\t%s\t%s\n' "$id" "$branch" "$ticket" "$round" >> "$repo/evidence/reviews/key.tsv"
 cp "$inputs/change.diff" "$repo/evidence/reviews/round-$round/$id.diff"
 cp "$inputs/typecheck.txt" "$repo/evidence/reviews/round-$round/$id.typecheck.txt"
+# Committed straight away: the next script switches branches, and git will not do that over
+# modified tracked files.
+git add evidence && git commit -q --no-verify -m "evidence: $out (review)"
 echo "$out reviewed as $id"
