@@ -53,6 +53,24 @@ export class DraftOrderPage {
 
   readonly summary = this.page.getByTestId("OrderSummary");
 
+  readonly addDiscountButton = this.summary.getByRole("button", { name: "Add Discount" });
+
+  readonly discountValueInput = this.dialog.getByTestId("discount-value");
+
+  readonly discountReasonInput = this.dialog.getByTestId("discount-reason");
+
+  /**
+   * Rows of the expanded discount breakdown carry no test id, and the whole discount section
+   * is itself a list item wrapping them - so only rows with no list item inside are rows.
+   */
+  readonly discountRow = this.summary
+    .getByRole("listitem")
+    .filter({ hasNot: this.page.getByRole("listitem") });
+
+  readonly manualDiscountRow = this.discountRow.filter({ hasText: "Manual" });
+
+  readonly promotionDiscountRow = this.discountRow.filter({ hasText: "Promotion" });
+
   readonly finalizeButton = this.page.getByTestId("button-bar-confirm");
 
   constructor(readonly page: Page) {}
@@ -106,6 +124,19 @@ export class DraftOrderPage {
     await this.shippingMethodSelect.click();
     await this.option.filter({ hasNotText: "No shipping method" }).first().click();
     await this.confirmShippingButton.click();
+    await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  /**
+   * Once a line is discounted, "Add Discount" moves inside the collapsed discount breakdown,
+   * so the breakdown is opened first. The modal defaults to a percentage.
+   */
+  async addPercentageDiscount({ percent, reason }: { percent: number; reason: string }) {
+    await this.discountToggle.click();
+    await this.addDiscountButton.click();
+    await this.discountValueInput.fill(String(percent));
+    await this.discountReasonInput.fill(reason);
+    await this.dialog.getByTestId("submit").click();
     await this.dialog.waitFor({ state: "hidden" });
   }
 
