@@ -31,7 +31,7 @@ branches.
   no MCP servers.
 - **What each side can read.** The demo's method files are removed from disk for every
   generation session: `SCORING.md`, `RESULTS.md`, `demo/breaks/`, the review prompt and
-  `results/`. The baseline sessions also do not see `CONVENTIONS.md` or `CHECKLIST.md`, because
+  `evidence/`. The baseline sessions also do not see `CONVENTIONS.md` or `CHECKLIST.md`, because
   that knowledge is what the setup is. On `with-setup` they are part of the setup, as they would
   be in a team's repository. Both sides see the tickets and the whole of Saleor's repository.
 - **Baseline configuration.** `npx playwright init-agents --loop=claude --config
@@ -61,7 +61,7 @@ e2e/playwright.config.ts --project stable`, as Playwright documents. Three chang
   ticket's change adds or edits. An item is either met or failed; a failed item is one finding,
   with the file and line as evidence. A ticket can therefore score at most 10 blockers and 13
   minors, and ten hard waits count as one B4, not ten.
-- **Output.** A structured verdict per item, saved under `results/reviews/`. The prompt is in
+- **Output.** A structured verdict per item, saved under `evidence/reviews/`. The prompt is in
   [`demo/prompts/review.md`](demo/prompts/review.md).
 - **No overriding.** The operator does not change a reviewer's verdict. If a verdict is plainly
   wrong it is noted in RESULTS.md next to the number, and the number stays.
