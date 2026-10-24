@@ -21,6 +21,9 @@ that did not know which arm wrote it.
 | Failed when the feature was broken, as it should | 3/3               | 3/3                             | 3/3                         | 3/3            |
 | Minutes per ticket                               | 8 to 40           | 8.6 to 12.8                     | 6 to 40                     | 1.5 to 1.7     |
 
+Run 20 more times each afterwards, every arm's held-out tests passed every time: 60 out of 60 runs
+per arm, 240 out of 240 in all ([RESULTS.md](RESULTS.md), supplementary stability).
+
 The tailored setup skips Playwright's planner, generator and healer loop, so part of its speed
 lead is a shorter workflow, not better tests. The two 40-minute sessions were a tool call that
 hung, explained in [RESULTS.md](RESULTS.md).

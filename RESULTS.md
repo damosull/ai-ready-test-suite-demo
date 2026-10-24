@@ -110,6 +110,28 @@ the same level without seeing the rules it was scored against.
 - No infrastructure re-runs, and no verdict looked plainly wrong, so there are no notes against
   any number.
 
+### Supplementary: stability over 20 runs
+
+Pre-registered in [SCORING.md, "Supplementary: stability"](SCORING.md#supplementary-stability-pre-registered-committed-before-any-stability-run)
+and committed (`bb74f56`) and pushed before the run. This does not change any verdict above.
+
+Each of the 12 held-out specs, from its scored branch and unedited, run once with
+`pnpm e2e <spec> --workers=1 --repeat-each=20` on one stack, one arm at a time, on 2026-10-24.
+Each spec holds one test, so each cell is 20 runs of one test. Numbers come from
+[`demo/tally-stability.py`](demo/tally-stability.py); logs and JSON reports are in
+`evidence/runs/stability/`.
+
+| Arm                   | Ticket 06 | Ticket 07 | Ticket 08 | Total |
+| --------------------- | --------- | --------- | --------- | ----- |
+| `baseline`            | 20/20     | 20/20     | 20/20     | 60/60 |
+| `ai-conventions`      | 20/20     | 20/20     | 20/20     | 60/60 |
+| `baseline-plus-rules` | 20/20     | 20/20     | 20/20     | 60/60 |
+| `with-setup`          | 20/20     | 20/20     | 20/20     | 60/60 |
+
+No spec failed in any repetition, and no run had to be repeated for an infrastructure reason. Each
+spec took 1 to 3 minutes for its 20 repetitions. On these specs, none of the difference between
+the arms is flakiness.
+
 ## Version 1.1: held-out tickets, three arms
 
 Pre-registered in [SCORING.md, "Addendum for v1.1"](SCORING.md#addendum-for-v11-pre-registered-committed-before-any-v11-generation)
