@@ -1,0 +1,244 @@
+diff --git a/e2e/pages/promotionPage.ts b/e2e/pages/promotionPage.ts
+new file mode 100644
+index 0000000..54f54fa
+--- /dev/null
++++ b/e2e/pages/promotionPage.ts
+@@ -0,0 +1,78 @@
++import { expect, type Locator, type Page } from "@playwright/test";
++
++export const DETAIL_URL =/\/discounts\/sales\/[^/?]+$/;
++
++class DeleteRuleDialog {
++  readonly dialog = this.page.getByTestId("delete-rule-dialog");
++
++  readonly confirmButton = this.page.getByTestId("delete-rule-button");
++
++  constructor(readonly page: Page) {}
++}
++
++/** A promotion, from the Promotions list to its detail page and rule cards. */
++export class PromotionPage {
++  readonly deleteRuleDialog = new DeleteRuleDialog(this.page);
++
++  readonly searchInput = this.page.getByTestId("search-input");
++
++  readonly list = this.page.getByTestId("list");
++
++  /* Glide's a11y table is hidden; its aria-rowcount is the header plus the data rows. */
++  readonly grid = this.list.getByRole("grid", { includeHidden: true });
++
++  readonly rowAnchor = this.page.getByTestId("datagrid-row-anchor");
++
++  readonly header = this.page.getByTestId("page-header");
++
++  readonly nameInput = this.page.getByTestId("discount-name-input");
++
++  readonly rulesSection = this.page.getByTestId("discount-rules-section");
++
++  readonly rules = this.page.getByTestId("added-rule");
++
++  readonly rulesPlaceholder = this.rulesSection.getByText(
++    "Add your first rule to set up a promotion",
++    { exact: true },
++  );
++
++  constructor(readonly page: Page) {}
++
++  /**
++   * Opens a promotion from the list - the only UI path, since global search does not index
++   * promotions. The list sorts by name, so "E2E big basket" is the first row until the search
++   * lands, and the grid's a11y table briefly unmounts while it re-renders: wait for one data
++   * row with the name before hovering it.
++   */
++  async open(name: string) {
++    await this.page.goto("/discounts/sales");
++    await this.searchInput.fill(name);
++    await this.page.waitForURL(/query=/);
++    await expect(this.grid).toHaveAttribute("aria-rowcount", "2");
++    await expect(this.list.getByText(name, { exact: true })).toHaveCount(1);
++
++    /*
++     * Rows are drawn on a canvas and the row anchor only gets its href on hover. The list's
++     * centre falls on the header row, so hover inside the Name column of the bottom row.
++     */
++    const box = await this.list.boundingBox();
++
++    if (!box) {
++      throw new Error("the promotion list is not rendered");
++    }
++
++    await this.list.hover({ position: { x: 150, y: box.height - 15 } });
++    await this.rowAnchor.click();
++    await this.page.waitForURL(DETAIL_URL);
++    await expect(this.header).toContainText(name);
++  }
++
++  /** Persists straight away on confirm - there is no Save step. */
++  async deleteRule(rule: Locator) {
++    // The card's trash icon, not the save bar's "Delete", which deletes the whole promotion.
++    await rule.getByTestId("rule-delete-button").click();
++    await this.deleteRuleDialog.dialog.waitFor({ state: "visible" });
++    await this.deleteRuleDialog.confirmButton.click();
++    await this.deleteRuleDialog.dialog.waitFor({ state: "hidden" });
++  }
++}
+diff --git a/e2e/tests/discounts/promotion-rule-removal.spec.ts b/e2e/tests/discounts/promotion-rule-removal.spec.ts
+new file mode 100644
+index 0000000..0e1d111
+--- /dev/null
++++ b/e2e/tests/discounts/promotion-rule-removal.spec.ts
+@@ -0,0 +1,51 @@
++import { expect, test } from "../../fixtures/test.ts";
++import { DETAIL_URL, PromotionPage } from "../../pages/promotionPage.ts";
++import { ORDERS_SCENARIO, PRODUCTS, PROMOTIONS } from "../../scenarios/orders.ts";
++
++/**
++ * Staff open the "E2E Tee sale" catalogue promotion from the Promotions list, delete its
++ * only rule from the rule card and confirm. The promotion itself must survive with no
++ * rules, both straight away and after a reload.
++ *
++ * Replaces legacy SALEOR_167 ("Delete promotion rule from ... promotion") for the catalogue
++ * promotion. Its order-promotion variant is deliberately not ported: the flow is the same
++ * rule card and dialog, and this covers one user story.
++ */
++test.use({ scenario: ORDERS_SCENARIO, actor: "admin" });
++
++test("Staff removes a rule from a promotion #e2e #discounts", async ({ page }) => {
++  // Arrange
++  const promotion = new PromotionPage(page);
++  const { name, percent } = PROMOTIONS.catalogue;
++
++  await promotion.open(name);
++
++  // Act & Assert
++  await test.step("the promotion starts with its one seeded rule", async () => {
++    await expect(promotion.rules).toHaveCount(1);
++
++    const rule = promotion.rules.first();
++
++    await expect(rule.getByTestId("rule-value-chip")).toHaveText(`${percent}%`);
++    await expect(rule).toContainText(PRODUCTS.tee.name);
++    await expect(promotion.rulesPlaceholder).toBeHidden();
++  });
++
++  await test.step("confirming the rule's delete removes it", async () => {
++    await promotion.deleteRule(promotion.rules.first());
++    await expect(promotion.rulesPlaceholder).toBeVisible();
++    await expect(promotion.rules).toHaveCount(0);
++    // Still on the promotion: the save bar's promotion delete was not triggered.
++    await expect(page).toHaveURL(DETAIL_URL);
++    await expect(promotion.header).toContainText(name);
++  });
++
++  await test.step("after a reload the promotion remains with no rules", async () => {
++    await page.reload();
++    await expect(promotion.header).toContainText(name);
++    await expect(promotion.nameInput).toHaveValue(name);
++    // Before the count: the loading skeleton also has no rule cards.
++    await expect(promotion.rulesPlaceholder).toBeVisible();
++    await expect(promotion.rules).toHaveCount(0);
++  });
++});
+diff --git a/specs/promotion-rule-removal.md b/specs/promotion-rule-removal.md
+new file mode 100644
+index 0000000..c0b8acb
+--- /dev/null
++++ b/specs/promotion-rule-removal.md
+@@ -0,0 +1,97 @@
++# Discounts: staff removes a rule from a promotion (ticket 08)
++
++## Application Overview
++
++Covers ticket 08 (tickets/08.md): staff open the "E2E Tee sale" catalogue promotion, delete its only rule using the rule card's delete button, and confirm. The promotion must still exist with no rules, both straight away and after a reload. This plan covers that one user story and nothing else.
++
++## Implementation constraints (from CLAUDE.md "End-to-end tests" and e2e/README.md)
++
++- **Spec file:** `e2e/tests/discounts/promotion-rule-removal.spec.ts`. This is a new `discounts/` area folder, in kebab-case. Import `test` and `expect` from `../../fixtures/test.ts`, not from `@playwright/test`.
++- **Doc comment:** start the spec with one that describes the flow. It replaces legacy `SALEOR_167` ("Delete promotion rule from ... promotion", `e2e-legacy/tests/discounts.spec.ts`) for the catalogue case. The order-promotion variant of SALEOR_167 is deliberately not ported, because the ticket covers one story.
++- **Scenario:** `test.use({ scenario: ORDERS_SCENARIO })`. Import `ORDERS_SCENARIO`, `PROMOTIONS` and `PRODUCTS` from `../../scenarios/orders.ts`. Use the existing scenario as-is: it already holds "E2E Tee sale" with exactly one rule (Channel-USD, 20% off, product E2E Tee). Do not add a new scenario, create data or clean up.
++- **Actor:** `admin`. This is the fixture default, but state it explicitly with `test.use({ actor: "admin" })` alongside the scenario so the intent is visible.
++- **Parallelism:** leave the test untagged so it stays serial with a reset. It writes (deletes a rule), so `parallel()` is not allowed. Do not add retries or `test.describe.configure`.
++- **Title:** `"Staff removes a rule from a promotion #e2e #discounts"`. Use one test with `// Arrange` and then `// Act & Assert`, with one named `test.step` per stage.
++- **IDs:** no hardcoded promotion or rule IDs, because they change on every dump build. Reach the promotion through the UI list. The list URL `/discounts/sales` has no ID, so `page.goto` on it is acceptable, the same way `DraftOrderPage.create` opens `/orders/drafts`.
++- **Schema targets:** the feature exists on both targets, so there is no `test.skip(config.stagingSchema, ...)`. `promotionRuleDelete` is defined in both `schema-main.graphql` and `schema-staging.graphql`. The detail view (`src/discounts/views/DiscountDetails`) uses shared, non-staging-specific operations. The spec must pass `pnpm e2e` (stable, verified interactively on :9200 during planning) and `pnpm e2e:main` (not explored interactively, so run it to confirm).
++- **Waiting:** use only web-first assertions and locator or URL waits. No `waitForTimeout`, no raised timeouts, and no CSS or XPath for dashboard UI.
++
++## Page object: `e2e/pages/promotionPage.ts` (new)
++
++Write `export class PromotionPage` with `readonly` fields initialized from `this.page`, an empty `constructor(readonly page: Page) {}`, and the delete dialog as a field. These locators were observed in the running dashboard:
++
++- `searchInput = getByTestId("search-input")`: "Search promotions..." on the list.
++- `list = getByTestId("list")`: wraps the Glide datagrid canvas. Rows are not reachable through the accessibility tree.
++- `grid = list.getByRole("grid", { includeHidden: true })`: Glide's hidden a11y table. `aria-rowcount` is the header plus the number of rows. Playwright cannot see it without `includeHidden`.
++- `rowAnchor = getByTestId("datagrid-row-anchor")`: an `<a>` that only gets its `href` after the pointer hovers a row.
++- `header = getByTestId("page-header")`: shows the promotion name, type (Catalog) and status (Active). It renders empty for a moment while loading.
++- `nameInput = getByTestId("discount-name-input")`: value "E2E Tee sale".
++- `rulesSection = getByTestId("discount-rules-section")`: the "Rules" card.
++- `rules = getByTestId("added-rule")`: one per rule card.
++- `ruleDeleteButton = getByTestId("rule-delete-button")`: the trash icon on a rule card, aria-label "Delete". Do not use `getByRole("button", { name: "Delete" })`. The save bar's promotion delete button (`button-bar-delete`) has the same name, and clicking it would delete the whole promotion.
++- `rulesPlaceholder = rulesSection.getByText("Add your first rule to set up a promotion", { exact: true })`: the empty state (`messages.placeholder`, id XtlUj6). It has no test ID.
++- `deleteRuleDialog`: either a small nested class or fields. `dialog = getByTestId("delete-rule-dialog")` has the title "Delete rule" and the subtitle "Are you sure you want to delete this rule?". `confirmButton = getByTestId("delete-rule-button")` is labelled "Delete". `cancelButton = getByTestId("cancel-delete-rule-button")` is labelled "Back". Do not confuse `delete-rule-button` (dialog confirm) with `rule-delete-button` (card trash icon).
++
++Methods are complete user actions that wait for their result:
++
++1. `open(name: string)`
++   - `goto("/discounts/sales")`, then fill `searchInput` with the name and `waitForURL(/query=/)`.
++   - Wait for the narrowed state: `expect(grid).toHaveAttribute("aria-rowcount", "2")` and `expect(list.getByText(name, { exact: true })).toHaveCount(1)`.
++   - Hover the single data row: `list.hover({ position: { x: <inside Name column, about 150>, y: <in the bottom row, e.g. list height minus about 15> } })`. Compute y from `list.boundingBox()` and comment why.
++   - Click `rowAnchor`, then `waitForURL(/\/discounts\/sales\/[^/?]+$/)` and `expect(header).toContainText(name)`.
++   - The comment must explain the wait. The list sorts by name ascending, so "E2E big basket" sorts before "E2E Tee sale". Until the search lands, the first row is the wrong promotion, and the grid's a11y table briefly unmounts while it re-renders.
++2. `deleteRule(rule: Locator)` (or `deleteOnlyRule()`):
++   - Click `rule.getByTestId("rule-delete-button")`, then wait for `deleteRuleDialog.dialog` to be visible.
++   - Click `confirmButton`, then `deleteRuleDialog.dialog.waitFor({ state: "hidden" })`.
++   - The mutation runs straight away on confirm. There is no Save step, and Save stays disabled.
++3. Optionally `reload()`: `page.reload()`, then `expect(header).toContainText(...)`, or leave the reload to the spec.
++
++Leave outcome assertions to the spec.
++
++## Observed behavior (stable target, during planning)
++
++- Discounts in the sidebar goes to `/discounts/sales?asc=true&sort=name`. The page title is "Promotions" and it lists 2 promotions: "E2E big basket" and "E2E Tee sale".
++- The "E2E Tee sale" detail page shows the following.
++  - Header: "E2E Tee sale", "Catalog", "Active".
++  - Rules card: one card with the label "Untitled rule" (the scenario does not name the rule), the channel "Channel-USD", the value chip "20%" plus "off", Edit and Delete icon buttons, and "Applies to: Products: E2E Tee".
++- Rule trash icon: opens the "Delete rule" dialog, which has Back and Delete buttons.
++- Delete: closes the dialog and shows the toast "Rule deleted". The Rules card then shows the placeholder "Add your first rule to set up a promotion", and `added-rule` count is 0. The Save button stays disabled, because the change is persisted rather than pending.
++- After a reload: same URL, header still "E2E Tee sale", name input "E2E Tee sale", placeholder shown, 0 rule cards.
++- Pitfall: `added-rule` count is also 0 while the rule list shows its loading skeleton (`RuleListLoading`). After the reload, assert the placeholder is visible before asserting the count is 0, or the check passes vacuously.
++- Global Search (`/search`) does not index promotions, so the list is the only UI path to the promotion.
++
++## Test Scenarios
++
++### 1. Discounts - promotion rules
++
++**Seed:** `e2e/tests/seed.spec.ts`
++
++#### 1.1. Staff removes a rule from a promotion #e2e #discounts
++
++**File:** `e2e/tests/discounts/promotion-rule-removal.spec.ts`
++
++**Steps:**
++  1. Start state (Arrange): `test.use({ scenario: ORDERS_SCENARIO, actor: "admin" })`. The fixture restores the `orders` dump and signs in as admin. Create `new PromotionPage(page)` and call `promotion.open(PROMOTIONS.catalogue.name)`, which goes to the Promotions list, searches "E2E Tee sale", waits for the grid to narrow to one row, hovers it, clicks the row anchor and waits for the detail URL and header.
++    - expect: The URL matches /discounts/sales/<id> (the ID is not asserted or hardcoded).
++    - expect: `header` contains "E2E Tee sale" (PROMOTIONS.catalogue.name).
++  2. test.step("the promotion starts with its one seeded rule"): guard the scenario assumption before acting.
++    - expect: `promotion.rules` (getByTestId("added-rule")) has count 1.
++    - expect: That rule's `rule-value-chip` has text `${PROMOTIONS.catalogue.percent}%` ("20%").
++    - expect: That rule contains the text PRODUCTS.tee.name ("E2E Tee"), from the "Applies to" condition link.
++    - expect: `rulesPlaceholder` is not visible.
++  3. test.step("confirming the rule's delete removes it"): call `promotion.deleteRule(promotion.rules.first())`. It clicks the card's trash button (getByTestId("rule-delete-button")), waits for the "Delete rule" dialog (getByTestId("delete-rule-dialog")), clicks its Delete (getByTestId("delete-rule-button")) and waits for the dialog to be hidden.
++    - expect: The dialog had the title "Delete rule" and the text "Are you sure you want to delete this rule?". Optionally assert this inside the step before confirming, using `deleteRuleDialog.dialog` toContainText.
++    - expect: After confirming, `rulesPlaceholder` ("Add your first rule to set up a promotion") is visible inside the Rules section.
++    - expect: `promotion.rules` has count 0.
++    - expect: `header` still contains "E2E Tee sale", and the URL is still the promotion detail page. The promotion delete in the save bar was not triggered.
++    - expect: Optional: a notification with the text "Rule deleted" is visible. Do not rely on it alone, because toasts are transient.
++  4. test.step("after a reload the promotion remains with no rules"): `page.reload()`.
++    - expect: `header` contains "E2E Tee sale" (web-first, so it waits through the empty loading header).
++    - expect: `nameInput` has value "E2E Tee sale", which shows the promotion was not deleted.
++    - expect: `rulesPlaceholder` is visible. Assert this first, because `added-rule` is also 0 while the rule list skeleton loads.
++    - expect: `promotion.rules` has count 0.
++  5. Failure conditions to keep in mind when implementing. These are not separate tests, because the ticket covers one story.
++    - expect: Fails if the promotion's save bar Delete (button-bar-delete) is clicked instead of the rule's trash icon. In that case the header and URL assertions break, because the app goes back to the list.
++    - expect: Fails if the deletion only updated local state. The reload step catches this.
++    - expect: Fails if the wrong promotion was opened, for example "E2E big basket" because the search had not narrowed the grid yet. The header assertion in `open()` and the 20% / E2E Tee guard catch this.
++    - expect: Run on both `pnpm e2e` and `pnpm e2e:main`. No schema skip is expected, because `promotionRuleDelete` exists on both schemas. Then run `pnpm run check-types:e2e`, oxlint and Prettier on the new spec and page object.
