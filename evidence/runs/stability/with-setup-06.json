@@ -1,0 +1,1541 @@
+{
+  "config": {
+    "configFile": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/playwright.config.ts",
+    "rootDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:default",
+        "name": "restore:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:default",
+        "name": "parallel:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:orders",
+        "name": "restore:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:orders",
+        "name": "parallel:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:product-media-translations",
+        "name": "restore:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:product-media-translations",
+        "name": "parallel:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 20,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "stable",
+        "name": "stable",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "../setup/restore.setup.ts",
+      "file": "../setup/restore.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:default",
+              "projectName": "restore:default",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1088,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:26:32.274Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-default/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-af330fc030239f5177a4",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:orders",
+              "projectName": "restore:orders",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1117,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:26:33.879Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-orders/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-fc1389ba4e72a3e73b35",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:product-media-translations",
+              "projectName": "restore:product-media-translations",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1172,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:26:35.493Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-product-media-translations/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-17c4f1f7e6e20fabdfb3",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "feedback.spec.ts",
+      "file": "feedback.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Feedback availability",
+          "file": "feedback.spec.ts",
+          "line": 97,
+          "column": 6,
+          "specs": [
+            {
+              "title": "reveals the trigger after loading and opens and submits the real survey",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:26:33.385Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-70e9ce2cefeb29806d2b",
+              "file": "feedback.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "hides the trigger when the survey api is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:26:33.385Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-aed0f647a075c702365c",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when the survey script is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:26:33.385Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-de77fc4f03c0e874846d",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when no survey matches",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:26:33.385Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-1ec3f7d18c937d6e357a",
+              "file": "feedback.spec.ts",
+              "line": 166,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "customers/customer-note.spec.ts",
+      "file": "customers/customer-note.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6660,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3957
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 675
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:26:37.180Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-a116375643e46d80f57b",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6398,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3955
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 660
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:26:44.835Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-4e07ba493f8c6a79daa0",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6378,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3944
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 683
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:26:52.126Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-629b19456b7e9dc03035",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6383,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3942
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 648
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:26:59.504Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-05f66f0e1379074d5369",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6392,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3945
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 679
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:27:06.768Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-e11557ab3baf4796fe39",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6337,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3946
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 652
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:27:14.041Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat5/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-fb087ec52b2c95357601",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6350,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3947
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 662
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:27:21.376Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat6/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-34aecefbae21a54c30c5",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6351,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3942
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 653
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:27:28.596Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat7/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-97d70fa26e63c937defe",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6410,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3946
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 674
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:27:35.837Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat8/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-592b47763a3196f8c92c",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6349,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3945
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 678
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:27:43.215Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat9/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-e12943e1f550aa11b593",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6319,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3944
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 650
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:27:50.460Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat10/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-8ada247bc45d5fbb8243",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6358,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3942
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 645
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:27:57.784Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat11/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-e62b81cb14af2a112f9d",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6330,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3944
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 672
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:28:05.039Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat12/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-56e40a53a19dfd379123",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6342,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3942
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 665
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:28:12.326Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat13/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-d4c3e6e8ad73117649e2",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6364,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3945
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 668
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:28:19.562Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat14/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-5e8f64bafbcabfdb6b40",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6382,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3941
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 659
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:28:26.804Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat15/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-dcd708925838760149ef",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6359,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3943
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 672
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:28:34.128Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat16/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-c6db533071a6d6b27063",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6326,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3946
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 656
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:28:41.456Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat17/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-fbbbf1297fe4bccbba06",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6373,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3951
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 649
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:28:48.746Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat18/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-33b0500628e4f3dd8a1a",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "Customer-management staff saves a note on a customer #e2e",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "stable",
+              "projectName": "stable",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6368,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "write a note and save the page",
+                      "duration": 3951
+                    },
+                    {
+                      "title": "the note is saved on the customer",
+                      "duration": 670
+                    }
+                  ],
+                  "startTime": "2026-10-24T16:28:56.069Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/customers-customer-note-Cu-731cf-es-a-note-on-a-customer-e2e-stable-repeat19/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5c0f8fe32320dac4443d-8dde409892d13895de5b",
+          "file": "customers/customer-note.spec.ts",
+          "line": 15,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-24T16:26:23.039Z",
+    "duration": 159813.55599999998,
+    "expected": 23,
+    "skipped": 4,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
