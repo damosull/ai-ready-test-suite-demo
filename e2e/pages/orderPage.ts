@@ -54,6 +54,11 @@ export class OrderPage {
 
   readonly editBillingAddressButton = this.page.getByTestId("edit-billing-address");
 
+  /* By name: the order lines' row menus share the top bar menu's `show-more-button` id. */
+  readonly moreActionsButton = this.page.getByRole("button", { name: "More actions" });
+
+  readonly cancelOrderMenuItem = this.page.getByTestId("cancel-order");
+
   constructor(readonly page: Page) {}
 
   async goto(orderId: string) {
@@ -89,6 +94,14 @@ export class OrderPage {
     await this.addTrackingButton.click();
     await this.trackingNumberInput.fill(trackingNumber);
     await this.confirmTrackingButton.click();
+    await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  /** From the top bar's menu, which offers it only while the order can still be cancelled. */
+  async cancel() {
+    await this.moreActionsButton.click();
+    await this.cancelOrderMenuItem.click();
+    await this.dialog.getByTestId("submit").click();
     await this.dialog.waitFor({ state: "hidden" });
   }
 
