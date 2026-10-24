@@ -1,0 +1,90 @@
+# Discounts: staff can remove a rule from a promotion (ticket 08)
+
+## Application Overview
+
+Covers ticket tickets/08.md. Staff open the "E2E Tee sale" catalogue promotion from the orders scenario (`PROMOTIONS.catalogue` in e2e/scenarios/orders.ts, scenario `ORDERS_SCENARIO`), which has exactly one rule (20% off the tee product, one channel, no rule name so the card reads "Untitled rule"). They delete that rule and confirm. The promotion must then show no rules, both straight away and after a reload, and must still be the "E2E Tee sale" promotion (not deleted).
+
+Target spec: e2e/tests/discounts/promotion-rule-removal.spec.ts. New page object: e2e/pages/promotionPage.ts (`PromotionPage`), since no existing page object covers the promotions screens.
+
+Starting state: fresh database restored by the suite fixture before the test; signed in as the default `admin` actor via the stored session. The spec must use `test.use({ scenario: ORDERS_SCENARIO })`, importing `test`/`expect` from e2e/fixtures/test.ts. No cleanup, no unique names, no hard-coded ids, no fixed waits, no retries.
+
+OBSERVED LOCATORS (verified live on the stable dashboard against a populatedb catalogue promotion with two rules; the seed's default data does not contain "E2E Tee sale", so the exact name was not exercised in the browser):
+
+Promotions list (/discounts/sales):
+
+- Search box: getByTestId("search-input") (role textbox "Search promotions..."). Typing updates the URL with `query=`. IMPORTANT: search only matched the exact full name. "Happy" and "E2E Tee" returned "No promotions found", while "Happy court day!" returned the row. Search with the full `PROMOTIONS.catalogue.name`.
+- List container: getByTestId("list"). It is a Glide canvas datagrid with no accessible rows (getByRole("row") finds nothing). There is a hidden mirror table whose `td[role=gridcell]` carry `data-testid` (not `data-test-id`) "glide-cell-<col>-<row>", so getByTestId cannot reach them.
+- Row link: getByTestId("datagrid-row-anchor") appears over the hovered row, and its href is /discounts/sales/<id>. To open the row: wait for the list to show exactly one result, then hover or click the first data row of the canvas (the same technique as legacy BasePage.clickGridCell), and wait for the URL to match /discounts/sales/<id>. Put this in a `PromotionPage.open(name)`-style method with a comment explaining the canvas grid. It must not read the id out of the anchor and must not navigate by a literal id.
+- Empty result: getByTestId("empty-data-grid-text") shows "No promotions found". It is useful as a guard that search has not settled on nothing.
+
+Promotion detail page (/discounts/sales/<id>):
+
+- Form: getByTestId("discount-form"). Header: getByTestId("page-header") shows name, type ("Catalog") and status.
+- Name input: getByTestId("discount-name-input") (role textbox "Discount name"); assert with toHaveValue(PROMOTIONS.catalogue.name).
+- Type: getByTestId("promotion-type-info") shows "Catalog"; getByTestId("discount-type-select").
+- Rules section: getByTestId("discount-rules-section") (heading "Rules", button getByTestId("add-rule")).
+- Rule list: getByTestId("rule-list"). It is present both with and without rules.
+- Each rule card: ruleList.getByTestId("added-rule"). Inside the card: getByTestId("rule-name") ("Untitled rule" for the seeded rule), getByTestId("rule-value-chip") ("20%"), getByTestId("channel-display"), getByTestId("rule-summary-chip") ("Products"), getByTestId("rule-edit-button") (aria "Edit"), getByTestId("rule-delete-button") (aria "Delete"). Legacy `rule-label-with-actions` no longer exists; scope the delete button to the rule card instead.
+- Empty state: no test id. Inside rule-list, the text "Add your first rule to set up a promotion" (react-intl message `placeholder` in src/discounts/components/DiscountRules/messages.ts). Locate with ruleList.getByText(...).
+- Page-level button bar: getByTestId("button-bar-delete") (deletes the whole PROMOTION; do not confuse it with the rule delete), "button-bar-cancel", "button-bar-confirm" (Save, disabled; rule deletion does not need Save).
+
+Delete-rule confirmation dialog:
+
+- Dialog: getByTestId("delete-rule-dialog") (role dialog, title "Delete rule", body "Are you sure you want to delete this rule?").
+- Confirm: dialog.getByTestId("delete-rule-button") ("Delete"). Cancel: dialog.getByTestId("cancel-delete-rule-button") ("Back"). Close: dialog.getByTestId("close-button"). Scope these to the dialog, because the page also has a "Delete" button.
+- After confirm, the dialog detaches, a toast "Success / Rule deleted" appears in the "Notifications" region, and the card disappears without Save. The change persists across reload (verified).
+
+## Test Scenarios
+
+### 1. Promotion rule removal
+
+**Seed:** `e2e/tests/seed.spec.ts`
+
+#### 1.1. staff remove the only rule from a promotion and the promotion remains with no rules #e2e #discounts
+
+**File:** `e2e/tests/discounts/promotion-rule-removal.spec.ts`
+
+**Steps:**
+
+1. Spec setup (not a UI step): start the file with a header comment saying it covers removing a rule from a promotion (ticket 08) and why: no e2e coverage of promotions existed, and the promotion must survive rule removal. Import `test` and `expect` from ../../fixtures/test.ts, and `ORDERS_SCENARIO` and `PROMOTIONS` from ../../scenarios/orders.ts (relative imports with the .ts extension). Call `test.use({ scenario: ORDERS_SCENARIO })` and leave the actor as the default admin. Do not add beforeEach, afterEach or cleanup.
+
+
+    - expect: The test runs against the restored orders scenario, which contains the "E2E Tee sale" catalogue promotion with exactly one rule
+
+2. // Arrange - test.step "open the E2E Tee sale promotion": construct `new PromotionPage(page)`. Go to the promotions list (/discounts/sales), fill getByTestId("search-input") with PROMOTIONS.catalogue.name (the full name, because search matches the full name only), wait until the list shows the single matching row, then open it by clicking the first datagrid row. Wait with page.waitForURL for a /discounts/sales/<id> path and for getByTestId("rule-list") to be visible. All of this lives in one PromotionPage method, e.g. `open(name: string)`.
+
+
+    - expect: URL is /discounts/sales/<some id> (the id is never typed into the spec)
+    - expect: getByTestId("discount-name-input") has value PROMOTIONS.catalogue.name ("E2E Tee sale")
+    - expect: getByTestId("promotion-type-info") has text "Catalog"
+    - expect: getByTestId("rule-list").getByTestId("added-rule") has count 1 (precondition the story relies on)
+    - expect: The single rule card's getByTestId("rule-value-chip") has text `${PROMOTIONS.catalogue.percent}%` ("20%"), so this is the seeded rule
+
+3. // Act - test.step "delete the rule and confirm": call PromotionPage.deleteRule(). It clicks the rule card's getByTestId("rule-delete-button"), scoped to ruleList.getByTestId("added-rule") (there is only one card), waits for getByTestId("delete-rule-dialog") to be visible, clicks deleteRuleDialog.getByTestId("delete-rule-button") (scoped to the dialog, not the page-level "Delete"), then waits for the dialog to reach state "hidden". Do not press Save; rule deletion takes effect immediately.
+
+
+    - expect: The delete-rule dialog opens with title "Delete rule" before confirming
+    - expect: After confirming, the dialog closes
+    - expect: A "Rule deleted" success notification appears (optional assertion; the outcome assertions below are the point)
+
+4. // Assert - test.step "the promotion shows no rules": assert on the same page without reloading.
+
+
+    - expect: ruleList.getByTestId("added-rule") has count 0
+    - expect: ruleList.getByText("Add your first rule to set up a promotion") is visible (empty state)
+    - expect: getByTestId("discount-name-input") still has value PROMOTIONS.catalogue.name
+    - expect: The URL is still the promotion detail page; there was no redirect to the list, which would mean the promotion itself was deleted
+
+5. // Assert - test.step "after a reload the promotion still exists with no rules": page.reload(), then wait for getByTestId("rule-list") to be visible (PromotionPage can expose a small `waitForLoaded()` used by both open() and this step).
+
+
+    - expect: getByTestId("discount-name-input") has value PROMOTIONS.catalogue.name ("E2E Tee sale"), so the promotion was not deleted
+    - expect: getByTestId("page-header") contains text PROMOTIONS.catalogue.name
+    - expect: ruleList.getByTestId("added-rule") has count 0
+    - expect: ruleList.getByText("Add your first rule to set up a promotion") is visible
+
+6. Page object requirements (e2e/pages/promotionPage.ts): `export class PromotionPage` with `constructor(readonly page: Page) {}`, `Page` imported as a type from @playwright/test, and readonly locator fields initialised from this.page: searchInput ("search-input"), list ("list"), emptyListText ("empty-data-grid-text"), form ("discount-form"), header ("page-header"), nameInput ("discount-name-input"), typeInfo ("promotion-type-info"), rulesSection ("discount-rules-section"), ruleList ("rule-list"), rules = ruleList.getByTestId("added-rule"), rulesEmptyState = ruleList.getByText("Add your first rule to set up a promotion"), deleteRuleDialog ("delete-rule-dialog"), confirmDeleteRuleButton = deleteRuleDialog.getByTestId("delete-rule-button"). Methods are named for user actions (open, deleteRule). Comments explain only the non-obvious parts: the canvas grid click, and the search matching the full name only. No waitForTimeout, no networkidle, no CSS or XPath selectors.
+
+
+    - expect: pnpm run check-types:e2e passes and lint is clean
+    - expect: The test passes on a fresh run, and would fail if the rule were not removed (count stays 1), if the removal did not persist (count 1 after reload), or if the promotion were deleted (the name input is missing or there is a redirect to the list)
