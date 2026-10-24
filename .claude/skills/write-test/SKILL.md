@@ -42,7 +42,12 @@ The dashboard's source is in `src/`. For each step of the ticket:
 2. Note what the screen shows after the action (status text, totals, a section), and which
    element proves the step finished (a dialog closing, the URL changing, a status changing).
 3. Where there is no test id, use `getByRole` with the accessible name the component renders
-   (look for its `defaultMessage`). Never a CSS class, XPath or a positional index.
+   (look for its `defaultMessage`): a heading, a textbox's label, a button's text. Never a CSS
+   class, XPath or a positional index.
+4. **Do not change `src/` for a test ticket.** Adding a `data-test-id` to the app turns a test
+   change into an app change that needs its own review, and a reviewer reading only `e2e/` will
+   find a locator that matches nothing. Use an existing test id or a role and name. If truly
+   nothing can identify the element, stop and say so in the hand-back instead of editing the app.
 
 If you cannot tell from the source what the page renders, run the spec and read the failure:
 the error context and trace under `e2e/test-results/` show the page.
@@ -127,6 +132,8 @@ test("Staff does the thing and sees the outcome #e2e", async ({ page }) => {
    assertion on something the UI does regardless (a dialog closing, a toast, a navigation, a field
    still holding what was typed) does not count. The reload step is what makes most of them count.
 4. Run the `review-test` skill on your change and fix everything it reports, then repeat 1 and 2.
+
+Before handing back, `git status --porcelain` must list only files under `e2e/`.
 
 Hand back: the files changed, which acceptance criterion each assertion covers, and the
 three-run result.

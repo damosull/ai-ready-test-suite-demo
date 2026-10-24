@@ -124,7 +124,8 @@ references; `CHECKLIST.md` is what a reviewer checks. To write a test from a tic
   Never through the login form outside `login.spec.ts`; never type credentials.
 - Locate by `getByTestId` (the attribute is `data-test-id`); otherwise `getByRole` with a name.
   Scope to the container (`this.dialog.getByTestId("submit")`). No CSS classes, XPath or
-  positional `nth`. Find test ids in `src/` with grep.
+  positional `nth`. Find test ids in `src/` with grep. Never edit `src/` for a test ticket,
+  not even to add a test id: use an existing one or a role and name.
 - Locators and multi-step actions live on the page object for that screen, as `readonly` fields
   from `this.page` with `constructor(readonly page: Page) {}`. Extend `DraftOrderPage`,
   `OrderPage` or `AddressDialog` rather than writing a new class or a spec-local helper.

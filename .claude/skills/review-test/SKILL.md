@@ -11,7 +11,9 @@ author's explanation of it.
 ## 1. Collect the change
 
 1. `git status --porcelain` lists what changed. Read every added or modified file under `e2e/`
-   in full: the spec, and any page object or scenario it touched.
+   in full: the spec, and any page object or scenario it touched. Any change outside `e2e/`
+   (above all `src/`) is a finding in itself: a test ticket does not change the app, and a
+   locator that depends on such a change is a B6 failure for a reviewer who sees only `e2e/`.
 2. Read the ticket the test is for. List its acceptance criteria.
 3. Read `CHECKLIST.md`. For the "duplicated helper" check, also read the existing page objects
    in `e2e/pages/`, `e2e/lib/graphql.ts` and the scenario files the spec imports.
