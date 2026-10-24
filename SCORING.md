@@ -115,6 +115,19 @@ are kept in RESULTS.md. The baseline is run once: it is the free tool as shipped
 nothing on its side to tune. The tickets, the checklist, the breaks and this method are never
 changed to improve a score.
 
+## Disclosure: ticket 01
+
+The with-setup rules file and skills were drafted while the baseline session for ticket 01 was
+running. While drafting them the operator saw part of that session's transcript (the planner's
+snapshot of the order-discount dialog), and read the finished baseline spec for ticket 01 before
+committing the setup. Nothing in the setup was changed after that read, and the setup's examples
+come from the existing suite, not from any ticket, but the setup was not written blind to
+baseline ticket 01. Tickets 02 to 05 on both branches were generated after the setup was
+committed, with no look at either side's output first.
+
+RESULTS.md therefore marks ticket 01 and gives the verdict twice: over all five tickets, and over
+tickets 02 to 05 only.
+
 ## Limits
 
 Five tickets, one application, one model, one generation per ticket per round. That is enough to
