@@ -1,0 +1,23 @@
+diff --git a/src/products/components/OrderDiscountProviders/OrderDiscountProvider.tsx b/src/products/components/OrderDiscountProviders/OrderDiscountProvider.tsx
+index 91d7467..a87312c 100644
+--- a/src/products/components/OrderDiscountProviders/OrderDiscountProvider.tsx
++++ b/src/products/components/OrderDiscountProviders/OrderDiscountProvider.tsx
+@@ -60,13 +60,11 @@ export const OrderDiscountProvider = ({ children, order }: OrderDiscountProvider
+     closeDialog();
+     notify(getDefaultNotifierSuccessErrorData(errors, intl));
+   };
+-  const addOrderDiscount = (data: OrderDiscountCommonInput) =>
+-    orderDiscountAdd({
+-      variables: {
+-        orderId,
+-        input: getParsedDiscountData(data),
+-      },
+-    });
++  // BREAK 01: the dialog closes, but the discount is never sent.
++  const addOrderDiscount = (_data: OrderDiscountCommonInput) => {
++    void orderDiscountAdd;
++    closeDialog();
++  };
+   const updateOrderDiscount = (data: OrderDiscountCommonInput) =>
+     orderDiscount &&
+     orderDiscountUpdate({

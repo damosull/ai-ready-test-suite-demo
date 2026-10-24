@@ -1,0 +1,18 @@
+diff --git a/src/orders/views/OrderDetails/OrderNormalDetails/index.tsx b/src/orders/views/OrderDetails/OrderNormalDetails/index.tsx
+index 2e516f3..592a040 100644
+--- a/src/orders/views/OrderDetails/OrderNormalDetails/index.tsx
++++ b/src/orders/views/OrderDetails/OrderNormalDetails/index.tsx
+@@ -316,11 +316,8 @@ export const OrderNormalDetails = ({
+         number={order?.number}
+         open={params.action === "cancel" && !hasOrderFulfillmentsFulfilled}
+         onClose={closeModal}
+-        onSubmit={() =>
+-          orderCancel.mutate({
+-            id,
+-          })
+-        }
++        // BREAK 03: the dialog closes, but the order is never cancelled.
++        onSubmit={() => closeModal()}
+       />
+       {/* Transaction Capture Dialog - for CHARGE action */}
+       {params.action === "transaction-charge-action" && order && selectedTransaction && (

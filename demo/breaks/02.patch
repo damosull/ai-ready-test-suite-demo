@@ -1,0 +1,14 @@
+diff --git a/src/orders/views/OrderDetails/OrderDraftDetails/index.tsx b/src/orders/views/OrderDetails/OrderDraftDetails/index.tsx
+index 45b943b..c1090d9 100644
+--- a/src/orders/views/OrderDetails/OrderDraftDetails/index.tsx
++++ b/src/orders/views/OrderDetails/OrderDraftDetails/index.tsx
+@@ -173,7 +173,8 @@ export const OrderDraftDetails = ({
+     data: Partial<OrderCustomerAddressesEditDialogOutput>,
+   ): Promise<FetchResult<OrderDraftUpdateMutation>> => orderDraftUpdate.mutate({ id, input: data });
+   const handleOrderDraftCancel = async () => {
+-    const errors = await extractMutationErrors(orderDraftCancel.mutate({ id }));
++    // BREAK 02: staff are sent back to the list, but the draft is never deleted.
++    const errors: Awaited<ReturnType<typeof extractMutationErrors>> = [];
+ 
+     if (!errors.length) {
+       navigate(orderDraftListUrl());

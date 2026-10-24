@@ -1,0 +1,21 @@
+diff --git a/src/orders/views/OrderDetails/OrderNormalDetails/index.tsx b/src/orders/views/OrderDetails/OrderNormalDetails/index.tsx
+index 2e516f3..0202990 100644
+--- a/src/orders/views/OrderDetails/OrderNormalDetails/index.tsx
++++ b/src/orders/views/OrderDetails/OrderNormalDetails/index.tsx
+@@ -230,14 +230,8 @@ export const OrderNormalDetails = ({
+             },
+           })
+         }
+-        onNoteAdd={variables =>
+-          extractMutationErrors(
+-            orderAddNote.mutate({
+-              input: variables,
+-              order: id,
+-            }),
+-          )
+-        }
++        // BREAK 05: the note form reports success, but the note is never saved.
++        onNoteAdd={() => Promise.resolve([])}
+         order={order}
+         shop={shop}
+         shippingMethods={data?.order?.shippingMethods || []}

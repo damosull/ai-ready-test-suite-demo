@@ -71,3 +71,6 @@ playwright-failures*/
 /build-e2e-*/
 /e2e/.cache/
 /e2e/test-results/
+
+# Demo: local review workspaces and scratch output
+/demo/.work/
