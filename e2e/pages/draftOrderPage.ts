@@ -55,6 +55,19 @@ export class DraftOrderPage {
 
   readonly finalizeButton = this.page.getByTestId("button-bar-confirm");
 
+  // The only "More actions" trigger on a draft. TopNav.Menu's dataTestId="menu" is not rendered.
+  readonly moreActionsButton = this.page.getByTestId("page-header").getByTestId("show-more-button");
+
+  // Labelled "Cancel order", but on a draft it opens the "Delete Draft Order" confirmation.
+  readonly deleteMenuItem = this.page.getByTestId("cancel-order");
+
+  // The not-found screen (NotFoundPage) carries no test ids.
+  readonly notFoundMessage = this.page.getByText("Sorry, the page was not found");
+
+  readonly goBackToDashboardButton = this.page.getByRole("button", {
+    name: "Go back to dashboard",
+  });
+
   constructor(readonly page: Page) {}
 
   /** Both lists create the same draft; they differ only in where the button lives. */
@@ -113,5 +126,15 @@ export class DraftOrderPage {
   async finalize() {
     await this.finalizeButton.click();
     await this.page.waitForURL(url => !url.pathname.includes("/drafts/"));
+  }
+
+  // Checks the dialog is the delete confirmation before confirming, because `submit` exists on
+  // many screens. The drafts list's pathname has no trailing segment, unlike a draft's address.
+  async delete() {
+    await this.moreActionsButton.click();
+    await this.deleteMenuItem.click();
+    await expect(this.dialog).toContainText("Delete Draft Order");
+    await this.dialog.getByTestId("submit").click();
+    await this.page.waitForURL(url => url.pathname === "/orders/drafts");
   }
 }
