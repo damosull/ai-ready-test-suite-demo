@@ -1,0 +1,204 @@
+diff --git a/e2e/pages/customerPage.ts b/e2e/pages/customerPage.ts
+new file mode 100644
+index 0000000..77f5982
+--- /dev/null
++++ b/e2e/pages/customerPage.ts
+@@ -0,0 +1,33 @@
++import { expect, type Page } from "@playwright/test";
++
++/**
++ * A customer's details page. The customer list is a canvas datagrid whose rows are not DOM
++ * elements, so specs open a customer by id rather than through the list.
++ */
++export class CustomerPage {
++  readonly contactCard = this.page.getByTestId("customer-details");
++
++  readonly noteInput = this.page.getByTestId("customer-note");
++
++  readonly saveButton = this.page.getByTestId("button-bar-confirm");
++
++  readonly notifications = this.page.getByRole("region", { name: /Notifications/ });
++
++  constructor(readonly page: Page) {}
++
++  async goto(customerId: string) {
++    await this.page.goto(`/customers/${customerId}`);
++    await this.noteInput.waitFor();
++  }
++
++  async writeNote(note: string) {
++    await this.noteInput.fill(note);
++  }
++
++  async save() {
++    await this.saveButton.click();
++    // Save is enabled only while the form is dirty, so it turning disabled again means the
++    // mutation came back and the form was reset to the saved value.
++    await expect(this.saveButton).toBeDisabled();
++  }
++}
+diff --git a/e2e/scenarios/orders.ts b/e2e/scenarios/orders.ts
+index bd01602..bf331bd 100644
+--- a/e2e/scenarios/orders.ts
++++ b/e2e/scenarios/orders.ts
+@@ -409,3 +409,22 @@ export const findOrderId = async (config: E2eConfig, ref: ScenarioOrder): Promis
+ 
+   return order.node.id;
+ };
++
++/**
++ * The id of a customer in the restored database, looked up by email. A read, so it is safe
++ * at test time; ids are not constants because every build of the dump mints new ones.
++ */
++export const findCustomerId = async (config: E2eConfig, email: string): Promise<string> => {
++  const data = await gql<{ user: { id: string } | null }>(
++    config,
++    `query($email: String!) { user(email: $email) { id } }`,
++    { email },
++    await adminToken(config),
++  );
++
++  if (!data.user) {
++    throw new Error(`the "${ORDERS_SCENARIO}" scenario has no customer "${email}"`);
++  }
++
++  return data.user.id;
++};
+diff --git a/e2e/tests/customers/customer-note.spec.ts b/e2e/tests/customers/customer-note.spec.ts
+new file mode 100644
+index 0000000..afdd989
+--- /dev/null
++++ b/e2e/tests/customers/customer-note.spec.ts
+@@ -0,0 +1,55 @@
++import { e2eConfig } from "../../config.ts";
++import { expect, test } from "../../fixtures/test.ts";
++import { CustomerPage } from "../../pages/customerPage.ts";
++import { CUSTOMER, findCustomerId, ORDERS_SCENARIO } from "../../scenarios/orders.ts";
++
++/**
++ * Customer service staff can keep a note on a customer (ticket 06), the first e2e coverage
++ * of the customers area. It runs as the `customer` actor, whose only permission is
++ * MANAGE_USERS, because that is the staff member the story is about: the note has to be
++ * writable without admin rights. The reload proves the note was persisted, not just held in
++ * form state.
++ */
++test.use({ scenario: ORDERS_SCENARIO, actor: "customer" });
++
++const config = e2eConfig();
++
++test("customer service staff can save a note on a customer #e2e #customers", async ({
++  page,
++}) => {
++  // Arrange
++  const customerPage = new CustomerPage(page);
++  const note = "Prefers delivery after 5pm";
++
++  // Act & Assert
++  await test.step("open the scenario customer", async () => {
++    const customerId = await findCustomerId(config, CUSTOMER.email);
++
++    await customerPage.goto(customerId);
++    await expect(page).toHaveURL(url => url.pathname === `/customers/${customerId}`);
++    await expect(customerPage.contactCard.getByTestId("customer-email")).toHaveValue(
++      CUSTOMER.email,
++    );
++    await expect(customerPage.contactCard.getByTestId("customer-first-name")).toHaveValue(
++      CUSTOMER.firstName,
++    );
++    await expect(customerPage.saveButton).toBeDisabled();
++  });
++
++  await test.step("write a note and save", async () => {
++    await customerPage.writeNote(note);
++    await expect(customerPage.saveButton).toBeEnabled();
++    await customerPage.save();
++    await expect(customerPage.notifications.getByText("Customer updated")).toBeVisible();
++    await expect(customerPage.noteInput).toHaveValue(note);
++    await expect(customerPage.saveButton).toBeDisabled();
++  });
++
++  await test.step("the note is still there after a reload", async () => {
++    await page.reload();
++    await customerPage.noteInput.waitFor();
++    await expect(customerPage.noteInput).toHaveValue(note);
++    // A clean form after a fresh load means the value came from the server.
++    await expect(customerPage.saveButton).toBeDisabled();
++  });
++});
+diff --git a/specs/customer-note.md b/specs/customer-note.md
+new file mode 100644
+index 0000000..a806bd8
+--- /dev/null
++++ b/specs/customer-note.md
+@@ -0,0 +1,71 @@
++# Customers: customer service staff can save a note on a customer (ticket 06)
++
++## Application Overview
++
++Ticket 06 asks for e2e coverage of one story. A staff member whose only permission is MANAGE_USERS opens the orders-scenario customer Ada Lovelace (e2e.customer@example.com), writes a note, saves it with the page's Save bar, and the note is still on the customer after a reload. No e2e spec covers the customers area yet.
++
++SPEC FILE: e2e/tests/customers/customer-note.spec.ts (a single test). PAGE OBJECT: e2e/pages/customerPage.ts (new). No existing page object covers customers, so this does not clash with rule 6.4.
++
++SETUP (rules 1.2, 1.4, 1.5, 3.1, 5.1, 5.3)
++- Import test and expect from '../../fixtures/test.ts'. Never import them from @playwright/test.
++- Use test.use({ scenario: ORDERS_SCENARIO, actor: 'customer' }), importing ORDERS_SCENARIO and CUSTOMER from e2e/scenarios/orders.ts. The 'customer' actor is user.manager@example.com (e2e/lib/actors.ts), the single-permission MANAGE_USERS staff user. The fixture loads its stored session, so the test never signs in through the UI. The orders scenario sets parent: 'default', so the cached session matches its staff rows.
++- Title, for example: 'customer service staff can save a note on a customer #e2e #customers'. Open the file with a comment saying what it covers (ticket 06, the first coverage of the customers area) and why it runs as the customer actor.
++- The database is restored before the test, so the spec needs no cleanup and no unique names. Do not tag it parallel(), because the test writes.
++
++FINDING THE CUSTOMER (rules 3.5, 3.7)
++Do not hard-code the id. Look it up at test time by email, with a read through e2e/lib/graphql.ts that follows the findOrderId pattern:
++- Add findCustomerId(config: E2eConfig, email: string): Promise<string> next to findOrderId in e2e/scenarios/orders.ts. It calls gql<{ user: { id: string } | null }>(config, 'query($email: String!) { user(email: $email) { id } }', { email }, await adminToken(config)). If user is null, it throws a clear error naming the orders scenario. This read is safe at test time, and the spec passes CUSTOMER.email to it.
++- Why not click through the list: /customers/?query=<email> does filter correctly (data-test-id 'search-input' / 'list-search-field'), but the list is a canvas datagrid ('list'). Rows are not DOM elements. The only link is one shared 'datagrid-row-anchor', which gets its href when the mouse hovers a row. Opening a row would need coordinate-based mouse moves, which goes against rule 6.1. So customerPage.goto(id) navigates to /customers/<id>, as OrderPage.goto does.
++
++DATA-TEST-IDS CONFIRMED IN THE BROWSER (stable target, 3.23)
++Customer details page /customers/<id>:
++- 'customer-details': the Contact card. It contains 'customer-first-name', 'customer-last-name', 'customer-email' (inputs) and 'customer-note' (a TEXTAREA labelled 'Note', from src/customers/components/CustomerInfo/CustomerInfo.tsx).
++- Save bar: 'button-bar-confirm' (Save; disabled until the form is dirty, disabled again after a successful save) and 'button-bar-cancel' (Back). OrderPage and DraftOrderPage use the same id.
++- Others present: 'page-header', 'app-header-back-button', 'account-status-active', 'customer-overview', 'customer-orders', 'customer-attributes', 'customer-addresses', 'manage-addresses', 'customer-gift-cards', 'show-customer-metadata'.
++- Save confirmation: a toast with the title 'Success' and the text 'Customer updated' (src/customers/views/CustomerDetails.tsx:207). It renders in the ARIA region named 'Notifications alt+T'. The toast message has no data-test-id (src/components/notifications/Toast.tsx has only 'toast-progress'), so locate it by role: page.getByRole('region', { name: /Notifications/ }).getByText('Customer updated').
++Customer list /customers/: 'create-customer', 'search-input', 'list-search-field', 'filters-button', 'list', 'datagrid-row-anchor', 'customer-type-tabs'. The test does not need these. They are listed for the page object's future use.
++
++CONFIRMED BEHAVIOUR FOR THE RESTRICTED ACTOR
++Using the cached 'customer' session, the sidebar showed only Home, Customers (All / Customer Types) and Extensions. The details page loaded with no console errors and the note textarea was enabled. Save produced 'Success / Customer updated', and the note was still there after a reload. (I explored on a populatedb customer because the seed spec restores the default scenario, where Ada does not exist. The flow and the test ids are the same on any customer.)
++
++PAGE OBJECT e2e/pages/customerPage.ts (rules 6.3, 6.5, 7.2)
++- class CustomerPage with constructor(readonly page: Page) {}, using readonly fields initialised from this.page:
++  - contactCard = getByTestId('customer-details')
++  - noteInput = getByTestId('customer-note')
++  - saveButton = getByTestId('button-bar-confirm')
++  - notifications = getByRole('region', { name: /Notifications/ })
++- goto(customerId): page.goto('/customers/' + customerId), then await noteInput.waitFor().
++- writeNote(note): noteInput.fill(note).
++- save(): click saveButton, then wait until it is disabled again (await expect(this.saveButton).toBeDisabled()). Add a comment explaining why: the Save bar is enabled only while the form is dirty, so a disabled button after the click means the mutation came back and the form was reset to the saved value. This is the UI state that proves the save finished (rule 7.2), with no fixed waits and no networkidle.
++- Imports are relative with the .ts extension. Use strict types and no any.
++
++ASSERTIONS (rules 2.3, 2.4)
++All assertions are web-first. The story is about persistence, so the reload assertion carries the story. The toast and the field value after saving show that the UI responded. Without the reload check, the test would still pass if the note were kept only in form state.
++
++OUT OF SCOPE (keep to the one story): validation errors, an empty note, very long notes, and the admin actor. If more coverage is wanted, write each as its own story later.
++
++## Test Scenarios
++
++### 1. Customers: customer note
++
++**Seed:** `e2e/tests/seed.spec.ts`
++
++#### 1.1. customer service staff can save a note on a customer #e2e #customers
++
++**File:** `e2e/tests/customers/customer-note.spec.ts`
++
++**Steps:**
++  1. Arrange (outside any step, as in order-payment-fulfillment.spec.ts): the test runs with test.use({ scenario: ORDERS_SCENARIO, actor: 'customer' }). Set const config = e2eConfig() at module level. Set const note = 'Prefers delivery after 5pm'. Write the note as a constant in the spec; it does not need to be unique, because the database is restored before the test.
++    - expect: The fixture has restored the orders scenario and loaded the stored session for user.manager@example.com (MANAGE_USERS only). Nothing signs in through the UI.
++  2. test.step('open the scenario customer'): const customerId = await findCustomerId(config, CUSTOMER.email). This is a read through e2e/lib/graphql.ts, with no hard-coded id. Then call await customerPage.goto(customerId).
++    - expect: The URL is /customers/<customerId>.
++    - expect: await expect(customerPage.contactCard.getByTestId('customer-email')).toHaveValue(CUSTOMER.email). This proves we are on Ada Lovelace's record and not some other customer's. Optionally also check customer-first-name toHaveValue(CUSTOMER.firstName).
++    - expect: await expect(customerPage.saveButton).toBeDisabled(). The form starts clean.
++  3. test.step('write a note and save'): call await customerPage.writeNote(note), then await customerPage.save(). save() clicks button-bar-confirm and waits for it to become disabled again.
++    - expect: Before saving: await expect(customerPage.saveButton).toBeEnabled() after the note is typed. This could be a check inside save() or an assertion in the step.
++    - expect: await expect(customerPage.notifications.getByText('Customer updated')).toBeVisible(). This is the save confirmation from CustomerDetails.tsx.
++    - expect: await expect(customerPage.noteInput).toHaveValue(note). The note field shows the new note after the save (acceptance criterion 2).
++    - expect: await expect(customerPage.saveButton).toBeDisabled(). The form is no longer dirty, which means the saved value is what the form now holds.
++  4. test.step('the note is still there after a reload'): call await page.reload(), then await customerPage.noteInput.waitFor(). Alternatively, call customerPage.goto(customerId) again.
++    - expect: await expect(customerPage.noteInput).toHaveValue(note). The note was persisted on the customer and is not just kept in form state (acceptance criterion 3).
++    - expect: await expect(customerPage.saveButton).toBeDisabled(). The reloaded form is clean, so the value comes from the server.
