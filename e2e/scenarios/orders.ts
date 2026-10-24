@@ -409,3 +409,22 @@ export const findOrderId = async (config: E2eConfig, ref: ScenarioOrder): Promis
 
   return order.node.id;
 };
+
+/**
+ * The id of a customer in the restored database, looked up by email. A read, so it is safe
+ * at test time; ids are not constants because every build of the dump mints new ones.
+ */
+export const findCustomerId = async (config: E2eConfig, email: string): Promise<string> => {
+  const data = await gql<{ user: { id: string } | null }>(
+    config,
+    `query($email: String!) { user(email: $email) { id } }`,
+    { email },
+    await adminToken(config),
+  );
+
+  if (!data.user) {
+    throw new Error(`the "${ORDERS_SCENARIO}" scenario has no customer "${email}"`);
+  }
+
+  return data.user.id;
+};
