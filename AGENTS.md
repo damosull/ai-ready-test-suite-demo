@@ -72,6 +72,81 @@ back implementation work, and report any checks that could not run.
   configuration changes, or failures warrant it; avoid repeating successful checks
   without new changes or evidence.
 
+## End-to-end tests
+
+New tests go in `e2e/`; `e2e-legacy/` is frozen and must not be edited. Read
+`e2e/README.md` before adding a spec, scenario, or page object.
+
+### Data and isolation
+
+- Every test starts from a restored scenario. Do not create, clean up, or uniquify
+  data at test time, and do not hardcode IDs; they change with every dump build.
+- A state the test needs is a scenario in `e2e/scenarios/`: built through the
+  GraphQL API (raw SQL only where the API cannot express it), registered in
+  `scenarios/registry.ts`, built with `parent: "default"`, and selected with
+  `test.use({ scenario: ... })`. Export the scenario name and its known data
+  (`CHANNEL`, `PRODUCTS`, ...) as constants and assert against them.
+- Read through the API only to look up seeded entities (`findOrderId` finds orders
+  by `e2e` metadata) or to verify persisted results. Perform the behavior under
+  test through the UI.
+- Derive expected values from scenario constants, and guard assumptions with
+  assertions (see `draft-pricing.spec.ts`). Read a value from the page only when
+  the seed makes it random, and comment why.
+
+### Actors and parallelism
+
+- Choose the session with `test.use({ actor })`. Use the single-permission actor
+  for permission flows and `admin` otherwise. Use `anonymous` only for specs that
+  sign in through the UI; do not add other UI logins.
+- Tests run serially with a reset by default. Tag a block with `parallel(scenario)`
+  from `e2e/config.ts` only when it writes nothing and never signs in through the
+  UI. Do not use `test.describe.configure({ mode: "parallel" })`.
+- Do not add retries; the suite runs with `retries: 0` so failures reproduce.
+
+### Spec structure
+
+- Put specs in a kebab-case `*.spec.ts` file, under an area folder such as
+  `tests/orders/` when one exists. Import `test` and `expect` from
+  `fixtures/test.ts`, not from `@playwright/test`; import only types from there.
+- Start with a doc comment describing the flow. For ported specs, name the legacy
+  `SALEOR_*` cases it replaces and any deliberately not ported.
+- Write titles as user-visible behavior ("Staff creates an order for a new customer
+  email") followed by `#e2e` and any area tag such as `#translations`.
+- Prefer one test per user story over one per assertion. Use `// Arrange`, then
+  `// Act & Assert` with one named `test.step` per stage, so a failure names the
+  stage. For single-action tests, use separate `// Act` and `// Assert` comments.
+- Pass both targets (`pnpm e2e` and `pnpm e2e:main`). When a feature exists on only
+  one schema, use `test.skip(config.stagingSchema, "<reason>")` and make its
+  scenario build return early on the unsupported target.
+- Mock only third-party services, such as PostHog, with `page.route`; never mock
+  the Saleor API. Skip env-dependent specs with a reason that names the README
+  instructions.
+
+### Page objects and waiting
+
+- Keep locators in classes in `e2e/pages/`: `readonly` fields initialized from
+  `this.page`, an empty `constructor(readonly page: Page) {}`, and nested dialogs
+  as fields (`readonly addressDialog = new AddressDialog(this.page)`).
+- Locate with `getByTestId` (`data-test-id`) or `getByRole` with an accessible name.
+  Use `exact: true` or anchored regexes for text matches. Do not use CSS or XPath
+  selectors for dashboard UI.
+- Make page-object methods complete user actions that wait for their result
+  (`dialog.waitFor({ state: "hidden" })`, `waitForURL`, or an expected status).
+  Use a destructured object when a method takes more than one argument. Leave
+  outcome assertions to the spec.
+- Wait only with web-first assertions and locator or URL waits. Never use
+  `waitForTimeout`, fixed sleeps, or raised timeouts. When a list re-renders,
+  wait for the narrowed state before clicking (see `DraftOrderPage.addProduct`).
+- Assert stable, user-visible results such as statuses, totals, and section text.
+  Do not assert per-image seed data such as staff names or random prices.
+- Comment the reason for non-obvious waits and data choices, not the steps.
+
+### Verification
+
+- Run `pnpm run check-types:e2e`, oxlint, and Prettier on changed files. Run the
+  spec with `pnpm e2e <path relative to e2e/>`; also run `pnpm e2e:main` when the
+  change touches schema-dependent UI or a scenario. Report targets you could not run.
+
 ## Conflict resolution and review
 
 - Resolve source conflicts first, then regenerate derived files:
