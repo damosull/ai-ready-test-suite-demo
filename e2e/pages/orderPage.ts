@@ -54,6 +54,14 @@ export class OrderPage {
 
   readonly editBillingAddressButton = this.page.getByTestId("edit-billing-address");
 
+  readonly catalogMenuItem = this.page.getByTestId("menu-item-label-products");
+
+  readonly orderDraftsMenuItem = this.page.getByTestId("menu-item-label-order-drafts");
+
+  readonly noteInput = this.page.getByRole("textbox", { name: "Comment" });
+
+  readonly addNoteButton = this.page.getByRole("button", { name: "Add Comment" });
+
   constructor(readonly page: Page) {}
 
   async goto(orderId: string) {
@@ -90,6 +98,20 @@ export class OrderPage {
     await this.trackingNumberInput.fill(trackingNumber);
     await this.confirmTrackingButton.click();
     await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  historyNote(message: string) {
+    return this.page.getByText(message, { exact: true });
+  }
+
+  /**
+   * The field clears before the mutation is sent, so an empty field does not prove the save.
+   * The note only renders from the mutation result, so waiting for it waits for the save.
+   */
+  async addNote(message: string) {
+    await this.noteInput.fill(message);
+    await this.addNoteButton.click();
+    await this.historyNote(message).waitFor();
   }
 
   /** The order total as a number - it is rendered without its currency. */
