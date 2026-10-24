@@ -1,0 +1,7 @@
+branch: ai-conventions-r4-t08
+specs: tests/discounts/promotion-rule-removal.spec.ts
+run 1: pass
+run 2: pass
+run 3: pass
+runs: 3/3
+broken feature caught: yes (specs failed with demo/breaks/08.patch applied)
