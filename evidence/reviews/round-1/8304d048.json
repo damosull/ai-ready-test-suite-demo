@@ -1,0 +1,192 @@
+{
+  "duration_api_ms": 49981,
+  "stop_reason": "tool_use",
+  "session_id": "40166ba1-2a7e-4865-adb6-4ecdfb688803",
+  "total_cost_usd": 0.35098339999999995,
+  "usage": {
+    "input_tokens": 14,
+    "cache_creation_input_tokens": 27925,
+    "cache_read_input_tokens": 143137,
+    "output_tokens": 4945,
+    "output_tokens_details": { "thinking_tokens": 1212 },
+    "server_tool_use": { "web_search_requests": 0, "web_fetch_requests": 0 },
+    "service_tier": "standard",
+    "cache_creation": { "ephemeral_1h_input_tokens": 27925, "ephemeral_5m_input_tokens": 0 },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 2530,
+        "cache_read_input_tokens": 30987,
+        "cache_creation_input_tokens": 1413,
+        "cache_creation": { "ephemeral_5m_input_tokens": 0, "ephemeral_1h_input_tokens": 1413 },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 14,
+      "outputTokens": 4945,
+      "cacheReadInputTokens": 143137,
+      "cacheCreationInputTokens": 27925,
+      "webSearchRequests": 0,
+      "costUSD": 0.35098339999999995,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1212,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": { "background": 0, "foreground": 0, "unset": 0 },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": { "parent": 0, "user": 0, "system": 0 },
+    "refused": { "depth_limit": 0, "concurrency_limit": 0, "budget": 0 },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 16,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"items\":[{\"id\":\"B1\",\"verdict\":\"met\",\"evidence\":\"The second step reloads the page and asserts again that the note text is in the history (order-notes.spec.ts diff lines 64-67). A note the server never saved would not survive the reload.\"},{\"id\":\"B2\",\"verdict\":\"met\",\"evidence\":\"All three criteria are asserted: the test runs with actor \\\"order\\\" (diff line 47), the note is shown after adding it (line 61), and it is still shown after a reload (lines 65-66).\"},{\"id\":\"B3\",\"verdict\":\"met\",\"evidence\":\"OrderPage had no history or note members, so the change extends it rather than adding a second class. It reuses findOrderId, ORDERS_SCENARIO and OrderPage.goto.\"},{\"id\":\"B4\",\"verdict\":\"met\",\"evidence\":\"No waitForTimeout and no sleeps. addNote waits on the note's text appearing in the history.\"},{\"id\":\"B5\",\"verdict\":\"met\",\"evidence\":\"It imports test and expect from ../../fixtures/test.ts, is not tagged parallel(), and writes nothing to the cache, the dumps or the seed.\"},{\"id\":\"B6\",\"verdict\":\"failed\",\"evidence\":\"e2e/pages/orderPage.ts diff line 9: getByTestId(\\\"order-history\\\") targets a data-test-id that does not exist anywhere in src/ (OrderHistory.tsx renders a plain DashboardCard), so the history container and the noteInput and addNoteButton locators scoped to it (lines 11, 13) match nothing. The container should be located by role and name or by a real test id instead.\"},{\"id\":\"B7\",\"verdict\":\"met\",\"evidence\":\"It uses the scenario's existing unpaid order through findOrderId and arranges nothing through the API or the UI.\"},{\"id\":\"B8\",\"verdict\":\"met\",\"evidence\":\"No hard-coded ids: the order is found by its scenario key \\\"unpaid\\\". The only literal asserted on is the note text the test types itself.\"},{\"id\":\"B9\",\"verdict\":\"met\",\"evidence\":\"test.use({ actor: \\\"order\\\" }) (diff line 47) loads the stored session of the single-permission order staff user. There is no UI sign-in and no credentials in the spec.\"},{\"id\":\"B10\",\"verdict\":\"met\",\"evidence\":\"typecheck.txt reports \\\"exit 0: no errors\\\", and the spec lives in e2e/tests/orders/.\"},{\"id\":\"M1\",\"verdict\":\"met\",\"evidence\":\"The spec only calls orderPage.addNote and asserts on orderPage.history. The locators are on OrderPage.\"},{\"id\":\"M2\",\"verdict\":\"met\",\"evidence\":\"The new members are readonly fields derived from this.page (via this.history), and the existing constructor(readonly page: Page) {} is kept.\"},{\"id\":\"M3\",\"verdict\":\"met\",\"evidence\":\"It has // Arrange and // Act & Assert comments (diff lines 52, 58), as order-payment-fulfillment.spec.ts does.\"},{\"id\":\"M4\",\"verdict\":\"met\",\"evidence\":\"One test tells one story, with a test.step for each stage (adding the note, then the reload).\"},{\"id\":\"M5\",\"verdict\":\"met\",\"evidence\":\"The title \\\"Order staff add a note that stays in the order history #e2e\\\" describes the behaviour and carries the #e2e tag.\"},{\"id\":\"M6\",\"verdict\":\"met\",\"evidence\":\"A header comment (diff lines 43-46) says what the spec covers and why it runs as the order staff user.\"},{\"id\":\"M7\",\"verdict\":\"met\",\"evidence\":\"The assertions are web-first (await expect(orderPage.history).toContainText(note)).\"},{\"id\":\"M8\",\"verdict\":\"met\",\"evidence\":\"It uses ORDERS_SCENARIO and the \\\"unpaid\\\" key from the scenario. The note text is input the test types itself, not a seeded value.\"},{\"id\":\"M9\",\"verdict\":\"met\",\"evidence\":\"No cleanup code and no unique or timestamped names.\"},{\"id\":\"M10\",\"verdict\":\"met\",\"evidence\":\"No per-test timeouts, retries, networkidle or waitForLoadState.\"},{\"id\":\"M11\",\"verdict\":\"met\",\"evidence\":\"Relative imports keep the .ts extension, and test and expect come only from the fixture.\"},{\"id\":\"M12\",\"verdict\":\"met\",\"evidence\":\"No any, no casts and no gql calls.\"},{\"id\":\"M13\",\"verdict\":\"met\",\"evidence\":\"The only new comment, on addNote (diff line 22), explains why it waits on the history rather than on the form.\"}],\"summary\":\"The spec is well shaped. It runs as the order-only staff user, uses the scenario's unpaid order and the fixture, keeps the new members on OrderPage, uses steps and web-first assertions, and checks after a reload that the note was saved. It type-checks. One blocker: the new OrderPage.history locator uses data-test-id \\\\\\\"order-history\\\\\\\", which does not exist anywhere in the dashboard source. The note input and the Add Comment button are scoped to it, so they match nothing either, and the test cannot find any of the elements it uses (failed under B6). Fix it by locating the history card by role and name, or by adding that test id to OrderHistory.tsx. Everything else on the checklist is met.\"}",
+  "structured_output": {
+    "items": [
+      {
+        "id": "B1",
+        "verdict": "met",
+        "evidence": "The second step reloads the page and asserts again that the note text is in the history (order-notes.spec.ts diff lines 64-67). A note the server never saved would not survive the reload."
+      },
+      {
+        "id": "B2",
+        "verdict": "met",
+        "evidence": "All three criteria are asserted: the test runs with actor \"order\" (diff line 47), the note is shown after adding it (line 61), and it is still shown after a reload (lines 65-66)."
+      },
+      {
+        "id": "B3",
+        "verdict": "met",
+        "evidence": "OrderPage had no history or note members, so the change extends it rather than adding a second class. It reuses findOrderId, ORDERS_SCENARIO and OrderPage.goto."
+      },
+      {
+        "id": "B4",
+        "verdict": "met",
+        "evidence": "No waitForTimeout and no sleeps. addNote waits on the note's text appearing in the history."
+      },
+      {
+        "id": "B5",
+        "verdict": "met",
+        "evidence": "It imports test and expect from ../../fixtures/test.ts, is not tagged parallel(), and writes nothing to the cache, the dumps or the seed."
+      },
+      {
+        "id": "B6",
+        "verdict": "failed",
+        "evidence": "e2e/pages/orderPage.ts diff line 9: getByTestId(\"order-history\") targets a data-test-id that does not exist anywhere in src/ (OrderHistory.tsx renders a plain DashboardCard), so the history container and the noteInput and addNoteButton locators scoped to it (lines 11, 13) match nothing. The container should be located by role and name or by a real test id instead."
+      },
+      {
+        "id": "B7",
+        "verdict": "met",
+        "evidence": "It uses the scenario's existing unpaid order through findOrderId and arranges nothing through the API or the UI."
+      },
+      {
+        "id": "B8",
+        "verdict": "met",
+        "evidence": "No hard-coded ids: the order is found by its scenario key \"unpaid\". The only literal asserted on is the note text the test types itself."
+      },
+      {
+        "id": "B9",
+        "verdict": "met",
+        "evidence": "test.use({ actor: \"order\" }) (diff line 47) loads the stored session of the single-permission order staff user. There is no UI sign-in and no credentials in the spec."
+      },
+      {
+        "id": "B10",
+        "verdict": "met",
+        "evidence": "typecheck.txt reports \"exit 0: no errors\", and the spec lives in e2e/tests/orders/."
+      },
+      {
+        "id": "M1",
+        "verdict": "met",
+        "evidence": "The spec only calls orderPage.addNote and asserts on orderPage.history. The locators are on OrderPage."
+      },
+      {
+        "id": "M2",
+        "verdict": "met",
+        "evidence": "The new members are readonly fields derived from this.page (via this.history), and the existing constructor(readonly page: Page) {} is kept."
+      },
+      {
+        "id": "M3",
+        "verdict": "met",
+        "evidence": "It has // Arrange and // Act & Assert comments (diff lines 52, 58), as order-payment-fulfillment.spec.ts does."
+      },
+      {
+        "id": "M4",
+        "verdict": "met",
+        "evidence": "One test tells one story, with a test.step for each stage (adding the note, then the reload)."
+      },
+      {
+        "id": "M5",
+        "verdict": "met",
+        "evidence": "The title \"Order staff add a note that stays in the order history #e2e\" describes the behaviour and carries the #e2e tag."
+      },
+      {
+        "id": "M6",
+        "verdict": "met",
+        "evidence": "A header comment (diff lines 43-46) says what the spec covers and why it runs as the order staff user."
+      },
+      {
+        "id": "M7",
+        "verdict": "met",
+        "evidence": "The assertions are web-first (await expect(orderPage.history).toContainText(note))."
+      },
+      {
+        "id": "M8",
+        "verdict": "met",
+        "evidence": "It uses ORDERS_SCENARIO and the \"unpaid\" key from the scenario. The note text is input the test types itself, not a seeded value."
+      },
+      {
+        "id": "M9",
+        "verdict": "met",
+        "evidence": "No cleanup code and no unique or timestamped names."
+      },
+      {
+        "id": "M10",
+        "verdict": "met",
+        "evidence": "No per-test timeouts, retries, networkidle or waitForLoadState."
+      },
+      {
+        "id": "M11",
+        "verdict": "met",
+        "evidence": "Relative imports keep the .ts extension, and test and expect come only from the fixture."
+      },
+      { "id": "M12", "verdict": "met", "evidence": "No any, no casts and no gql calls." },
+      {
+        "id": "M13",
+        "verdict": "met",
+        "evidence": "The only new comment, on addNote (diff line 22), explains why it waits on the history rather than on the form."
+      }
+    ],
+    "summary": "The spec is well shaped. It runs as the order-only staff user, uses the scenario's unpaid order and the fixture, keeps the new members on OrderPage, uses steps and web-first assertions, and checks after a reload that the note was saved. It type-checks. One blocker: the new OrderPage.history locator uses data-test-id \\\"order-history\\\", which does not exist anywhere in the dashboard source. The note input and the Add Comment button are scoped to it, so they match nothing either, and the test cannot find any of the elements it uses (failed under B6). Fix it by locating the history card by role and name, or by adding that test id to OrderHistory.tsx. Everything else on the checklist is met."
+  },
+  "ttft_ms": 2622,
+  "type": "result",
+  "duration_ms": 51143,
+  "uuid": "25e46a9a-3d76-44e5-8c7d-57105c456699",
+  "ttft_stream_ms": 1516,
+  "time_to_request_ms": 191,
+  "first_content_frame_ms": 1516,
+  "queued_turn_count": 0,
+  "result_index": 0
+}

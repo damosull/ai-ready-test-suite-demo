@@ -1,0 +1,172 @@
+{
+  "duration_api_ms": 31350,
+  "stop_reason": "tool_use",
+  "session_id": "c7913486-d49c-44a3-8ecd-174863938d06",
+  "total_cost_usd": 0.24320600000000003,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 21073,
+    "cache_read_input_tokens": 55250,
+    "output_tokens": 3177,
+    "output_tokens_details": { "thinking_tokens": 492 },
+    "server_tool_use": { "web_search_requests": 0, "web_fetch_requests": 0 },
+    "service_tier": "standard",
+    "cache_creation": { "ephemeral_1h_input_tokens": 21073, "ephemeral_5m_input_tokens": 0 },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 2073,
+        "cache_read_input_tokens": 22184,
+        "cache_creation_input_tokens": 3364,
+        "cache_creation": { "ephemeral_5m_input_tokens": 0, "ephemeral_1h_input_tokens": 3364 },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3177,
+      "cacheReadInputTokens": 55250,
+      "cacheCreationInputTokens": 21073,
+      "webSearchRequests": 0,
+      "costUSD": 0.24320600000000003,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 492,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": { "background": 0, "foreground": 0, "unset": 0 },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": { "parent": 0, "user": 0, "system": 0 },
+    "refused": { "depth_limit": 0, "concurrency_limit": 0, "budget": 0 },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 10,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"summary\":\"This is a sound test, with two minor style findings. It starts a draft in the USD channel using the existing `DraftOrderPage.create` flow and deletes it through the menu and the confirmation dialog. It then checks that staff land back on the drafts list. Finally it opens the draft's saved address again and expects the \\\"page was not found\\\" screen, which only passes if the server really deleted the draft. Both acceptance criteria are covered, and the type check exits with no errors. Failed: M1, because the menu, header and dialog-button locators are written inline in the spec instead of on `DraftOrderPage`. Failed: M13, because the generated `// spec:` / `// seed:` lines and the numbered step comments add nothing the code doesn't already say. Every blocker (B1 to B10) is met.\",\"items\":[{\"id\":\"B1\",\"verdict\":\"met\",\"evidence\":\"change.diff:67-70 opens the saved draftUrl after deletion and expects 'Sorry, the page was not found'. This would fail if the delete mutation never ran, because the draft would still load.\"},{\"id\":\"B2\",\"verdict\":\"met\",\"evidence\":\"Return to the drafts list is asserted at change.diff:58-61. The not-found screen on the deleted draft's address is asserted at change.diff:67-75.\"},{\"id\":\"B3\",\"verdict\":\"met\",\"evidence\":\"It reuses DraftOrderPage.create, dialog, createDraftButton, statusInfo and finalizeButton. The show-more, menu item and page-header locators don't exist on any page object in e2e/pages, so nothing is duplicated.\"},{\"id\":\"B4\",\"verdict\":\"met\",\"evidence\":\"No waitForTimeout, sleeps or polling loops.\"},{\"id\":\"B5\",\"verdict\":\"met\",\"evidence\":\"Imports test and expect from ../../fixtures/test.ts (change.diff:9). Not tagged parallel, and writes nothing to the cache.\"},{\"id\":\"B6\",\"verdict\":\"met\",\"evidence\":\"Locators use test ids and role-and-name. The dialog buttons are scoped to draft.dialog. The not-found text matches what productMediaTranslations.spec.ts:307 already uses.\"},{\"id\":\"B7\",\"verdict\":\"met\",\"evidence\":\"The draft is started with the existing DraftOrderPage.create flow (change.diff:29), which the checklist allows.\"},{\"id\":\"B8\",\"verdict\":\"met\",\"evidence\":\"No hard-coded ids. The channel comes from the CHANNEL constant, and the draft URL is captured at runtime.\"},{\"id\":\"B9\",\"verdict\":\"met\",\"evidence\":\"Uses the fixture's default admin session with no UI sign-in. The ticket doesn't name a specific permission.\"},{\"id\":\"B10\",\"verdict\":\"met\",\"evidence\":\"typecheck.txt reports 'exit 0: no errors'. The file is at e2e/tests/orders/draft-delete.spec.ts.\"},{\"id\":\"M1\",\"verdict\":\"failed\",\"evidence\":\"change.diff:24, 38, 40 and 54 define the page-header, show-more-button, 'Cancel order' menu item and dialog 'Delete' button locators, plus the delete action itself, inline in the spec instead of on DraftOrderPage.\"},{\"id\":\"M2\",\"verdict\":\"met\",\"evidence\":\"No page-object members added.\"},{\"id\":\"M3\",\"verdict\":\"met\",\"evidence\":\"The Arrange, Act and Assert comments are present (change.diff:22, 37, 42, etc.).\"},{\"id\":\"M4\",\"verdict\":\"met\",\"evidence\":\"One test, with a test.step for each stage.\"},{\"id\":\"M5\",\"verdict\":\"met\",\"evidence\":\"The title 'Staff deletes a draft order from its menu #e2e' describes the behaviour and carries the tag.\"},{\"id\":\"M6\",\"verdict\":\"met\",\"evidence\":\"The header comment at change.diff:13-17 says what the spec covers and why.\"},{\"id\":\"M7\",\"verdict\":\"met\",\"evidence\":\"All assertions are web-first.\"},{\"id\":\"M8\",\"verdict\":\"met\",\"evidence\":\"Uses the ORDERS_SCENARIO and CHANNEL constants. The remaining literals are UI copy, not scenario values.\"},{\"id\":\"M9\",\"verdict\":\"met\",\"evidence\":\"No cleanup steps and no unique names.\"},{\"id\":\"M10\",\"verdict\":\"met\",\"evidence\":\"No custom timeouts, retries, networkidle or waitForLoadState.\"},{\"id\":\"M11\",\"verdict\":\"met\",\"evidence\":\"Relative imports keep the .ts extension, and test and expect come only from the fixture.\"},{\"id\":\"M12\",\"verdict\":\"met\",\"evidence\":\"No any, no casts and no gql calls.\"},{\"id\":\"M13\",\"verdict\":\"failed\",\"evidence\":\"change.diff:7-8 are generated boilerplate ('// spec: specs/02-draft-order-delete.md', '// seed: ...') pointing at files that aren't in the change. The numbered comments at change.diff:27, 35, 51 and 64 only repeat the test.step titles.\"}]}",
+  "structured_output": {
+    "summary": "This is a sound test, with two minor style findings. It starts a draft in the USD channel using the existing `DraftOrderPage.create` flow and deletes it through the menu and the confirmation dialog. It then checks that staff land back on the drafts list. Finally it opens the draft's saved address again and expects the \"page was not found\" screen, which only passes if the server really deleted the draft. Both acceptance criteria are covered, and the type check exits with no errors. Failed: M1, because the menu, header and dialog-button locators are written inline in the spec instead of on `DraftOrderPage`. Failed: M13, because the generated `// spec:` / `// seed:` lines and the numbered step comments add nothing the code doesn't already say. Every blocker (B1 to B10) is met.",
+    "items": [
+      {
+        "id": "B1",
+        "verdict": "met",
+        "evidence": "change.diff:67-70 opens the saved draftUrl after deletion and expects 'Sorry, the page was not found'. This would fail if the delete mutation never ran, because the draft would still load."
+      },
+      {
+        "id": "B2",
+        "verdict": "met",
+        "evidence": "Return to the drafts list is asserted at change.diff:58-61. The not-found screen on the deleted draft's address is asserted at change.diff:67-75."
+      },
+      {
+        "id": "B3",
+        "verdict": "met",
+        "evidence": "It reuses DraftOrderPage.create, dialog, createDraftButton, statusInfo and finalizeButton. The show-more, menu item and page-header locators don't exist on any page object in e2e/pages, so nothing is duplicated."
+      },
+      { "id": "B4", "verdict": "met", "evidence": "No waitForTimeout, sleeps or polling loops." },
+      {
+        "id": "B5",
+        "verdict": "met",
+        "evidence": "Imports test and expect from ../../fixtures/test.ts (change.diff:9). Not tagged parallel, and writes nothing to the cache."
+      },
+      {
+        "id": "B6",
+        "verdict": "met",
+        "evidence": "Locators use test ids and role-and-name. The dialog buttons are scoped to draft.dialog. The not-found text matches what productMediaTranslations.spec.ts:307 already uses."
+      },
+      {
+        "id": "B7",
+        "verdict": "met",
+        "evidence": "The draft is started with the existing DraftOrderPage.create flow (change.diff:29), which the checklist allows."
+      },
+      {
+        "id": "B8",
+        "verdict": "met",
+        "evidence": "No hard-coded ids. The channel comes from the CHANNEL constant, and the draft URL is captured at runtime."
+      },
+      {
+        "id": "B9",
+        "verdict": "met",
+        "evidence": "Uses the fixture's default admin session with no UI sign-in. The ticket doesn't name a specific permission."
+      },
+      {
+        "id": "B10",
+        "verdict": "met",
+        "evidence": "typecheck.txt reports 'exit 0: no errors'. The file is at e2e/tests/orders/draft-delete.spec.ts."
+      },
+      {
+        "id": "M1",
+        "verdict": "failed",
+        "evidence": "change.diff:24, 38, 40 and 54 define the page-header, show-more-button, 'Cancel order' menu item and dialog 'Delete' button locators, plus the delete action itself, inline in the spec instead of on DraftOrderPage."
+      },
+      { "id": "M2", "verdict": "met", "evidence": "No page-object members added." },
+      {
+        "id": "M3",
+        "verdict": "met",
+        "evidence": "The Arrange, Act and Assert comments are present (change.diff:22, 37, 42, etc.)."
+      },
+      { "id": "M4", "verdict": "met", "evidence": "One test, with a test.step for each stage." },
+      {
+        "id": "M5",
+        "verdict": "met",
+        "evidence": "The title 'Staff deletes a draft order from its menu #e2e' describes the behaviour and carries the tag."
+      },
+      {
+        "id": "M6",
+        "verdict": "met",
+        "evidence": "The header comment at change.diff:13-17 says what the spec covers and why."
+      },
+      { "id": "M7", "verdict": "met", "evidence": "All assertions are web-first." },
+      {
+        "id": "M8",
+        "verdict": "met",
+        "evidence": "Uses the ORDERS_SCENARIO and CHANNEL constants. The remaining literals are UI copy, not scenario values."
+      },
+      { "id": "M9", "verdict": "met", "evidence": "No cleanup steps and no unique names." },
+      {
+        "id": "M10",
+        "verdict": "met",
+        "evidence": "No custom timeouts, retries, networkidle or waitForLoadState."
+      },
+      {
+        "id": "M11",
+        "verdict": "met",
+        "evidence": "Relative imports keep the .ts extension, and test and expect come only from the fixture."
+      },
+      { "id": "M12", "verdict": "met", "evidence": "No any, no casts and no gql calls." },
+      {
+        "id": "M13",
+        "verdict": "failed",
+        "evidence": "change.diff:7-8 are generated boilerplate ('// spec: specs/02-draft-order-delete.md', '// seed: ...') pointing at files that aren't in the change. The numbered comments at change.diff:27, 35, 51 and 64 only repeat the test.step titles."
+      }
+    ]
+  },
+  "ttft_ms": 2464,
+  "type": "result",
+  "duration_ms": 31601,
+  "uuid": "aee8e1c6-8d83-4576-9527-0b548179d78f",
+  "ttft_stream_ms": 1594,
+  "time_to_request_ms": 183,
+  "first_content_frame_ms": 1594,
+  "queued_turn_count": 0,
+  "result_index": 0
+}

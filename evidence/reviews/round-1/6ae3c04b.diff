@@ -1,0 +1,71 @@
+diff --git a/e2e/pages/draftOrderPage.ts b/e2e/pages/draftOrderPage.ts
+index fbec014..5800e41 100644
+--- a/e2e/pages/draftOrderPage.ts
++++ b/e2e/pages/draftOrderPage.ts
+@@ -55,6 +55,14 @@ export class DraftOrderPage {
+ 
+   readonly finalizeButton = this.page.getByTestId("button-bar-confirm");
+ 
++  readonly moreActionsButton = this.page.getByTestId("show-more-button");
++
++  /** Labelled "Cancel order" in the menu; the dialog it opens deletes the draft. */
++  readonly deleteMenuItem = this.page.getByTestId("cancel-order");
++
++  /** `NotFoundPage` has no test id, so it is found by its message. */
++  readonly notFoundMessage = this.page.getByText("Sorry, the page was not found");
++
+   constructor(readonly page: Page) {}
+ 
+   /** Both lists create the same draft; they differ only in where the button lives. */
+@@ -109,6 +117,14 @@ export class DraftOrderPage {
+     await this.dialog.waitFor({ state: "hidden" });
+   }
+ 
++  /** The dialog only closes once the deletion succeeded - on an error it stays open. */
++  async delete() {
++    await this.moreActionsButton.click();
++    await this.deleteMenuItem.click();
++    await this.dialog.getByTestId("submit").click();
++    await this.dialog.waitFor({ state: "hidden" });
++  }
++
+   /** Lands on the order it became, which no longer lives under `/orders/drafts/`. */
+   async finalize() {
+     await this.finalizeButton.click();
+diff --git a/e2e/tests/orders/draft-deletion.spec.ts b/e2e/tests/orders/draft-deletion.spec.ts
+new file mode 100644
+index 0000000..8cbd52a
+--- /dev/null
++++ b/e2e/tests/orders/draft-deletion.spec.ts
+@@ -0,0 +1,31 @@
++import { expect, test } from "../../fixtures/test.ts";
++import { DraftOrderPage } from "../../pages/draftOrderPage.ts";
++import { CHANNEL, ORDERS_SCENARIO } from "../../scenarios/orders.ts";
++
++/**
++ * Staff deleting a draft they no longer need, from the draft page's menu. If the deletion
++ * silently failed, the drafts list would keep filling with orders nobody can get rid of, so
++ * the draft's own address is opened again to prove it is gone on the server.
++ */
++test.use({ scenario: ORDERS_SCENARIO });
++
++test("Staff deletes a draft order and it can no longer be opened #e2e", async ({ page }) => {
++  // Arrange
++  const draft = new DraftOrderPage(page);
++
++  await draft.create({ from: "drafts", channel: CHANNEL.name });
++
++  const draftUrl = page.url();
++
++  // Act & Assert
++  await test.step("delete the draft from its menu and land on the drafts list", async () => {
++    await draft.delete();
++    await expect(page).toHaveURL(/\/orders\/drafts\/?(\?.*)?$/);
++  });
++
++  await test.step("the deleted draft's address shows the not-found page", async () => {
++    await page.goto(draftUrl);
++    await expect(draft.notFoundMessage).toBeVisible();
++    await expect(draft.statusInfo).toBeHidden();
++  });
++});

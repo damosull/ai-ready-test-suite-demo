@@ -1,0 +1,7 @@
+branch: with-setup-t01
+specs: tests/orders/draft-manual-discount.spec.ts
+run 1: pass
+run 2: pass
+run 3: pass
+runs: 3/3
+broken feature caught: yes (specs failed with demo/breaks/01.patch applied)

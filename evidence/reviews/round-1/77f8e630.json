@@ -1,0 +1,192 @@
+{
+  "duration_api_ms": 47433,
+  "stop_reason": "tool_use",
+  "session_id": "2851b326-6705-43f3-8202-05b982c7c77f",
+  "total_cost_usd": 0.34161719999999995,
+  "usage": {
+    "input_tokens": 14,
+    "cache_creation_input_tokens": 28921,
+    "cache_read_input_tokens": 141066,
+    "output_tokens": 4099,
+    "output_tokens_details": { "thinking_tokens": 901 },
+    "server_tool_use": { "web_search_requests": 0, "web_fetch_requests": 0 },
+    "service_tier": "standard",
+    "cache_creation": { "ephemeral_1h_input_tokens": 28921, "ephemeral_5m_input_tokens": 0 },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 1635,
+        "cache_read_input_tokens": 31360,
+        "cache_creation_input_tokens": 2036,
+        "cache_creation": { "ephemeral_5m_input_tokens": 0, "ephemeral_1h_input_tokens": 2036 },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 14,
+      "outputTokens": 4099,
+      "cacheReadInputTokens": 141066,
+      "cacheCreationInputTokens": 28921,
+      "webSearchRequests": 0,
+      "costUSD": 0.34161719999999995,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 901,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": { "background": 0, "foreground": 0, "unset": 0 },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": { "parent": 0, "user": 0, "system": 0 },
+    "refused": { "depth_limit": 0, "concurrency_limit": 0, "budget": 0 },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 13,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"summary\":\"I found nothing to fail: all 23 checklist items are met. The spec covers all three acceptance criteria. Expected values are derived from the scenario's PRODUCTS and PROMOTIONS constants, with a check that the tee alone stays below the order promotion's threshold. After a page reload it checks the server's total again and that the manual 25% is still in the breakdown. The new locators and the addPercentageDiscount action sit on the existing DraftOrderPage. They use real data-test-ids where the dashboard has them (\\\"discount-value\\\", \\\"discount-reason\\\", \\\"submit\\\"), all scoped to the dialog. Where it has none (\\\"Add Discount\\\" button, breakdown rows), they use role-based locators scoped to the order summary. The type check reports no errors.\",\"items\":[{\"id\":\"B1\",\"verdict\":\"met\",\"evidence\":\"After page.reload() the spec checks draft.total equals the promoted price less 25% and that the manual row shows 25% (diff lines 100-105). A reloaded total comes from the server, so these would fail if the discount mutation never ran.\"},{\"id\":\"B2\",\"verdict\":\"met\",\"evidence\":\"All three criteria are asserted: the total at diff line 90, the manual 25% next to the promotion row at lines 95-97, and persistence after reload at lines 101-104.\"},{\"id\":\"B3\",\"verdict\":\"met\",\"evidence\":\"It reuses the existing discountToggle, summary, dialog, create and addProduct, and adds only locators and an action that DraftOrderPage did not already have.\"},{\"id\":\"B4\",\"verdict\":\"met\",\"evidence\":\"No fixed waits: it waits on the dialog being hidden and on web-first assertions.\"},{\"id\":\"B5\",\"verdict\":\"met\",\"evidence\":\"Imports test and expect from fixtures/test.ts, has no parallel() tag, and does not write to the cache or the dumps.\"},{\"id\":\"B6\",\"verdict\":\"met\",\"evidence\":\"Uses the real dialog test ids discount-value, discount-reason and submit, all scoped to the dialog. The \\\"Add Discount\\\" button and the breakdown rows have no test id in OrderValue.tsx, so they are found by role and filtered by text inside the summary.\"},{\"id\":\"B7\",\"verdict\":\"met\",\"evidence\":\"Data comes from ORDERS_SCENARIO, and the draft is started with the suite's own DraftOrderPage.create flow.\"},{\"id\":\"B8\",\"verdict\":\"met\",\"evidence\":\"No hard-coded ids; amounts come from PRODUCTS.tee and PROMOTIONS.catalogue.\"},{\"id\":\"B9\",\"verdict\":\"met\",\"evidence\":\"Uses the default admin session; no UI sign-in and no credentials in the spec.\"},{\"id\":\"B10\",\"verdict\":\"met\",\"evidence\":\"typecheck.txt says \\\"exit 0: no errors\\\", and the spec is in e2e/tests/orders/.\"},{\"id\":\"M1\",\"verdict\":\"met\",\"evidence\":\"The spec has no inline locators; everything is on DraftOrderPage.\"},{\"id\":\"M2\",\"verdict\":\"met\",\"evidence\":\"New members are readonly fields built from this.page, this.summary or this.dialog, and the class keeps constructor(readonly page: Page) {}.\"},{\"id\":\"M3\",\"verdict\":\"met\",\"evidence\":\"Has // Arrange and // Act & Assert comments (diff lines 72, 87).\"},{\"id\":\"M4\",\"verdict\":\"met\",\"evidence\":\"One test with three test.step stages.\"},{\"id\":\"M5\",\"verdict\":\"met\",\"evidence\":\"The title states the behaviour being checked and carries the #e2e tag.\"},{\"id\":\"M6\",\"verdict\":\"met\",\"evidence\":\"A header comment at diff lines 60-64 says what the spec covers and why.\"},{\"id\":\"M7\",\"verdict\":\"met\",\"evidence\":\"Every assertion is web-first (toHaveText or toContainText on a locator).\"},{\"id\":\"M8\",\"verdict\":\"met\",\"evidence\":\"Expected values are derived from scenario constants and ORDERS_SCENARIO, with a threshold guard on the arithmetic and money compared via toFixed(2).\"},{\"id\":\"M9\",\"verdict\":\"met\",\"evidence\":\"No cleanup steps and no unique or random names.\"},{\"id\":\"M10\",\"verdict\":\"met\",\"evidence\":\"No custom timeouts, retries or networkidle waits.\"},{\"id\":\"M11\",\"verdict\":\"met\",\"evidence\":\"Relative imports keep the .ts extension, and test and expect come only from the fixture.\"},{\"id\":\"M12\",\"verdict\":\"met\",\"evidence\":\"No any and no casts; the method parameters are typed.\"},{\"id\":\"M13\",\"verdict\":\"met\",\"evidence\":\"The comments explain reasons: why the order promotion is kept out of the maths, why the breakdown is opened first, and how the rows are told apart.\"}]}",
+  "structured_output": {
+    "summary": "I found nothing to fail: all 23 checklist items are met. The spec covers all three acceptance criteria. Expected values are derived from the scenario's PRODUCTS and PROMOTIONS constants, with a check that the tee alone stays below the order promotion's threshold. After a page reload it checks the server's total again and that the manual 25% is still in the breakdown. The new locators and the addPercentageDiscount action sit on the existing DraftOrderPage. They use real data-test-ids where the dashboard has them (\"discount-value\", \"discount-reason\", \"submit\"), all scoped to the dialog. Where it has none (\"Add Discount\" button, breakdown rows), they use role-based locators scoped to the order summary. The type check reports no errors.",
+    "items": [
+      {
+        "id": "B1",
+        "verdict": "met",
+        "evidence": "After page.reload() the spec checks draft.total equals the promoted price less 25% and that the manual row shows 25% (diff lines 100-105). A reloaded total comes from the server, so these would fail if the discount mutation never ran."
+      },
+      {
+        "id": "B2",
+        "verdict": "met",
+        "evidence": "All three criteria are asserted: the total at diff line 90, the manual 25% next to the promotion row at lines 95-97, and persistence after reload at lines 101-104."
+      },
+      {
+        "id": "B3",
+        "verdict": "met",
+        "evidence": "It reuses the existing discountToggle, summary, dialog, create and addProduct, and adds only locators and an action that DraftOrderPage did not already have."
+      },
+      {
+        "id": "B4",
+        "verdict": "met",
+        "evidence": "No fixed waits: it waits on the dialog being hidden and on web-first assertions."
+      },
+      {
+        "id": "B5",
+        "verdict": "met",
+        "evidence": "Imports test and expect from fixtures/test.ts, has no parallel() tag, and does not write to the cache or the dumps."
+      },
+      {
+        "id": "B6",
+        "verdict": "met",
+        "evidence": "Uses the real dialog test ids discount-value, discount-reason and submit, all scoped to the dialog. The \"Add Discount\" button and the breakdown rows have no test id in OrderValue.tsx, so they are found by role and filtered by text inside the summary."
+      },
+      {
+        "id": "B7",
+        "verdict": "met",
+        "evidence": "Data comes from ORDERS_SCENARIO, and the draft is started with the suite's own DraftOrderPage.create flow."
+      },
+      {
+        "id": "B8",
+        "verdict": "met",
+        "evidence": "No hard-coded ids; amounts come from PRODUCTS.tee and PROMOTIONS.catalogue."
+      },
+      {
+        "id": "B9",
+        "verdict": "met",
+        "evidence": "Uses the default admin session; no UI sign-in and no credentials in the spec."
+      },
+      {
+        "id": "B10",
+        "verdict": "met",
+        "evidence": "typecheck.txt says \"exit 0: no errors\", and the spec is in e2e/tests/orders/."
+      },
+      {
+        "id": "M1",
+        "verdict": "met",
+        "evidence": "The spec has no inline locators; everything is on DraftOrderPage."
+      },
+      {
+        "id": "M2",
+        "verdict": "met",
+        "evidence": "New members are readonly fields built from this.page, this.summary or this.dialog, and the class keeps constructor(readonly page: Page) {}."
+      },
+      {
+        "id": "M3",
+        "verdict": "met",
+        "evidence": "Has // Arrange and // Act & Assert comments (diff lines 72, 87)."
+      },
+      { "id": "M4", "verdict": "met", "evidence": "One test with three test.step stages." },
+      {
+        "id": "M5",
+        "verdict": "met",
+        "evidence": "The title states the behaviour being checked and carries the #e2e tag."
+      },
+      {
+        "id": "M6",
+        "verdict": "met",
+        "evidence": "A header comment at diff lines 60-64 says what the spec covers and why."
+      },
+      {
+        "id": "M7",
+        "verdict": "met",
+        "evidence": "Every assertion is web-first (toHaveText or toContainText on a locator)."
+      },
+      {
+        "id": "M8",
+        "verdict": "met",
+        "evidence": "Expected values are derived from scenario constants and ORDERS_SCENARIO, with a threshold guard on the arithmetic and money compared via toFixed(2)."
+      },
+      {
+        "id": "M9",
+        "verdict": "met",
+        "evidence": "No cleanup steps and no unique or random names."
+      },
+      {
+        "id": "M10",
+        "verdict": "met",
+        "evidence": "No custom timeouts, retries or networkidle waits."
+      },
+      {
+        "id": "M11",
+        "verdict": "met",
+        "evidence": "Relative imports keep the .ts extension, and test and expect come only from the fixture."
+      },
+      {
+        "id": "M12",
+        "verdict": "met",
+        "evidence": "No any and no casts; the method parameters are typed."
+      },
+      {
+        "id": "M13",
+        "verdict": "met",
+        "evidence": "The comments explain reasons: why the order promotion is kept out of the maths, why the breakdown is opened first, and how the rows are told apart."
+      }
+    ]
+  },
+  "ttft_ms": 3055,
+  "type": "result",
+  "duration_ms": 48009,
+  "uuid": "4c01a962-0682-42ba-887e-f2d92666b60e",
+  "ttft_stream_ms": 2008,
+  "time_to_request_ms": 214,
+  "first_content_frame_ms": 2009,
+  "queued_turn_count": 0,
+  "result_index": 0
+}

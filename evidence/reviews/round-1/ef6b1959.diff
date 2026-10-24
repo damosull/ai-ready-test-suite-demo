@@ -1,0 +1,82 @@
+diff --git a/e2e/pages/orderPage.ts b/e2e/pages/orderPage.ts
+index b835db3..e2dee5d 100644
+--- a/e2e/pages/orderPage.ts
++++ b/e2e/pages/orderPage.ts
+@@ -14,6 +14,11 @@ export class OrderPage {
+ 
+   readonly statusInfo = this.page.getByTestId("status-info");
+ 
++  // The header's trigger shares its test id with the order line rows, so scope it.
++  readonly moreActionsButton = this.page.getByTestId("page-header").getByTestId("show-more-button");
++
++  readonly cancelOrderMenuItem = this.page.getByTestId("cancel-order");
++
+   readonly markAsPaidButton = this.page.getByTestId("mark-as-paid-button");
+ 
+   readonly transactionReferenceInput = this.page.getByTestId("transaction-reference-input");
+diff --git a/e2e/tests/orders/order-cancel.spec.ts b/e2e/tests/orders/order-cancel.spec.ts
+new file mode 100644
+index 0000000..a9b00e0
+--- /dev/null
++++ b/e2e/tests/orders/order-cancel.spec.ts
+@@ -0,0 +1,60 @@
++// spec: specs/order-cancel.md
++// seed: e2e/tests/seed.spec.ts
++
++import { e2eConfig } from "../../config.ts";
++import { expect, test } from "../../fixtures/test.ts";
++import { OrderPage } from "../../pages/orderPage.ts";
++import { findOrderId, ORDERS_SCENARIO } from "../../scenarios/orders.ts";
++
++/**
++ * Staff cancel an order from the page header's "More actions" menu and confirm in a dialog.
++ * Runs on the orders scenario's `unpaid` order; without a parallel() tag the seed fixture
++ * restores the scenario first, so the sibling specs' changes to that order don't leak in.
++ */
++test.use({ scenario: ORDERS_SCENARIO });
++
++const config = e2eConfig();
++
++test("Cancel an unpaid, unfulfilled order #e2e", async ({ page }) => {
++  // Arrange
++  const orderPage = new OrderPage(page);
++  const confirmCancelButton = orderPage.dialog.getByTestId("submit");
++
++  // 1. Open the scenario's unpaid order
++  await orderPage.goto(await findOrderId(config, "unpaid"));
++  await expect(orderPage.statusInfo).toHaveText("Unfulfilled");
++  await expect(orderPage.fulfillButton).toBeVisible();
++
++  // Act
++  await test.step("open the cancel dialog from the header menu", async () => {
++    // 2. Click "More actions" in the header, then "Cancel order"
++    await orderPage.moreActionsButton.click();
++    await expect(page.getByRole("menu")).toBeVisible();
++    await orderPage.cancelOrderMenuItem.click();
++    await expect(orderPage.dialog).toBeVisible();
++    await expect(orderPage.dialog).toContainText("Cancel order #");
++    await expect(orderPage.dialog.getByTestId("back")).toBeVisible();
++    await expect(confirmCancelButton).toBeVisible();
++  });
++
++  await test.step("confirm the cancellation", async () => {
++    // 3. Confirm in the dialog
++    await confirmCancelButton.click();
++    await expect(orderPage.dialog).toBeHidden();
++  });
++
++  // Assert
++  await test.step("the order is cancelled and can no longer be fulfilled", async () => {
++    // 4. Check status and the fulfil action without reloading
++    await expect(orderPage.statusInfo).toHaveText("Cancelled");
++    await expect(orderPage.fulfillButton).toHaveCount(0);
++  });
++
++  await test.step("the cancellation is saved", async () => {
++    // 5. Reload and check again
++    await page.reload();
++    await orderPage.statusInfo.waitFor();
++    await expect(orderPage.statusInfo).toHaveText("Cancelled");
++    await expect(orderPage.fulfillButton).toHaveCount(0);
++  });
++});

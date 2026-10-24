@@ -1,0 +1,73 @@
+diff --git a/e2e/pages/orderPage.ts b/e2e/pages/orderPage.ts
+index b835db3..d362641 100644
+--- a/e2e/pages/orderPage.ts
++++ b/e2e/pages/orderPage.ts
+@@ -30,6 +30,11 @@ export class OrderPage {
+ 
+   readonly manualTransactionSubmit = this.page.getByTestId("manualTransactionSubmit");
+ 
++  /** The order lines card has its own "show more" menu; this is the one in the header. */
++  readonly menuButton = this.page.getByTestId("page-header").getByTestId("show-more-button");
++
++  readonly cancelOrderMenuItem = this.page.getByTestId("cancel-order");
++
+   readonly fulfillButton = this.page.getByTestId("order-items-fulfill-button");
+ 
+   readonly confirmFulfillmentButton = this.page.getByTestId("button-bar-confirm");
+@@ -84,6 +89,13 @@ export class OrderPage {
+     await this.page.waitForURL(url => !url.pathname.endsWith("/fulfill"));
+   }
+ 
++  async cancel() {
++    await this.menuButton.click();
++    await this.cancelOrderMenuItem.click();
++    await this.dialog.getByTestId("submit").click();
++    await this.dialog.waitFor({ state: "hidden" });
++  }
++
+   async addTracking(trackingNumber: string) {
+     await this.timelineView.click();
+     await this.addTrackingButton.click();
+diff --git a/e2e/tests/orders/order-cancellation.spec.ts b/e2e/tests/orders/order-cancellation.spec.ts
+new file mode 100644
+index 0000000..e339fd2
+--- /dev/null
++++ b/e2e/tests/orders/order-cancellation.spec.ts
+@@ -0,0 +1,37 @@
++import { e2eConfig } from "../../config.ts";
++import { expect, test } from "../../fixtures/test.ts";
++import { OrderPage } from "../../pages/orderPage.ts";
++import { findOrderId, ORDERS_SCENARIO } from "../../scenarios/orders.ts";
++
++/**
++ * Cancelling an order a customer changed their mind about before it was paid or shipped. A
++ * regression leaves staff with orders they cannot close and stock that stays allocated.
++ */
++test.use({ scenario: ORDERS_SCENARIO });
++
++const config = e2eConfig();
++
++test("Staff cancels an unpaid, unfulfilled order and it can no longer be fulfilled #e2e", async ({
++  page,
++}) => {
++  // Arrange
++  const orderPage = new OrderPage(page);
++
++  await orderPage.goto(await findOrderId(config, "unpaid"));
++  // Without this the "no fulfil action" check below would also pass on a page that never offered it.
++  await expect(orderPage.statusInfo).toHaveText("Unfulfilled");
++  await expect(orderPage.fulfillButton).toBeVisible();
++
++  // Act & Assert
++  await test.step("cancel from the order's menu", async () => {
++    await orderPage.cancel();
++    await expect(orderPage.statusInfo).toHaveText("Cancelled");
++    await expect(orderPage.fulfillButton).toBeHidden();
++  });
++
++  await test.step("the cancellation is saved", async () => {
++    await page.reload();
++    await expect(orderPage.statusInfo).toHaveText("Cancelled");
++    await expect(orderPage.fulfillButton).toBeHidden();
++  });
++});

@@ -1,0 +1,192 @@
+{
+  "duration_api_ms": 39044,
+  "stop_reason": "tool_use",
+  "session_id": "7dd36c84-1492-4d02-930e-783e8e178c59",
+  "total_cost_usd": 0.26978759999999996,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 23108,
+    "cache_read_input_tokens": 80918,
+    "output_tokens": 3435,
+    "output_tokens_details": { "thinking_tokens": 331 },
+    "server_tool_use": { "web_search_requests": 0, "web_fetch_requests": 0 },
+    "service_tier": "standard",
+    "cache_creation": { "ephemeral_1h_input_tokens": 23108, "ephemeral_5m_input_tokens": 0 },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 2019,
+        "cache_read_input_tokens": 26037,
+        "cache_creation_input_tokens": 1546,
+        "cache_creation": { "ephemeral_5m_input_tokens": 0, "ephemeral_1h_input_tokens": 1546 },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 3435,
+      "cacheReadInputTokens": 80918,
+      "cacheCreationInputTokens": 23108,
+      "webSearchRequests": 0,
+      "costUSD": 0.26978759999999996,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 331,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": { "background": 0, "foreground": 0, "unset": 0 },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": { "parent": 0, "user": 0, "system": 0 },
+    "refused": { "depth_limit": 0, "concurrency_limit": 0, "budget": 0 },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 12,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"items\":[{\"id\":\"B1\",\"verdict\":\"met\",\"evidence\":\"After deleting, the spec reopens the saved draft URL (spec line 67) and expects the not-found message and no status-info (lines 68-69). If the mutation never ran, the draft would still load and both assertions would fail.\"},{\"id\":\"B2\",\"verdict\":\"met\",\"evidence\":\"Criterion 1 (back on the drafts list) is asserted with toHaveURL at spec line 63. Criterion 2 (not-found screen, not the draft) is asserted at lines 67-69.\"},{\"id\":\"B3\",\"verdict\":\"met\",\"evidence\":\"The new members show-more-button, cancel-order, notFoundMessage and delete() go on the existing DraftOrderPage. No page object, lib helper or scenario already has them. The not-found text only appears inline in productMediaTranslations.spec.ts, not as a helper.\"},{\"id\":\"B4\",\"verdict\":\"met\",\"evidence\":\"No fixed waits. delete() waits for the dialog to close and the spec uses web-first assertions.\"},{\"id\":\"B5\",\"verdict\":\"met\",\"evidence\":\"Imports test from ../../fixtures/test.ts, has no parallel() tag, and writes nothing to the cache or dumps.\"},{\"id\":\"B6\",\"verdict\":\"met\",\"evidence\":\"Uses data-test-id locators, and the submit button is scoped to this.dialog (diff line 28). show-more-button is unique on an empty draft. getByText is used only because NotFoundPage has no test id, and a comment says so.\"},{\"id\":\"B7\",\"verdict\":\"met\",\"evidence\":\"The draft is started with the existing DraftOrderPage.create flow (spec line 56), which the checklist explicitly allows.\"},{\"id\":\"B8\",\"verdict\":\"met\",\"evidence\":\"No hard-coded ids. The draft URL is captured at runtime and the channel comes from CHANNEL.name.\"},{\"id\":\"B9\",\"verdict\":\"met\",\"evidence\":\"No UI sign-in and no credentials. It uses the fixture's default admin actor, and the ticket names no specific permission.\"},{\"id\":\"B10\",\"verdict\":\"met\",\"evidence\":\"The spec is at e2e/tests/orders/draft-deletion.spec.ts and typecheck.txt reports 'exit 0: no errors'.\"},{\"id\":\"M1\",\"verdict\":\"met\",\"evidence\":\"All locators and the multi-step delete action are on DraftOrderPage. The spec only calls methods and asserts on page-object locators.\"},{\"id\":\"M2\",\"verdict\":\"met\",\"evidence\":\"The new members are readonly fields initialised from this.page (diff lines 9-15), and the class keeps constructor(readonly page: Page) {}.\"},{\"id\":\"M3\",\"verdict\":\"met\",\"evidence\":\"Has // Arrange and // Act & Assert comments (spec lines 53, 60).\"},{\"id\":\"M4\",\"verdict\":\"met\",\"evidence\":\"One test for one story, with a test.step for each stage (lines 61, 66).\"},{\"id\":\"M5\",\"verdict\":\"met\",\"evidence\":\"The title 'Staff deletes a draft order and it can no longer be opened #e2e' describes the behaviour and carries the tag.\"},{\"id\":\"M6\",\"verdict\":\"met\",\"evidence\":\"The header comment at spec lines 45-49 explains what is covered and why.\"},{\"id\":\"M7\",\"verdict\":\"met\",\"evidence\":\"All assertions are web-first: toHaveURL, toBeVisible, toBeHidden.\"},{\"id\":\"M8\",\"verdict\":\"met\",\"evidence\":\"Uses the ORDERS_SCENARIO and CHANNEL constants. There are no money or arithmetic values.\"},{\"id\":\"M9\",\"verdict\":\"met\",\"evidence\":\"No cleanup hooks and no unique or random names.\"},{\"id\":\"M10\",\"verdict\":\"met\",\"evidence\":\"No custom timeouts, no retries, no networkidle and no waitForLoadState.\"},{\"id\":\"M11\",\"verdict\":\"met\",\"evidence\":\"Relative imports keep the .ts extension, and test and expect come only from the fixture.\"},{\"id\":\"M12\",\"verdict\":\"met\",\"evidence\":\"No any, no casts and no gql calls.\"},{\"id\":\"M13\",\"verdict\":\"met\",\"evidence\":\"The comments explain reasons: why the 'Cancel order' item is used, why the not-found page is found by text, and that the dialog closes only on success. None restate the next line.\"}],\"summary\":\"I judged all 23 items (B1–B10, M1–M13) as met, with nothing to fix before merge. The test proves the deletion actually happened on the server: after deleting, it opens the draft's saved address again and expects the \\\"page was not found\\\" screen and no draft status. Both acceptance criteria are covered: the return to the drafts list by a URL check, and the deleted address by the not-found check. The new menu locators and the delete() action go on the existing DraftOrderPage, the draft is started with DraftOrderPage.create, the spec uses the suite's fixtures and scenario constants, and the type check passed with no errors. One weak point, which does not fail B6: the more-actions button (show-more-button) is not scoped to a container, and order lines have a button with the same test id. It is unique here only because this draft has no products, so it could match twice if a later test reuses delete() on a draft with lines.\"}",
+  "structured_output": {
+    "items": [
+      {
+        "id": "B1",
+        "verdict": "met",
+        "evidence": "After deleting, the spec reopens the saved draft URL (spec line 67) and expects the not-found message and no status-info (lines 68-69). If the mutation never ran, the draft would still load and both assertions would fail."
+      },
+      {
+        "id": "B2",
+        "verdict": "met",
+        "evidence": "Criterion 1 (back on the drafts list) is asserted with toHaveURL at spec line 63. Criterion 2 (not-found screen, not the draft) is asserted at lines 67-69."
+      },
+      {
+        "id": "B3",
+        "verdict": "met",
+        "evidence": "The new members show-more-button, cancel-order, notFoundMessage and delete() go on the existing DraftOrderPage. No page object, lib helper or scenario already has them. The not-found text only appears inline in productMediaTranslations.spec.ts, not as a helper."
+      },
+      {
+        "id": "B4",
+        "verdict": "met",
+        "evidence": "No fixed waits. delete() waits for the dialog to close and the spec uses web-first assertions."
+      },
+      {
+        "id": "B5",
+        "verdict": "met",
+        "evidence": "Imports test from ../../fixtures/test.ts, has no parallel() tag, and writes nothing to the cache or dumps."
+      },
+      {
+        "id": "B6",
+        "verdict": "met",
+        "evidence": "Uses data-test-id locators, and the submit button is scoped to this.dialog (diff line 28). show-more-button is unique on an empty draft. getByText is used only because NotFoundPage has no test id, and a comment says so."
+      },
+      {
+        "id": "B7",
+        "verdict": "met",
+        "evidence": "The draft is started with the existing DraftOrderPage.create flow (spec line 56), which the checklist explicitly allows."
+      },
+      {
+        "id": "B8",
+        "verdict": "met",
+        "evidence": "No hard-coded ids. The draft URL is captured at runtime and the channel comes from CHANNEL.name."
+      },
+      {
+        "id": "B9",
+        "verdict": "met",
+        "evidence": "No UI sign-in and no credentials. It uses the fixture's default admin actor, and the ticket names no specific permission."
+      },
+      {
+        "id": "B10",
+        "verdict": "met",
+        "evidence": "The spec is at e2e/tests/orders/draft-deletion.spec.ts and typecheck.txt reports 'exit 0: no errors'."
+      },
+      {
+        "id": "M1",
+        "verdict": "met",
+        "evidence": "All locators and the multi-step delete action are on DraftOrderPage. The spec only calls methods and asserts on page-object locators."
+      },
+      {
+        "id": "M2",
+        "verdict": "met",
+        "evidence": "The new members are readonly fields initialised from this.page (diff lines 9-15), and the class keeps constructor(readonly page: Page) {}."
+      },
+      {
+        "id": "M3",
+        "verdict": "met",
+        "evidence": "Has // Arrange and // Act & Assert comments (spec lines 53, 60)."
+      },
+      {
+        "id": "M4",
+        "verdict": "met",
+        "evidence": "One test for one story, with a test.step for each stage (lines 61, 66)."
+      },
+      {
+        "id": "M5",
+        "verdict": "met",
+        "evidence": "The title 'Staff deletes a draft order and it can no longer be opened #e2e' describes the behaviour and carries the tag."
+      },
+      {
+        "id": "M6",
+        "verdict": "met",
+        "evidence": "The header comment at spec lines 45-49 explains what is covered and why."
+      },
+      {
+        "id": "M7",
+        "verdict": "met",
+        "evidence": "All assertions are web-first: toHaveURL, toBeVisible, toBeHidden."
+      },
+      {
+        "id": "M8",
+        "verdict": "met",
+        "evidence": "Uses the ORDERS_SCENARIO and CHANNEL constants. There are no money or arithmetic values."
+      },
+      {
+        "id": "M9",
+        "verdict": "met",
+        "evidence": "No cleanup hooks and no unique or random names."
+      },
+      {
+        "id": "M10",
+        "verdict": "met",
+        "evidence": "No custom timeouts, no retries, no networkidle and no waitForLoadState."
+      },
+      {
+        "id": "M11",
+        "verdict": "met",
+        "evidence": "Relative imports keep the .ts extension, and test and expect come only from the fixture."
+      },
+      { "id": "M12", "verdict": "met", "evidence": "No any, no casts and no gql calls." },
+      {
+        "id": "M13",
+        "verdict": "met",
+        "evidence": "The comments explain reasons: why the 'Cancel order' item is used, why the not-found page is found by text, and that the dialog closes only on success. None restate the next line."
+      }
+    ],
+    "summary": "I judged all 23 items (B1–B10, M1–M13) as met, with nothing to fix before merge. The test proves the deletion actually happened on the server: after deleting, it opens the draft's saved address again and expects the \"page was not found\" screen and no draft status. Both acceptance criteria are covered: the return to the drafts list by a URL check, and the deleted address by the not-found check. The new menu locators and the delete() action go on the existing DraftOrderPage, the draft is started with DraftOrderPage.create, the spec uses the suite's fixtures and scenario constants, and the type check passed with no errors. One weak point, which does not fail B6: the more-actions button (show-more-button) is not scoped to a container, and order lines have a button with the same test id. It is unique here only because this draft has no products, so it could match twice if a later test reuses delete() on a draft with lines."
+  },
+  "ttft_ms": 3194,
+  "type": "result",
+  "duration_ms": 39778,
+  "uuid": "591ece10-553b-41c8-976f-6484b7a06190",
+  "ttft_stream_ms": 2187,
+  "time_to_request_ms": 193,
+  "first_content_frame_ms": 2187,
+  "queued_turn_count": 0,
+  "result_index": 0
+}

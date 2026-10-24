@@ -1,0 +1,184 @@
+{
+  "duration_api_ms": 30680,
+  "stop_reason": "tool_use",
+  "session_id": "b0589964-5e46-44d8-b218-3e02a7399a98",
+  "total_cost_usd": 0.2694508,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 24456,
+    "cache_read_input_tokens": 29894,
+    "output_tokens": 3390,
+    "output_tokens_details": { "thinking_tokens": 792 },
+    "server_tool_use": { "web_search_requests": 0, "web_fetch_requests": 0 },
+    "service_tier": "standard",
+    "cache_creation": { "ephemeral_1h_input_tokens": 24456, "ephemeral_5m_input_tokens": 0 },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 2598,
+        "cache_read_input_tokens": 21130,
+        "cache_creation_input_tokens": 3326,
+        "cache_creation": { "ephemeral_5m_input_tokens": 0, "ephemeral_1h_input_tokens": 3326 },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 3390,
+      "cacheReadInputTokens": 29894,
+      "cacheCreationInputTokens": 24456,
+      "webSearchRequests": 0,
+      "costUSD": 0.2694508,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 792,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": { "background": 0, "foreground": 0, "unset": 0 },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": { "parent": 0, "user": 0, "system": 0 },
+    "refused": { "depth_limit": 0, "concurrency_limit": 0, "budget": 0 },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 9,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "{\"items\":[{\"id\":\"B1\",\"verdict\":\"met\",\"evidence\":\"After a page.reload() the test asserts the total equals money(expectedTotal) and the manual row shows 25% and the manual discount amount (spec lines 101-107). Those values only come back if the server saved the discount.\"},{\"id\":\"B2\",\"verdict\":\"met\",\"evidence\":\"All three criteria are asserted. The total is checked against promoted less 25% (line 80). The manual row shows 25% with the reason, next to the promotion row (lines 89-96). The total and breakdown are checked again after a reload (lines 101-109).\"},{\"id\":\"B3\",\"verdict\":\"met\",\"evidence\":\"It reuses DraftOrderPage.create, addProduct, total, discountToggle, summary, dialog and statusInfo. It adds no duplicate page object, GraphQL helper or scenario constant.\"},{\"id\":\"B4\",\"verdict\":\"met\",\"evidence\":\"There is no waitForTimeout, sleep or polling loop. Waits are web-first assertions or dialog.waitFor({ state: 'hidden' }).\"},{\"id\":\"B5\",\"verdict\":\"met\",\"evidence\":\"It imports test and expect from ../../fixtures/test.ts, has no parallel() tag, and does not write to the cache or the dumps.\"},{\"id\":\"B6\",\"verdict\":\"met\",\"evidence\":\"Locators use test ids, roles with names, or listitem filtered by hasText, all scoped to draft.summary or draft.dialog. There are no CSS classes, XPath or positional indexes.\"},{\"id\":\"B7\",\"verdict\":\"met\",\"evidence\":\"The draft is started with DraftOrderPage.create and the product and promotion come from ORDERS_SCENARIO. Nothing is arranged through the API.\"},{\"id\":\"B8\",\"verdict\":\"met\",\"evidence\":\"Expected amounts come from PRODUCTS.tee and PROMOTIONS. There are no hard-coded ids and no populatedb values.\"},{\"id\":\"B9\",\"verdict\":\"met\",\"evidence\":\"It uses the fixture's default admin session. There is no UI sign-in and no credentials.\"},{\"id\":\"B10\",\"verdict\":\"met\",\"evidence\":\"The spec lives at e2e/tests/orders/draft-manual-discount.spec.ts, and typecheck.txt reports 'exit 0: no errors'.\"},{\"id\":\"M1\",\"verdict\":\"failed\",\"evidence\":\"e2e/tests/orders/draft-manual-discount.spec.ts:34-37 (diff lines 40-43) and :74-76 (diff lines 80-82): the spec defines the Add Discount button, subtotal amount, manual and promotion row locators, and the multi-step fill-and-submit discount action inline instead of on DraftOrderPage.\"},{\"id\":\"M2\",\"verdict\":\"met\",\"evidence\":\"The change adds no page-object members.\"},{\"id\":\"M3\",\"verdict\":\"met\",\"evidence\":\"It has // Arrange (line 20) and // Act & Assert (line 44), the suite's own interleaved form.\"},{\"id\":\"M4\",\"verdict\":\"met\",\"evidence\":\"It is one test for one story, with a test.step for each stage.\"},{\"id\":\"M5\",\"verdict\":\"met\",\"evidence\":\"The title states the behaviour ('A 25% manual order discount applies on top of the tee's catalogue promotion and is saved') and carries #e2e.\"},{\"id\":\"M6\",\"verdict\":\"met\",\"evidence\":\"The JSDoc header at lines 8-11 says what the spec covers and why: a manual discount on top of the catalogue promotion, persisted on the server.\"},{\"id\":\"M7\",\"verdict\":\"met\",\"evidence\":\"Every assertion is web-first on a locator.\"},{\"id\":\"M8\",\"verdict\":\"met\",\"evidence\":\"It derives amounts from the scenario constants, guards the threshold (line 32), formats money with toFixed(2) and imports ORDERS_SCENARIO. The 25% comes from the ticket, and the scenario has no constant for it.\"},{\"id\":\"M9\",\"verdict\":\"met\",\"evidence\":\"There is no cleanup and there are no unique names.\"},{\"id\":\"M10\",\"verdict\":\"met\",\"evidence\":\"There are no explicit timeouts, retries, networkidle or waitForLoadState.\"},{\"id\":\"M11\",\"verdict\":\"met\",\"evidence\":\"Relative imports keep .ts, and test and expect come only from the fixture.\"},{\"id\":\"M12\",\"verdict\":\"met\",\"evidence\":\"There is no any, no cast and no gql call.\"},{\"id\":\"M13\",\"verdict\":\"failed\",\"evidence\":\"e2e/tests/orders/draft-manual-discount.spec.ts:21 (diff line 27), and similar at :39, :47, :74: generated numbered step comments ('// 1. Compute the expected amounts...', '// 3. Add one E2E Tee', '// 6. Fill the value and reason, then confirm') restate the next line, and lines 1-2 point to spec and seed files that do not exist.\"}],\"summary\":\"The test is sound: it proves the 25% manual discount is saved by reloading the page, covers all three acceptance criteria, reuses the DraftOrderPage flows, and passes the type check. It has two minor problems: locators and the discount-dialog action are written inline in the spec instead of on DraftOrderPage (M1), and its comments are generated numbered steps plus spec/seed header lines that point to files that do not exist (M13).\"}",
+  "structured_output": {
+    "items": [
+      {
+        "id": "B1",
+        "verdict": "met",
+        "evidence": "After a page.reload() the test asserts the total equals money(expectedTotal) and the manual row shows 25% and the manual discount amount (spec lines 101-107). Those values only come back if the server saved the discount."
+      },
+      {
+        "id": "B2",
+        "verdict": "met",
+        "evidence": "All three criteria are asserted. The total is checked against promoted less 25% (line 80). The manual row shows 25% with the reason, next to the promotion row (lines 89-96). The total and breakdown are checked again after a reload (lines 101-109)."
+      },
+      {
+        "id": "B3",
+        "verdict": "met",
+        "evidence": "It reuses DraftOrderPage.create, addProduct, total, discountToggle, summary, dialog and statusInfo. It adds no duplicate page object, GraphQL helper or scenario constant."
+      },
+      {
+        "id": "B4",
+        "verdict": "met",
+        "evidence": "There is no waitForTimeout, sleep or polling loop. Waits are web-first assertions or dialog.waitFor({ state: 'hidden' })."
+      },
+      {
+        "id": "B5",
+        "verdict": "met",
+        "evidence": "It imports test and expect from ../../fixtures/test.ts, has no parallel() tag, and does not write to the cache or the dumps."
+      },
+      {
+        "id": "B6",
+        "verdict": "met",
+        "evidence": "Locators use test ids, roles with names, or listitem filtered by hasText, all scoped to draft.summary or draft.dialog. There are no CSS classes, XPath or positional indexes."
+      },
+      {
+        "id": "B7",
+        "verdict": "met",
+        "evidence": "The draft is started with DraftOrderPage.create and the product and promotion come from ORDERS_SCENARIO. Nothing is arranged through the API."
+      },
+      {
+        "id": "B8",
+        "verdict": "met",
+        "evidence": "Expected amounts come from PRODUCTS.tee and PROMOTIONS. There are no hard-coded ids and no populatedb values."
+      },
+      {
+        "id": "B9",
+        "verdict": "met",
+        "evidence": "It uses the fixture's default admin session. There is no UI sign-in and no credentials."
+      },
+      {
+        "id": "B10",
+        "verdict": "met",
+        "evidence": "The spec lives at e2e/tests/orders/draft-manual-discount.spec.ts, and typecheck.txt reports 'exit 0: no errors'."
+      },
+      {
+        "id": "M1",
+        "verdict": "failed",
+        "evidence": "e2e/tests/orders/draft-manual-discount.spec.ts:34-37 (diff lines 40-43) and :74-76 (diff lines 80-82): the spec defines the Add Discount button, subtotal amount, manual and promotion row locators, and the multi-step fill-and-submit discount action inline instead of on DraftOrderPage."
+      },
+      { "id": "M2", "verdict": "met", "evidence": "The change adds no page-object members." },
+      {
+        "id": "M3",
+        "verdict": "met",
+        "evidence": "It has // Arrange (line 20) and // Act & Assert (line 44), the suite's own interleaved form."
+      },
+      {
+        "id": "M4",
+        "verdict": "met",
+        "evidence": "It is one test for one story, with a test.step for each stage."
+      },
+      {
+        "id": "M5",
+        "verdict": "met",
+        "evidence": "The title states the behaviour ('A 25% manual order discount applies on top of the tee's catalogue promotion and is saved') and carries #e2e."
+      },
+      {
+        "id": "M6",
+        "verdict": "met",
+        "evidence": "The JSDoc header at lines 8-11 says what the spec covers and why: a manual discount on top of the catalogue promotion, persisted on the server."
+      },
+      { "id": "M7", "verdict": "met", "evidence": "Every assertion is web-first on a locator." },
+      {
+        "id": "M8",
+        "verdict": "met",
+        "evidence": "It derives amounts from the scenario constants, guards the threshold (line 32), formats money with toFixed(2) and imports ORDERS_SCENARIO. The 25% comes from the ticket, and the scenario has no constant for it."
+      },
+      {
+        "id": "M9",
+        "verdict": "met",
+        "evidence": "There is no cleanup and there are no unique names."
+      },
+      {
+        "id": "M10",
+        "verdict": "met",
+        "evidence": "There are no explicit timeouts, retries, networkidle or waitForLoadState."
+      },
+      {
+        "id": "M11",
+        "verdict": "met",
+        "evidence": "Relative imports keep .ts, and test and expect come only from the fixture."
+      },
+      { "id": "M12", "verdict": "met", "evidence": "There is no any, no cast and no gql call." },
+      {
+        "id": "M13",
+        "verdict": "failed",
+        "evidence": "e2e/tests/orders/draft-manual-discount.spec.ts:21 (diff line 27), and similar at :39, :47, :74: generated numbered step comments ('// 1. Compute the expected amounts...', '// 3. Add one E2E Tee', '// 6. Fill the value and reason, then confirm') restate the next line, and lines 1-2 point to spec and seed files that do not exist."
+      }
+    ],
+    "summary": "The test is sound: it proves the 25% manual discount is saved by reloading the page, covers all three acceptance criteria, reuses the DraftOrderPage flows, and passes the type check. It has two minor problems: locators and the discount-dialog action are written inline in the spec instead of on DraftOrderPage (M1), and its comments are generated numbered steps plus spec/seed header lines that point to files that do not exist (M13)."
+  },
+  "ttft_ms": 2093,
+  "type": "result",
+  "duration_ms": 30785,
+  "uuid": "928876dd-a33b-41d5-b8f5-10c882b3f87a",
+  "ttft_stream_ms": 1137,
+  "time_to_request_ms": 80,
+  "first_content_frame_ms": 1138,
+  "queued_turn_count": 0,
+  "result_index": 0
+}

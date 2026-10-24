@@ -1,0 +1,68 @@
+diff --git a/e2e/pages/orderPage.ts b/e2e/pages/orderPage.ts
+index b835db3..3704789 100644
+--- a/e2e/pages/orderPage.ts
++++ b/e2e/pages/orderPage.ts
+@@ -54,6 +54,12 @@ export class OrderPage {
+ 
+   readonly editBillingAddressButton = this.page.getByTestId("edit-billing-address");
+ 
++  readonly history = this.page.getByTestId("order-history");
++
++  readonly noteInput = this.history.getByRole("textbox", { name: "Comment" });
++
++  readonly addNoteButton = this.history.getByRole("button", { name: "Add Comment" });
++
+   constructor(readonly page: Page) {}
+ 
+   async goto(orderId: string) {
+@@ -92,6 +98,13 @@ export class OrderPage {
+     await this.dialog.waitFor({ state: "hidden" });
+   }
+ 
++  /** The form clears before the mutation returns, so wait for the note in the history instead. */
++  async addNote(note: string) {
++    await this.noteInput.fill(note);
++    await this.addNoteButton.click();
++    await this.history.getByText(note).waitFor();
++  }
++
+   /** The order total as a number - it is rendered without its currency. */
+   async readTotal(): Promise<number> {
+     return Number((await this.total.innerText()).trim());
+diff --git a/e2e/tests/orders/order-notes.spec.ts b/e2e/tests/orders/order-notes.spec.ts
+new file mode 100644
+index 0000000..9662b3f
+--- /dev/null
++++ b/e2e/tests/orders/order-notes.spec.ts
+@@ -0,0 +1,31 @@
++import { e2eConfig } from "../../config.ts";
++import { expect, test } from "../../fixtures/test.ts";
++import { OrderPage } from "../../pages/orderPage.ts";
++import { findOrderId, ORDERS_SCENARIO } from "../../scenarios/orders.ts";
++
++/**
++ * Customer service staff leave notes for each other in the order history. They hold only the
++ * order-management permission, so the spec runs as that staff user rather than the superuser.
++ */
++test.use({ scenario: ORDERS_SCENARIO, actor: "order" });
++
++const config = e2eConfig();
++
++test("Order staff add a note that stays in the order history #e2e", async ({ page }) => {
++  // Arrange
++  const orderPage = new OrderPage(page);
++  const note = "Customer called, wants delivery after 5pm";
++
++  await orderPage.goto(await findOrderId(config, "unpaid"));
++
++  // Act & Assert
++  await test.step("add a note", async () => {
++    await orderPage.addNote(note);
++    await expect(orderPage.history).toContainText(note);
++  });
++
++  await test.step("the note is saved, not just shown", async () => {
++    await page.reload();
++    await expect(orderPage.history).toContainText(note);
++  });
++});
