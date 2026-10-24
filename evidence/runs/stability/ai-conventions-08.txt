@@ -1,0 +1,7 @@
+branch: ai-conventions-r4-t08
+spec: tests/discounts/promotion-rule-removal.spec.ts
+command: pnpm e2e tests/discounts/promotion-rule-removal.spec.ts --workers=1 --repeat-each=20 --reporter=line,json
+runner exit: 0
+minutes: 2
+test line 16: 20/20 passed: Staff removes a rule from a promotion #e2e #discounts
+spec passes: 20/20
