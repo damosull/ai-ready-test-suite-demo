@@ -1,0 +1,16 @@
+diff --git a/src/products/views/ProductUpdate/handlers/utils.ts b/src/products/views/ProductUpdate/handlers/utils.ts
+index 74f714e..b8815b2 100644
+--- a/src/products/views/ProductUpdate/handlers/utils.ts
++++ b/src/products/views/ProductUpdate/handlers/utils.ts
+@@ -61,9 +61,8 @@ export function getProductUpdateVariables(
+     variables.input["description"] = getParsedDataForJsonStringField(data.description);
+   }
+ 
+-  if (data.name) {
+-    variables.input["name"] = data.name;
+-  }
++  // BREAK 07: the page saves and reports success, but the new name is never sent.
++  void data.name;
+ 
+   // Presence of the key means the field changed (payload holds changed fields only),
+   // so an empty value is an explicit clear — send null instead of dropping the field.

@@ -133,3 +133,34 @@ tickets 02 to 05 only.
 Five tickets, one application, one model, one generation per ticket per round. That is enough to
 show a difference, not to measure its size with any confidence. The reviewer is also an AI
 model; its verdicts are published in full so a reader can check them.
+
+## Addendum for v1.1 (pre-registered, committed before any v1.1 generation)
+
+Version 1 compared two arms on tickets the setup's author had seen while writing the setup. v1.1
+adds a held-out test and a third arm, to separate "the AI was told the rules" from "the AI had a
+workflow that applies and checks them".
+
+- **Third arm, `baseline-plus-rules`.** The baseline as it stands (Playwright's agents, set to
+  `model: inherit`, the same seed and MCP configuration) plus the full text of
+  [CONVENTIONS.md](CONVENTIONS.md) appended to `AGENTS.md` (which `CLAUDE.md` links to) as plain
+  rules. No skills, no CHECKLIST.md, no review step. Its sessions use the baseline prompt and see
+  the same files the baseline sees; the rules reach them only through `AGENTS.md`.
+- **`with-setup` is frozen** at its round-2 commit (`ba60244`, tagged `with-setup-frozen-v1`).
+  Nothing in it changes in this version, whatever the result. There is no round 4.
+- **Three held-out tickets**, [`tickets/06.md` to `08.md`](tickets/), in customers, products and
+  discounts, each fitting patterns the suite already has, each with a break in
+  [`demo/breaks/`](demo/breaks/) checked by hand before this commit. Branches frozen before these
+  tickets existed get the ticket file from `main` at generation time.
+- **Generation.** All three arms on tickets 06 to 08; `baseline-plus-rules` also on 01 to 05. One
+  generation per ticket per arm, as round 3 (branches `<arm>-r3-t<ticket>`). Whatever comes out is
+  the result: no regeneration, no edits.
+- **Review.** Exactly as before, except that the reviewer now sees the whole change (everything but
+  the session transcript and the ticket file), not only `e2e/`. Still blind: each change gets a
+  random submission id, and the key is kept apart from the verdicts.
+- **Stability and breaks.** Exactly as before.
+- **Pass rule.** Unchanged, and stated for `with-setup` against each of the other two arms: zero
+  blockers on `with-setup`; `with-setup`'s findings at most half the other arm's; every
+  `with-setup` spec green 3/3. The headline is tickets 06 to 08. Tickets 01 to 05 are also tallied
+  for three arms (baseline round 1, with-setup round 2, baseline-plus-rules round 3), noting that
+  the rounds were reviewed with different diff scopes.
+- **Tally.** [`demo/tally3.py`](demo/tally3.py).

@@ -4,7 +4,7 @@
 # (round 2 onwards: `<branch>-r<round>-t<ticket>`). Every ticket starts from the setup
 # itself, never from another ticket's output.
 #
-#   demo/generate.sh <baseline|with-setup> <01..05> [round]
+#   demo/generate.sh <baseline|baseline-plus-rules|with-setup> <01..08> [round]
 #
 # It checks out the branch, so run a copy from outside the repository with REPO set:
 #   cp demo/generate.sh /tmp/ && REPO=$PWD /tmp/generate.sh baseline 01
@@ -26,11 +26,16 @@ case "$branch" in
     hide=(CONVENTIONS.md CHECKLIST.md SCORING.md RESULTS.md demo/breaks demo/prompts/review.md evidence)
     mcp="demo/playwright-mcp.json"
     ;;
+  baseline-plus-rules)
+    # Same as the baseline: the rules it gets are in AGENTS.md on its branch, nothing else.
+    hide=(CONVENTIONS.md CHECKLIST.md SCORING.md RESULTS.md demo/breaks demo/prompts/review.md evidence)
+    mcp="demo/playwright-mcp.json"
+    ;;
   with-setup)
     hide=(SCORING.md RESULTS.md demo/breaks demo/prompts/review.md evidence)
     mcp="demo/no-mcp.json"
     ;;
-  *) echo "branch must be baseline or with-setup" >&2; exit 1 ;;
+  *) echo "branch must be baseline, baseline-plus-rules or with-setup" >&2; exit 1 ;;
 esac
 
 if [[ -n "$(git status --porcelain -- . ':!evidence')" ]]; then
@@ -47,14 +52,20 @@ git checkout -q -B "$out" "$branch"
 
 # Copies kept outside the repository, because the files are about to leave it.
 work="$(mktemp -d)"
-cp demo/claude-session.sh "$work/"
-cp "$mcp" "$work/mcp.json"
-prompt="$(sed "s#{{TICKET}}#tickets/$ticket.md#" "demo/prompts/$branch.md")"
+git show main:demo/claude-session.sh > "$work/claude-session.sh"
+chmod +x "$work/claude-session.sh"
+git show "main:$mcp" > "$work/mcp.json"
+prompt="$(git show "main:demo/prompts/$branch.md" | sed "s#{{TICKET}}#tickets/$ticket.md#")"
 log="$work/transcript.jsonl"
 
 for path in "${hide[@]}"; do
   rm -rf "$path"
 done
+
+# Tickets added after a branch was frozen (06 onwards) are read from main.
+if [[ ! -f "tickets/$ticket.md" ]]; then
+  git show "main:tickets/$ticket.md" > "tickets/$ticket.md"
+fi
 
 status=0
 REPO="$repo" "$work/claude-session.sh" "$log" "$work/mcp.json" "$prompt" || status=$?

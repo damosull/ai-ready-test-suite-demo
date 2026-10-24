@@ -1,0 +1,23 @@
+diff --git a/src/discounts/views/DiscountDetails/DiscountDetails.tsx b/src/discounts/views/DiscountDetails/DiscountDetails.tsx
+index 91d5452..4e6f092 100644
+--- a/src/discounts/views/DiscountDetails/DiscountDetails.tsx
++++ b/src/discounts/views/DiscountDetails/DiscountDetails.tsx
+@@ -50,14 +50,11 @@ export const DiscountDetails = ({ id }: DiscountDetailsProps) => {
+   const onRuleCreateSubmit = createRuleCreateHandler(promotionData?.promotion, variables =>
+     promotionRuleCreate({ variables }),
+   );
+-  const onRuleDeleteSubmit = async (id: string) => {
+-    const result = await promotionRuleDelete({
+-      variables: {
+-        id,
+-      },
+-    });
++  // BREAK 08: the confirmation closes as if it worked, but the rule is never deleted.
++  const onRuleDeleteSubmit = async (_id: string) => {
++    void promotionRuleDelete;
+ 
+-    return (result.data?.promotionRuleDelete?.errors?.length ?? 0) === 0;
++    return true;
+   };
+   const onPromotionDelete = () => {
+     promotionDelete({

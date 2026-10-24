@@ -30,7 +30,8 @@ fi
 id="$(openssl rand -hex 4)"
 inputs="$ws/.review/$id"
 mkdir -p "$inputs"
-git diff "$branch" "$out" -- e2e/ > "$inputs/change.diff"
+# The whole change (from v1.1), except the session transcript and the ticket file itself.
+git diff "$branch" "$out" -- . ':!evidence' ':!tickets' > "$inputs/change.diff"
 
 # Type check with the change applied, in the main checkout (which has node_modules).
 if [[ -n "$(git status --porcelain -- . ':!evidence')" ]]; then echo "working tree is not clean" >&2; exit 1; fi
