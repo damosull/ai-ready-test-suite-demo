@@ -53,6 +53,24 @@ export class DraftOrderPage {
 
   readonly summary = this.page.getByTestId("OrderSummary");
 
+  readonly addDiscountButton = this.summary.getByRole("button", { name: "Add Discount" });
+
+  readonly percentageOption = this.dialog.getByRole("radio", { name: "Percentage" });
+
+  readonly discountValueInput = this.dialog.getByTestId("discount-value");
+
+  readonly discountReasonInput = this.dialog.getByTestId("discount-reason");
+
+  /**
+   * One row of the expanded discount breakdown, by its label ("Manual", "Promotion"). The
+   * whole discount section is a list item too, so only the rows that hold no other are kept.
+   */
+  discountRow(label: string) {
+    return this.summary
+      .getByRole("listitem")
+      .filter({ hasText: label, hasNot: this.page.getByRole("listitem") });
+  }
+
   readonly finalizeButton = this.page.getByTestId("button-bar-confirm");
 
   constructor(readonly page: Page) {}
@@ -106,6 +124,17 @@ export class DraftOrderPage {
     await this.shippingMethodSelect.click();
     await this.option.filter({ hasNotText: "No shipping method" }).first().click();
     await this.confirmShippingButton.click();
+    await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  /** Opens from the expanded discount breakdown, which a line promotion has already put there. */
+  async addPercentageDiscount({ percent, reason }: { percent: number; reason: string }) {
+    await this.discountToggle.click();
+    await this.addDiscountButton.click();
+    await this.percentageOption.click();
+    await this.discountValueInput.fill(String(percent));
+    await this.discountReasonInput.fill(reason);
+    await this.dialog.getByTestId("submit").click();
     await this.dialog.waitFor({ state: "hidden" });
   }
 
