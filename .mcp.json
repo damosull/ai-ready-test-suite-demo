@@ -1,8 +1,14 @@
 {
   "mcpServers": {
-    "posthog": {
-      "type": "http",
-      "url": "https://mcp.posthog.com/mcp"
+    "playwright-test": {
+      "command": "npx",
+      "args": [
+        "playwright",
+        "run-test-mcp-server",
+        "--config",
+        "e2e/playwright.config.ts",
+        "--headless"
+      ]
     }
   }
 }
