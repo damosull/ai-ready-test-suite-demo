@@ -34,6 +34,16 @@ export class OrderPage {
 
   readonly confirmFulfillmentButton = this.page.getByTestId("button-bar-confirm");
 
+  readonly fulfillmentMenuButton = this.page.getByTestId("fulfillment-menu-button");
+
+  readonly cancelFulfillmentMenuItem = this.page.getByTestId("cancel-fulfillment");
+
+  readonly cancelFulfillmentWarehouseInput = this.dialog
+    .getByTestId("cancel-fulfillment-select-field")
+    .getByRole("combobox");
+
+  readonly option = this.page.getByTestId("select-option");
+
   readonly timelineView = this.page.getByTestId("order-items-view-timeline");
 
   readonly addTrackingButton = this.page.getByTestId("add-tracking-button");
@@ -82,6 +92,21 @@ export class OrderPage {
     await this.page.waitForURL(url => url.pathname.endsWith("/fulfill"));
     await this.confirmFulfillmentButton.click();
     await this.page.waitForURL(url => !url.pathname.endsWith("/fulfill"));
+  }
+
+  /**
+   * Cancels the order's only fulfillment from its card, which only the timeline view shows.
+   * The dialog pre-selects the warehouse the parcel shipped from; picking one explicitly is
+   * what staff do, and any warehouse restocks.
+   */
+  async cancelFulfillment() {
+    await this.timelineView.click();
+    await this.fulfillmentMenuButton.click();
+    await this.cancelFulfillmentMenuItem.click();
+    await this.cancelFulfillmentWarehouseInput.click();
+    await this.option.first().click();
+    await this.dialog.getByTestId("submit").click();
+    await this.dialog.waitFor({ state: "hidden" });
   }
 
   async addTracking(trackingNumber: string) {
