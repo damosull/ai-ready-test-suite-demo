@@ -1,0 +1,109 @@
+diff --git a/e2e/pages/productPage.ts b/e2e/pages/productPage.ts
+new file mode 100644
+index 0000000..6a81e98
+--- /dev/null
++++ b/e2e/pages/productPage.ts
+@@ -0,0 +1,30 @@
++import { expect, type Page } from "@playwright/test";
++
++/** A product's detail page: its general information and the page's save bar. */
++export class ProductPage {
++  /** Holds the product's name, followed by its product type. */
++  readonly header = this.page.getByTestId("page-header");
++
++  readonly generalSettings = this.page.getByTestId("product-general-settings");
++
++  readonly nameInput = this.generalSettings.getByRole("textbox", { name: "Name" });
++
++  readonly saveButton = this.page.getByTestId("button-bar-confirm");
++
++  constructor(readonly page: Page) {}
++
++  async goto(productId: string) {
++    await this.page.goto(`/products/${encodeURIComponent(productId)}`);
++    await this.nameInput.waitFor();
++  }
++
++  /**
++   * Save stays disabled while the form has no unsaved changes, so it turning disabled again
++   * is the form settling on what the server saved.
++   */
++  async rename(name: string) {
++    await this.nameInput.fill(name);
++    await this.saveButton.click();
++    await expect(this.saveButton).toBeDisabled();
++  }
++}
+diff --git a/e2e/scenarios/orders.ts b/e2e/scenarios/orders.ts
+index bd01602..d9712c3 100644
+--- a/e2e/scenarios/orders.ts
++++ b/e2e/scenarios/orders.ts
+@@ -409,3 +409,29 @@ export const findOrderId = async (config: E2eConfig, ref: ScenarioOrder): Promis
+ 
+   return order.node.id;
+ };
++
++/**
++ * The id of one of `PRODUCTS` in the restored database, found by its name. The search is
++ * fuzzy, so the exact name is matched among its results.
++ */
++export const findProductId = async (
++  config: E2eConfig,
++  ref: keyof typeof PRODUCTS,
++): Promise<string> => {
++  const { name } = PRODUCTS[ref];
++  const data = await gql<{ products: { edges: { node: { id: string; name: string } }[] } }>(
++    config,
++    `query($search: String!) {
++      products(first: 20, filter: { search: $search }) { edges { node { id name } } }
++    }`,
++    { search: name },
++    await adminToken(config),
++  );
++  const product = data.products.edges.find(({ node }) => node.name === name);
++
++  if (!product) {
++    throw new Error(`the "${ORDERS_SCENARIO}" scenario has no product "${name}"`);
++  }
++
++  return product.node.id;
++};
+diff --git a/e2e/tests/products/product-rename.spec.ts b/e2e/tests/products/product-rename.spec.ts
+new file mode 100644
+index 0000000..47eb695
+--- /dev/null
++++ b/e2e/tests/products/product-rename.spec.ts
+@@ -0,0 +1,33 @@
++import { e2eConfig } from "../../config.ts";
++import { expect, test } from "../../fixtures/test.ts";
++import { ProductPage } from "../../pages/productPage.ts";
++import { findProductId, ORDERS_SCENARIO, PRODUCTS } from "../../scenarios/orders.ts";
++
++/**
++ * Renaming a product from its page. A rename that never reaches the server looks saved
++ * until the page is reloaded, so the new name is checked again after a reload.
++ */
++test.use({ scenario: ORDERS_SCENARIO });
++
++const config = e2eConfig();
++
++test("Staff renames a product and the new name is saved #e2e", async ({ page }) => {
++  // Arrange
++  const productPage = new ProductPage(page);
++  const newName = "E2E Zip Hoodie";
++
++  await productPage.goto(await findProductId(config, "hoodie"));
++  await expect(productPage.header).toContainText(PRODUCTS.hoodie.name);
++
++  // Act & Assert
++  await test.step("rename and save", async () => {
++    await productPage.rename(newName);
++    await expect(productPage.header).toContainText(newName);
++  });
++
++  await test.step("the new name is saved, not just shown", async () => {
++    await page.reload();
++    await expect(productPage.nameInput).toHaveValue(newName);
++    await expect(productPage.header).toContainText(newName);
++  });
++});
