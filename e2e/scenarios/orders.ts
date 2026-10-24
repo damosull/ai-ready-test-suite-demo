@@ -409,3 +409,19 @@ export const findOrderId = async (config: E2eConfig, ref: ScenarioOrder): Promis
 
   return order.node.id;
 };
+
+/** The id of `CUSTOMER` in the restored database - like `findOrderId`, a read. */
+export const findCustomerId = async (config: E2eConfig): Promise<string> => {
+  const data = await gql<{ user: { id: string } | null }>(
+    config,
+    `query($email: String!) { user(email: $email) { id } }`,
+    { email: CUSTOMER.email },
+    await adminToken(config),
+  );
+
+  if (!data.user) {
+    throw new Error(`the "${ORDERS_SCENARIO}" scenario has no customer ${CUSTOMER.email}`);
+  }
+
+  return data.user.id;
+};
