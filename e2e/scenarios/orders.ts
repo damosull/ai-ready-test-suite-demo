@@ -409,3 +409,23 @@ export const findOrderId = async (config: E2eConfig, ref: ScenarioOrder): Promis
 
   return order.node.id;
 };
+
+/** The id of one of `PRODUCTS` in the restored database, found by its SKU - see `findOrderId`. */
+export const findProductId = async (
+  config: E2eConfig,
+  key: keyof typeof PRODUCTS,
+): Promise<string> => {
+  const { sku } = PRODUCTS[key];
+  const data = await gql<{ productVariant: { product: { id: string } } | null }>(
+    config,
+    `query($sku: String!) { productVariant(sku: $sku) { product { id } } }`,
+    { sku },
+    await adminToken(config),
+  );
+
+  if (!data.productVariant) {
+    throw new Error(`the "${ORDERS_SCENARIO}" scenario has no product with SKU "${sku}"`);
+  }
+
+  return data.productVariant.product.id;
+};
