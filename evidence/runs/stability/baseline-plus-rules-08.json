@@ -1,0 +1,1710 @@
+{
+  "config": {
+    "configFile": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/playwright.config.ts",
+    "rootDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:default",
+        "name": "restore:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:default",
+        "name": "parallel:default",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:orders",
+        "name": "restore:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:orders",
+        "name": "parallel:orders",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "restore:product-media-translations",
+        "name": "restore:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/setup",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "parallel:product-media-translations",
+        "name": "parallel:product-media-translations",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results",
+        "repeatEach": 20,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "stable",
+        "name": "stable",
+        "testDir": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "../setup/restore.setup.ts",
+      "file": "../setup/restore.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:default",
+              "projectName": "restore:default",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1113,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:24:52.153Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-default/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-af330fc030239f5177a4",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:orders",
+              "projectName": "restore:orders",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1130,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:24:53.776Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-orders/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-fc1389ba4e72a3e73b35",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        },
+        {
+          "title": "restore the scenario",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "restore:product-media-translations",
+              "projectName": "restore:product-media-translations",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1097,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-24T16:24:55.389Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/restore.setup.ts-restore-the-scenario-restore-product-media-translations/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "efa7bf392ce72df4dbda-17c4f1f7e6e20fabdfb3",
+          "file": "../setup/restore.setup.ts",
+          "line": 15,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "feedback.spec.ts",
+      "file": "feedback.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Feedback availability",
+          "file": "feedback.spec.ts",
+          "line": 97,
+          "column": 6,
+          "specs": [
+            {
+              "title": "reveals the trigger after loading and opens and submits the real survey",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:24:53.290Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-70e9ce2cefeb29806d2b",
+              "file": "feedback.spec.ts",
+              "line": 106,
+              "column": 7
+            },
+            {
+              "title": "hides the trigger when the survey api is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:24:53.290Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-aed0f647a075c702365c",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when the survey script is blocked",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:24:53.290Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-de77fc4f03c0e874846d",
+              "file": "feedback.spec.ts",
+              "line": 146,
+              "column": 9
+            },
+            {
+              "title": "hides the trigger when no survey matches",
+              "ok": true,
+              "tags": [
+                "parallel:default"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                      "location": {
+                        "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                        "line": 98,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "parallel:default",
+                  "projectName": "parallel:default",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-24T16:24:53.290Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run with the isolated analytics configuration documented in e2e/README.md",
+                          "location": {
+                            "file": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/tests/feedback.spec.ts",
+                            "line": 98,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "eccc8495635fa8823817-1ec3f7d18c937d6e357a",
+              "file": "feedback.spec.ts",
+              "line": 166,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "discounts/promotion-rule-removal.spec.ts",
+      "file": "discounts/promotion-rule-removal.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Promotion rule removal",
+          "file": "discounts/promotion-rule-removal.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3721,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1974
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 146
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 14
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 593
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:24:56.972Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-c64f321988c7ca77e4d2",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3381,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1835
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 147
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 13
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 562
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:01.796Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat1/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-339670d7bd793024fb72",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3386,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1886
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 144
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 14
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 529
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:06.100Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat2/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-536dfaeb2e5d55d0a6fc",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3292,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1788
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 150
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 13
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 525
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:10.391Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat3/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-1fdfdcc7e53ea5b07056",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3345,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1775
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 156
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 14
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 583
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:14.615Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat4/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-ec780e2a4dc9773ce03f",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3343,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1789
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 148
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 15
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 537
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:18.842Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat5/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-0100a9b14f6da6f84df1",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3243,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1752
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 155
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 13
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 526
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:23.083Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat6/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-2aedc3ea03a09f856ddf",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3286,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1783
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 148
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 16
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 548
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:27.289Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat7/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-253bef9a3c34667efe8b",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3206,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1749
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 140
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 13
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 512
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:31.453Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat8/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-2e570feb980f3853030d",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3433,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1868
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 145
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 14
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 555
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:35.553Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat9/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-2bdbad277d4ca0608e44",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3249,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1764
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 148
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 13
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 535
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:39.932Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat10/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-2bbd0522d9e8757eeea8",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3301,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1775
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 141
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 23
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 570
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:44.160Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat11/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-ad2985dd3e5b9dd93f73",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3262,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1770
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 145
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 15
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 536
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:48.356Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat12/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-5db65df07009b5b76557",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3278,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1813
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 125
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 19
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 526
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:52.528Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat13/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-3ebce690ea808c94be5e",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 17,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3316,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1764
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 149
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 14
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 609
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:25:56.673Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat14/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-bd62089336731becd97e",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 18,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3303,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1776
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 150
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 13
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 563
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:26:00.944Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat15/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-2a9c08ebf34edfb1bf1b",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 19,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3279,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1774
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 141
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 14
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 532
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:26:05.143Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat16/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-85025cdc2f73d70409df",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 20,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3232,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1774
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 144
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 12
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 510
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:26:09.336Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat17/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-ca751d63e5ec8fd47c07",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 21,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3281,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1774
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 152
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 12
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 555
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:26:13.463Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat18/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-a0cf4be58ed098c01e42",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "staff can remove the only rule from a catalogue promotion and the promotion remains #e2e",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "stable",
+                  "projectName": "stable",
+                  "results": [
+                    {
+                      "workerIndex": 22,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3367,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "open the E2E Tee sale promotion",
+                          "duration": 1879
+                        },
+                        {
+                          "title": "delete the rule and confirm",
+                          "duration": 141
+                        },
+                        {
+                          "title": "the promotion shows no rules",
+                          "duration": 13
+                        },
+                        {
+                          "title": "after a reload the promotion still exists with no rules",
+                          "duration": 540
+                        }
+                      ],
+                      "startTime": "2026-10-24T16:26:17.697Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/damien/Projects/ai-ready-test-suite-demo/e2e/test-results/discounts-promotion-rule-r-04bff-d-the-promotion-remains-e2e-stable-repeat19/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a5170de71db9bb03eae7-bc0dd75ddcb808ded72f",
+              "file": "discounts/promotion-rule-removal.spec.ts",
+              "line": 17,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-24T16:24:42.886Z",
+    "duration": 98681.653,
+    "expected": 23,
+    "skipped": 4,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

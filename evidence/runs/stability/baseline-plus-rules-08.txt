@@ -1,0 +1,7 @@
+branch: baseline-plus-rules-r3-t08
+spec: tests/discounts/promotion-rule-removal.spec.ts
+command: pnpm e2e tests/discounts/promotion-rule-removal.spec.ts --workers=1 --repeat-each=20 --reporter=line,json
+runner exit: 0
+minutes: 2
+test line 17: 20/20 passed: staff can remove the only rule from a catalogue promotion and the promotion remains #e2e
+spec passes: 20/20
