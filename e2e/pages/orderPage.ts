@@ -30,6 +30,11 @@ export class OrderPage {
 
   readonly manualTransactionSubmit = this.page.getByTestId("manualTransactionSubmit");
 
+  /** The order lines card has its own "show more" menu; this is the one in the header. */
+  readonly menuButton = this.page.getByTestId("page-header").getByTestId("show-more-button");
+
+  readonly cancelOrderMenuItem = this.page.getByTestId("cancel-order");
+
   readonly fulfillButton = this.page.getByTestId("order-items-fulfill-button");
 
   readonly confirmFulfillmentButton = this.page.getByTestId("button-bar-confirm");
@@ -82,6 +87,13 @@ export class OrderPage {
     await this.page.waitForURL(url => url.pathname.endsWith("/fulfill"));
     await this.confirmFulfillmentButton.click();
     await this.page.waitForURL(url => !url.pathname.endsWith("/fulfill"));
+  }
+
+  async cancel() {
+    await this.menuButton.click();
+    await this.cancelOrderMenuItem.click();
+    await this.dialog.getByTestId("submit").click();
+    await this.dialog.waitFor({ state: "hidden" });
   }
 
   async addTracking(trackingNumber: string) {
