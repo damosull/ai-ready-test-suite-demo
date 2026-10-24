@@ -409,3 +409,29 @@ export const findOrderId = async (config: E2eConfig, ref: ScenarioOrder): Promis
 
   return order.node.id;
 };
+
+/**
+ * The id of one of `PRODUCTS` in the restored database, found by its name. The search is
+ * fuzzy, so the exact name is matched among its results.
+ */
+export const findProductId = async (
+  config: E2eConfig,
+  ref: keyof typeof PRODUCTS,
+): Promise<string> => {
+  const { name } = PRODUCTS[ref];
+  const data = await gql<{ products: { edges: { node: { id: string; name: string } }[] } }>(
+    config,
+    `query($search: String!) {
+      products(first: 20, filter: { search: $search }) { edges { node { id name } } }
+    }`,
+    { search: name },
+    await adminToken(config),
+  );
+  const product = data.products.edges.find(({ node }) => node.name === name);
+
+  if (!product) {
+    throw new Error(`the "${ORDERS_SCENARIO}" scenario has no product "${name}"`);
+  }
+
+  return product.node.id;
+};
