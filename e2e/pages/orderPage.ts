@@ -44,6 +44,16 @@ export class OrderPage {
 
   readonly trackingNumber = this.page.getByTestId("tracking-number-set");
 
+  readonly fulfillmentMenuButton = this.page.getByTestId("fulfillment-menu-button");
+
+  readonly cancelFulfillmentMenuItem = this.page.getByTestId("cancel-fulfillment");
+
+  readonly cancelFulfillmentWarehouseField = this.dialog.getByTestId(
+    "cancel-fulfillment-select-field",
+  );
+
+  readonly option = this.page.getByTestId("select-option");
+
   readonly total = this.page.getByTestId("order-total");
 
   readonly shippingAddressSection = this.page.getByTestId("shipping-address-section");
@@ -89,6 +99,20 @@ export class OrderPage {
     await this.addTrackingButton.click();
     await this.trackingNumberInput.fill(trackingNumber);
     await this.confirmTrackingButton.click();
+    await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  /**
+   * Cancels the order's one fulfillment, restocking to the first warehouse the dialog offers.
+   * Like tracking, the fulfillment's menu is only in the timeline view.
+   */
+  async cancelFulfillment() {
+    await this.timelineView.click();
+    await this.fulfillmentMenuButton.click();
+    await this.cancelFulfillmentMenuItem.click();
+    await this.cancelFulfillmentWarehouseField.getByRole("combobox").click();
+    await this.option.first().click();
+    await this.dialog.getByTestId("submit").click();
     await this.dialog.waitFor({ state: "hidden" });
   }
 
