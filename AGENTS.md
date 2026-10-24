@@ -72,6 +72,62 @@ back implementation work, and report any checks that could not run.
   configuration changes, or failures warrant it; avoid repeating successful checks
   without new changes or evidence.
 
+## End-to-end tests
+
+Read `e2e/README.md` before writing or reviewing a spec; it explains the reasons behind
+these rules.
+
+- Put new specs in `e2e/`. `e2e-legacy/` is frozen, so do not edit or extend it. When a spec
+  replaces legacy coverage, list the replaced `SALEOR_<n>` cases in the spec's doc comment,
+  along with any case deliberately left out and why.
+- Import `test` and `expect` from `e2e/fixtures/test.ts`, not `@playwright/test`. Use
+  relative imports with the `.ts` extension.
+- Each untagged test starts from a freshly restored database. Do not add cleanup,
+  unique-name suffixes, or dependencies between tests.
+- Build the state a spec needs as a scenario instead of creating it in the test. Add a file
+  in `e2e/scenarios/`, register it in `scenarios/registry.ts`, and select it with
+  `test.use({ scenario })`. Set `parent: "default"` unless the scenario replaces the
+  default scenario. Build through the GraphQL API, checking each mutation with
+  `assertNoMutationErrors`. Use SQL only for states the API cannot express. If the build
+  creates something that a beat task settles, add that task to `e2e/lib/beat.ts`.
+- Never hard-code entity IDs, because every dump build mints new ones. Export known names
+  and values from the scenario, and look up IDs at test time with read-only queries (see
+  `findOrderId`). Do not assert on `populatedb`'s random data. Seed known values, or read
+  the value from the page and comment why.
+- Use API calls during a test only for lookups and for checking persisted state.
+- Choose the signed-in user with `test.use({ actor })`. `admin` is the default. Use the
+  single-permission actors in `e2e/lib/actors.ts` for permission flows. Use `anonymous`
+  only for specs that sign in through the UI.
+- Tests run serially by default. Tag a block with `{ tag: parallel(scenario) }` only when
+  it leaves no change another test could notice and never calls `tokenCreate`. That
+  includes UI sign-in, `signIn`, `adminToken`, and helpers such as `findOrderId`, because
+  Saleor throttles logins per IP.
+- Specs run against both the `stable` and `main` targets. Gate target-specific features
+  with `test.skip(config.stagingSchema, "<reason>")`, and make the scenario build skip the
+  same work on the other target.
+- Keep page objects in `e2e/pages/`. Declare locators as `readonly` fields initialized
+  from `this.page` with an empty `constructor(readonly page: Page) {}`. Methods wrap
+  multi-step UI actions and wait until those actions finish, for example a hidden dialog
+  or a changed URL. Specs own the assertions about outcomes.
+- Open each spec with a doc comment describing the flow it covers. Write test titles as
+  plain-language user stories; existing titles end in `#e2e` and an optional area tag. For
+  multi-stage flows, use `// Arrange`, then `// Act & Assert` with one `test.step` per
+  stage. For single-action tests, use `// Arrange`, `// Act`, and `// Assert`.
+- Locate elements with `getByTestId` (`data-test-id`) or `getByRole` and its accessible
+  name, using `exact: true` where text could match more than one element. If no test ID
+  exists, add one to the component. Use CSS selectors only for third-party DOM. Do not use
+  `nth`, `force: true`, `waitForTimeout`, or `networkidle`.
+- Use web-first `await expect(locator)` assertions and wait on concrete signals:
+  `waitFor`, `waitForURL`, `waitForResponse`, or a list that has finished narrowing.
+- Do not add retries or raise timeouts to make a test pass. The suite sets `retries: 0`
+  so that failures can be reproduced.
+- Intercept external services with `page.route` at a test host so nothing reaches the
+  real service. Skip environment-dependent specs with a reason that points to
+  `e2e/README.md`.
+- Verify with `pnpm run check-types:e2e`, oxlint, and Prettier. Run the spec with
+  `pnpm e2e <spec>`, and also run `pnpm e2e:main <spec>` when its behavior depends on the
+  target. Both need Docker. If they cannot run, say so.
+
 ## Conflict resolution and review
 
 - Resolve source conflicts first, then regenerate derived files:
