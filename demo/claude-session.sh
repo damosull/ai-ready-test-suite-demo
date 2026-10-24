@@ -10,9 +10,11 @@
 # - Isolated from the operator's machine: the user-level CLAUDE.md and auto-memory are not
 #   loaded, only the repository's own settings are read, and only the MCP servers named in
 #   the config file are available.
-# - Scoped tools: file edits inside the repository, the e2e runner, Playwright, read-only git
-#   and the configured MCP servers. Anything else that would need approval is refused,
-#   because nobody is there to answer a prompt.
+# - Narrowed tools: file edits, the e2e runner, Playwright, type checks, read-only git and
+#   the configured MCP servers. Edits to the runner, its config, package.json and the Claude
+#   settings are denied, and anything else that would need approval is refused, because
+#   nobody is there to answer a prompt. This is not a sandbox: running the tests runs the
+#   code the session wrote. Run it on a disposable machine or container if that matters.
 set -euo pipefail
 
 if [[ -n "${ANTHROPIC_API_KEY:-}" ]]; then
@@ -37,8 +39,11 @@ claude -p \
   --permission-mode acceptEdits \
   --permission-prompts none \
   --allowedTools "Read Glob Grep Edit Write Skill Task Agent TodoWrite" \
-  --allowedTools "Bash(pnpm e2e:*) Bash(pnpm run check-types:e2e) Bash(pnpm exec playwright:*) Bash(npx playwright:*) Bash(pnpm exec oxlint:*) Bash(pnpm exec prettier:*)" \
-  --allowedTools "Bash(git status:*) Bash(git diff:*) Bash(git log:*) Bash(ls:*) Bash(cat:*) Bash(grep:*) Bash(find:*)" \
+  --allowedTools "Bash(pnpm e2e:*) Bash(pnpm run check-types:e2e) Bash(pnpm exec playwright:*) Bash(pnpm exec oxlint:*) Bash(pnpm exec prettier:*)" \
+  --allowedTools "Bash(git status:*) Bash(git diff:*) Bash(git log:*) Bash(ls:*) Bash(cat:*) Bash(grep:*)" \
   --allowedTools "mcp__playwright-test" \
+  --disallowedTools "Edit(package.json) Write(package.json) Edit(pnpm-*.yaml) Write(pnpm-*.yaml)" \
+  --disallowedTools "Edit(e2e/run.ts) Write(e2e/run.ts) Edit(e2e/playwright.config.ts) Write(e2e/playwright.config.ts) Edit(e2e/global-setup.ts) Write(e2e/global-setup.ts)" \
+  --disallowedTools "Edit(.claude/settings*.json) Write(.claude/settings*.json) Edit(.mcp.json) Write(.mcp.json)" \
   --output-format stream-json --verbose \
   "$prompt" > "$log"
