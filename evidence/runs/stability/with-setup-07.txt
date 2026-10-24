@@ -1,0 +1,7 @@
+branch: with-setup-r3-t07
+spec: tests/products/product-rename.spec.ts
+command: pnpm e2e tests/products/product-rename.spec.ts --workers=1 --repeat-each=20 --reporter=line,json
+runner exit: 0
+minutes: 3
+test line 14: 20/20 passed: Staff renames a product and the new name is saved #e2e
+spec passes: 20/20
