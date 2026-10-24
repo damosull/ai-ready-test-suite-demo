@@ -25,7 +25,7 @@ fi
 log="$1"
 mcp="$2"
 prompt="$3"
-repo="$(cd "$(dirname "$0")/.." && pwd)"
+repo="${REPO:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 mkdir -p "$(dirname "$log")"
 cd "$repo"
@@ -40,7 +40,7 @@ claude -p \
   --permission-prompts none \
   --allowedTools "Read Glob Grep Edit Write Skill Task Agent TodoWrite" \
   --allowedTools "Bash(pnpm e2e:*) Bash(pnpm run check-types:e2e) Bash(pnpm exec playwright:*) Bash(pnpm exec oxlint:*) Bash(pnpm exec prettier:*)" \
-  --allowedTools "Bash(git status:*) Bash(git diff:*) Bash(git log:*) Bash(ls:*) Bash(cat:*) Bash(grep:*)" \
+  --allowedTools "Bash(git status:*) Bash(ls:*) Bash(cat:*) Bash(grep:*)" \
   --allowedTools "mcp__playwright-test" \
   --disallowedTools "Edit(package.json) Write(package.json) Edit(pnpm-*.yaml) Write(pnpm-*.yaml)" \
   --disallowedTools "Edit(e2e/run.ts) Write(e2e/run.ts) Edit(e2e/playwright.config.ts) Write(e2e/playwright.config.ts) Edit(e2e/global-setup.ts) Write(e2e/global-setup.ts)" \

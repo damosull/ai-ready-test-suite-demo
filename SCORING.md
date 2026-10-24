@@ -23,11 +23,23 @@ branches.
   [CHECKLIST.md](CHECKLIST.md) are changed after generation starts.
 - **Same model and tool.** Claude Code (CLI), Claude Opus, on a Claude Code subscription. No
   API key.
-- **Same harness.** Every session is started by [`demo/claude-session.sh`](demo/claude-session.sh):
-  a fresh headless session per ticket, the operator's personal `CLAUDE.md` and memory excluded,
-  the same tool permissions, no human in the loop. The baseline sessions are given the
-  Playwright MCP server the agents need ([`demo/playwright-mcp.json`](demo/playwright-mcp.json));
-  the with-setup sessions are given no MCP servers.
+- **Same harness.** Every session is started by [`demo/generate.sh`](demo/generate.sh), which
+  calls [`demo/claude-session.sh`](demo/claude-session.sh): a fresh headless session per ticket,
+  the operator's personal `CLAUDE.md` and memory excluded, the same tool permissions, no human
+  in the loop. The baseline sessions are given the Playwright MCP server the agents need
+  ([`demo/playwright-mcp.json`](demo/playwright-mcp.json)); the with-setup sessions are given
+  no MCP servers.
+- **What each side can read.** The demo's method files are removed from disk for every
+  generation session: `SCORING.md`, `RESULTS.md`, `demo/breaks/`, the review prompt and
+  `results/`. The baseline sessions also do not see `CONVENTIONS.md` or `CHECKLIST.md`, because
+  that knowledge is what the setup is. On `with-setup` they are part of the setup, as they would
+  be in a team's repository. Both sides see the tickets and the whole of Saleor's repository.
+- **Baseline configuration.** `npx playwright init-agents --loop=claude --config
+e2e/playwright.config.ts --project stable`, as Playwright documents. Three changes, all made
+  before generation and none specific to a ticket: the agents' `model: sonnet` is set to
+  `model: inherit`, so both branches run on the same model; the generated seed test imports the
+  suite's fixture and opens the dashboard (Playwright's docs say to adapt the seed to the app);
+  the MCP server is pointed at the suite's config.
 - **Same starting state.** Each ticket's session starts from the branch tip with nothing from
   the other tickets, and its output is committed as one commit named for the ticket.
 - **Prompts.** Kept verbatim in [`demo/prompts/`](demo/prompts/). The baseline prompt tells the
