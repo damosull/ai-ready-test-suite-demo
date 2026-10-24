@@ -1,4 +1,4 @@
-import { type Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 
 import { AddressDialog } from "./addressDialog.ts";
 
@@ -54,6 +54,10 @@ export class OrderPage {
 
   readonly editBillingAddressButton = this.page.getByTestId("edit-billing-address");
 
+  readonly noteInput = this.page.getByRole("textbox", { name: "Comment" });
+
+  readonly addNoteButton = this.page.getByRole("button", { name: "Add Comment" });
+
   constructor(readonly page: Page) {}
 
   async goto(orderId: string) {
@@ -90,6 +94,22 @@ export class OrderPage {
     await this.trackingNumberInput.fill(trackingNumber);
     await this.confirmTrackingButton.click();
     await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  /** The box clears as soon as the note is sent, before the server has saved it. */
+  async addNote(message: string) {
+    await this.noteInput.fill(message);
+    await this.addNoteButton.click();
+    await expect(this.noteInput).toHaveValue("");
+  }
+
+  /**
+   * A note in the order history, by its exact text. The history card has no test id or
+   * landmark to scope to; the text a spec writes is unique on the page once the note box
+   * has cleared.
+   */
+  historyNote(message: string) {
+    return this.page.getByText(message, { exact: true });
   }
 
   /** The order total as a number - it is rendered without its currency. */
