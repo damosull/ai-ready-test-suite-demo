@@ -1,0 +1,7 @@
+branch: ai-conventions-r4-t06
+specs: tests/customers/customer-note.spec.ts
+run 1: pass
+run 2: pass
+run 3: pass
+runs: 3/3
+broken feature caught: yes (specs failed with demo/breaks/06.patch applied)
