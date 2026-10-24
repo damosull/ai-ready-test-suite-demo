@@ -55,6 +55,14 @@ export class DraftOrderPage {
 
   readonly finalizeButton = this.page.getByTestId("button-bar-confirm");
 
+  readonly moreActionsButton = this.page.getByTestId("show-more-button");
+
+  /** Labelled "Cancel order" in the menu; the dialog it opens deletes the draft. */
+  readonly deleteMenuItem = this.page.getByTestId("cancel-order");
+
+  /** `NotFoundPage` has no test id, so it is found by its message. */
+  readonly notFoundMessage = this.page.getByText("Sorry, the page was not found");
+
   constructor(readonly page: Page) {}
 
   /** Both lists create the same draft; they differ only in where the button lives. */
@@ -106,6 +114,14 @@ export class DraftOrderPage {
     await this.shippingMethodSelect.click();
     await this.option.filter({ hasNotText: "No shipping method" }).first().click();
     await this.confirmShippingButton.click();
+    await this.dialog.waitFor({ state: "hidden" });
+  }
+
+  /** The dialog only closes once the deletion succeeded - on an error it stays open. */
+  async delete() {
+    await this.moreActionsButton.click();
+    await this.deleteMenuItem.click();
+    await this.dialog.getByTestId("submit").click();
     await this.dialog.waitFor({ state: "hidden" });
   }
 
