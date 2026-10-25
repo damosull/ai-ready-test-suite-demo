@@ -32,11 +32,12 @@ baseline-plus-rules (06 5.8, 07 10.3, 08 39.5 min, transcript wall-clock) and th
 range corrected to 6 to 40; notes under SCORING.md's title and v1.1 "no round 4"; SAMPLE-REPORT.md
 regenerated with qa-setup-kit's new stability cell ("60/60 (20 runs on each of 3 tickets)").
 
-Nothing is published. The repo is private; Damien decides when it goes public.
+The repo is public (2026-10-25) and linked from https://damodoesthings.com/ai-test-setup (the README's
+"Start with a repo check:" links there).
 
 ## How to resume (start a fresh session with "Read HANDOFF.md and carry on")
 
-- Repo: `~/Projects/ai-ready-test-suite-demo`, GitHub `damosull/ai-ready-test-suite-demo` (private).
+- Repo: `~/Projects/ai-ready-test-suite-demo`, GitHub `damosull/ai-ready-test-suite-demo` (public).
   GitHub Actions is **disabled** on the repo and Saleor's workflows are deleted from `main`. Keep
   it that way: nothing here needs CI.
 - Toolchain: Node 24 via nvm (`source ~/.nvm/nvm.sh && nvm use 24`), pnpm 11 via corepack, Docker
@@ -75,11 +76,9 @@ Nothing is published. The repo is private; Damien decides when it goes public.
    stacks on this Mac also need memory). Prove a parallel run gives the same results as a serial
    one before relying on it. Then add the method, generically, to
    qa-setup-kit.
-2. Offer-page link: `<!-- LINK: offer page, added when it exists -->` at the end of the README
-   Results section.
-3. Before publishing: someone other than the author reads RESULTS.md and the disclosures in
+2. Before publishing: someone other than the author reads RESULTS.md and the disclosures in
    SCORING.md.
-4. Once the repo is public, set demo/graphic/social-card.png as the repo's social preview (GitHub →
+3. Once the repo is public, set demo/graphic/social-card.png as the repo's social preview (GitHub →
    Settings → General → Social preview).
 
 ## Open problems

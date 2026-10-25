@@ -57,7 +57,7 @@ expert conventions 0 + 1, tailored setup 0 + 0. The AI-written conventions were 
 I sell this setup, fitted to a team's own suite. This repo is how it's measured. Start with a repo
 check:
 
-<!-- LINK: offer page, added when it exists -->
+[damodoesthings.com/ai-test-setup](https://damodoesthings.com/ai-test-setup)
 
 ## The claim
 
