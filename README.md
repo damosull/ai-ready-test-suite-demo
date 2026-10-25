@@ -9,15 +9,20 @@ was built for, reviewed blind against the team's own conventions.
 
 ## Results
 
+Versions: Version 1 is tickets 01 to 05, two arms, rounds 1 and 2; v1.1 is held-out tickets 06 to
+08, three arms, round 3; v1.2 adds the fourth arm on 06 to 08, round 4.
+
 Three held-out tickets (customers, products, discounts) on the Saleor Dashboard's end-to-end
 suite. One AI-written test change per ticket per arm, every change reviewed by a fresh AI reviewer
-that did not know which arm wrote it.
+that did not know which arm wrote it. The reviewer is the same model as the generator (Claude
+Opus 5.5), in a fresh session told nothing about the arms. A planner comment left in a test can
+still show which arm wrote it.
 
 |                                                  | Playwright agents | Agents + AI-written conventions | Agents + expert conventions | Tailored setup |
 | ------------------------------------------------ | ----------------- | ------------------------------- | --------------------------- | -------------- |
 | Blockers (would not merge)                       | 1                 | 0                               | 0                           | **0**          |
 | Minor findings (would be sent back)              | 9                 | 1                               | 2                           | **0**          |
-| Green three runs out of three                    | 3/3               | 3/3                             | 3/3                         | 3/3            |
+| Tickets green three runs in a row                | 3/3               | 3/3                             | 3/3                         | 3/3            |
 | Failed when the feature was broken, as it should | 3/3               | 3/3                             | 3/3                         | 3/3            |
 | Minutes per ticket                               | 8 to 40           | 8.6 to 12.8                     | 6 to 40                     | 1.5 to 1.7     |
 
@@ -27,6 +32,9 @@ per arm, 240 out of 240 in all ([RESULTS.md](RESULTS.md), supplementary stabilit
 The tailored setup skips Playwright's planner, generator and healer loop, so part of its speed
 lead is a shorter workflow, not better tests. The two 40-minute sessions were a tool call that
 hung, explained in [RESULTS.md](RESULTS.md).
+
+Minutes per ticket don't include the one-off time to build the setup. Only the ai-conventions arm
+ran with a 5-minute cap on Playwright MCP tool calls; it never fired.
 
 **Written-down conventions make the difference, and the AI tool can write them itself.** Asked
 once to write the conventions a reviewer on this team would enforce, a fresh AI session read the
@@ -46,7 +54,8 @@ including the tailored setup's failed first round and what was changed, stay in
 [RESULTS.md](RESULTS.md) below the headline. On those five tickets the totals were baseline 1 + 12,
 expert conventions 0 + 1, tailored setup 0 + 0. The AI-written conventions were not run on them.
 
-Want this measured on your own suite and tickets? Start with a repo check:
+I sell this setup, fitted to a team's own suite. This repo is how it's measured. Start with a repo
+check:
 
 <!-- LINK: offer page, added when it exists -->
 
@@ -89,7 +98,8 @@ ticket, no human edits to anything generated.
 - three runs in a row with the suite's own runner;
 - a pre-registered change to the dashboard that breaks each ticket's feature while the screen still
   responds ([`demo/breaks/`](demo/breaks/)). A test that still passes is a blocker;
-- the pass rule above.
+- the pass rule: zero blockers, at most half the other arm's findings, and every spec green three
+  runs in a row.
 
 The tickets are in [`tickets/`](tickets/). Each ticket's tests are on their own branch. Held-out
 tickets: `baseline-r3-t06`..`t08`, `ai-conventions-r4-t06`..`t08`, `baseline-plus-rules-r3-t06`..`t08`,
@@ -123,6 +133,12 @@ them.
 The checklist and the expert conventions come from the same reading of the suite, so the arm
 given those conventions was scored against rules it was handed; the baseline and ai-conventions
 arms were not.
+
+The tailored setup was written from the same [CONVENTIONS.md](CONVENTIONS.md), and its
+`review-test` skill checks against the same [CHECKLIST.md](CHECKLIST.md) the reviewer scores with,
+so it too was scored against rules it carries. It was revised once, after failing round 1 on
+tickets 01 to 05, then frozen before tickets 06 to 08 were run. All eight tickets were written by
+the author.
 
 ## Credit
 

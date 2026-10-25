@@ -96,14 +96,14 @@ Three tickets written for the public demo (06, 07, 08), in areas none of the set
 for, each written three ways by the same AI tool on Saleor's suite and checked the same way
 ([RESULTS.md](RESULTS.md)).
 
-|                                        | Playwright's free test agents | + conventions the AI wrote itself | With the setup |
-| -------------------------------------- | ----------------------------- | --------------------------------- | -------------- |
-| Blockers                               | 1                             | 0                                 | 0              |
-| Minor findings                         | 9                             | 1                                 | 0              |
-| Stability, passes out of 20 per ticket | 60/60                         | 60/60                             | 60/60          |
-| Green every run                        | 3/3                           | 3/3                               | 3/3            |
-| Caught the break                       | 3/3                           | 3/3                               | 3/3            |
-| Minutes a ticket                       | 8.2 to 40.4                   | 8.6 to 12.8                       | 1.5 to 1.7     |
+|                                        | Playwright's free test agents        | + conventions the AI wrote itself    | With the setup                       |
+| -------------------------------------- | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| Blockers                               | 1                                    | 0                                    | 0                                    |
+| Minor findings                         | 9                                    | 1                                    | 0                                    |
+| Stability, passes out of 20 per ticket | 60/60 (20 runs on each of 3 tickets) | 60/60 (20 runs on each of 3 tickets) | 60/60 (20 runs on each of 3 tickets) |
+| Green every run                        | 3/3                                  | 3/3                                  | 3/3                                  |
+| Caught the break                       | 3/3                                  | 3/3                                  | 3/3                                  |
+| Minutes a ticket                       | 8.2 to 40.4                          | 8.6 to 12.8                          | 1.5 to 1.7                           |
 
 - **Blockers**: problems a reviewer would not merge the test with.
 - **Minor findings**: the test works, but a reviewer would send it back to read like the rest of

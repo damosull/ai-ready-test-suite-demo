@@ -1,5 +1,9 @@
 # How the two runs are scored
 
+> Note added 2026-10-25, after v1.2: a fourth arm (`ai-conventions`) ran in v1.2 as round 4,
+> pre-registered in its own addendum, [Addendum for v1.2](#addendum-for-v12-pre-registered-committed-before-any-v12-generation).
+> The text below is unchanged.
+
 This is the full method, written before any test was generated (see the commit history), so
 that someone else could run it again and get comparable numbers.
 
@@ -147,6 +151,10 @@ workflow that applies and checks them".
   the same files the baseline sees; the rules reach them only through `AGENTS.md`.
 - **`with-setup` is frozen** at its round-2 commit (`ba60244`, tagged `with-setup-frozen-v1`).
   Nothing in it changes in this version, whatever the result. There is no round 4.
+
+  > Note added 2026-10-25, after v1.2: a fourth arm ran in v1.2 as round 4, pre-registered in
+  > its own addendum below. `with-setup` was not regenerated.
+
 - **Three held-out tickets**, [`tickets/06.md` to `08.md`](tickets/), in customers, products and
   discounts, each fitting patterns the suite already has, each with a break in
   [`demo/breaks/`](demo/breaks/) checked by hand before this commit. Branches frozen before these

@@ -23,6 +23,14 @@ this repo), the questions for the reviewer, and tickets 06-08 replayed through q
 `repo-check/report.py`. Every figure is from a run file or RESULTS.md. To regenerate it, fill the
 runner's report from those run folders and the v1.2 evidence; don't hand-edit numbers.
 
+Outside read before publishing (2026-10-25, fixes approved by Damien, on `main`): README
+disclosures (the setup carries CONVENTIONS.md and CHECKLIST.md too; reviewer is the same model;
+setup build time not counted; MCP cap only on ai-conventions), the pass rule spelled out, a
+version map, the offer line above the link placeholder; RESULTS.md per-ticket round-3 times for
+baseline-plus-rules (06 5.8, 07 10.3, 08 39.5 min, transcript wall-clock) and the held-out agent
+range corrected to 6 to 40; notes under SCORING.md's title and v1.1 "no round 4"; SAMPLE-REPORT.md
+regenerated with qa-setup-kit's new stability cell ("60/60 (20 runs on each of 3 tickets)").
+
 Nothing is published. The repo is private; Damien decides when it goes public.
 
 ## How to resume (start a fresh session with "Read HANDOFF.md and carry on")

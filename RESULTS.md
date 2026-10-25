@@ -193,7 +193,8 @@ Giving the AI the conventions as plain rules removed nearly all of the baseline'
 blockers, and two minor findings in three tickets (one inline locator group, one leftover planner
 comment) against the baseline's one blocker and nine minors. The skills' measurable extra on these
 tickets is those two minors. The other difference is speed: with-setup sessions took 1.5 to 1.7
-minutes per held-out ticket, the agent-based arms 6 to 10 (40 when a tool call hung, below).
+minutes per held-out ticket, the agent-based arms 6 to 40 (5.8 to 40.4; the two 40-minute
+sessions were a tool call that hung, below).
 
 ### Tickets 01 to 05, three arms
 
@@ -286,7 +287,8 @@ Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at mos
 ### v1.1 notes
 
 - **Generation time.** Per session, round 3: baseline 8.5, 40.4, 8.2 minutes (06, 07, 08);
-  baseline-plus-rules 5.8 to 10.8 minutes, except 39.5 on ticket 08; with-setup 1.5 to 1.7. The two
+  baseline-plus-rules 5.8, 10.3, 39.5 minutes (06, 07, 08) and 6.2 to 10.8 on tickets 01 to 05;
+  with-setup 1.5 to 1.7. Wall-clock time of each headless session, from its transcript. The two
   40-minute sessions each lost 30 minutes to one call to the Playwright MCP server's `test_run`
   tool that never answered; Claude Code aborts an MCP tool call after 1800 seconds, and the session
   then carried on. It affects time only: scoring judges the code produced. A per-call MCP timeout
