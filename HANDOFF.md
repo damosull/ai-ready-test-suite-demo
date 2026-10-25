@@ -16,6 +16,13 @@ qa-setup-kit's generic `repo-check/` runner was proven on this repo, ticket 07: 
 AI-conventions 0 + 1, setup 0 + 0, all green, all caught, stability 20/20 each. Evidence and the
 comparison with v1.2 are in `evidence/kit-proof/`; branches `repo-check/*`.
 
+`SAMPLE-REPORT.md` (2026-10-25, approved by Damien, merged to `main`): the sample repo check a buyer
+sees, on Saleor. Saleor's real review history (`e2e/` and the earlier `playwright/`, read-only via
+`gh`; run folders `~/checks/saleor-dashboard/history-4-e2e/` and `history-5-playwright/`, outside
+this repo), the questions for the reviewer, and tickets 06-08 replayed through qa-setup-kit's
+`repo-check/report.py`. Every figure is from a run file or RESULTS.md. To regenerate it, fill the
+runner's report from those run folders and the v1.2 evidence; don't hand-edit numbers.
+
 Nothing is published. The repo is private; Damien decides when it goes public.
 
 ## How to resume (start a fresh session with "Read HANDOFF.md and carry on")

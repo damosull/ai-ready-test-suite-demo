@@ -4,7 +4,7 @@
 - **Your AI reviewer**: your team changed the code for 18 of its 40 comments on test files. They give 3 candidate conventions for your reviewer to confirm.
 - **The tests**: Playwright's free test agents, 10 findings at 8.2 to 40.4 minutes a ticket; with conventions the AI wrote itself, 1 at 8.6 to 12.8; with the setup, 0 at 1.5 to 1.7.
 - **The plan**: three additions to your repository: your conventions written where Claude Code reads them, a skill that writes each test to them, and a skill that checks each test before a person sees it.
-- **Next step**: do the plan yourself for free, or have the setup put in under the guarantee. The options are at the end.
+- **Next step**: write your conventions down yourself for free, or have the setup put in under the guarantee. The options are at the end.
 
 This is what a repo check finds when a team reviews little test code in pull requests. That is a finding in itself: your conventions live in reviewers' heads, or are not checked at all, so your AI tool has nothing to learn them from.
 
