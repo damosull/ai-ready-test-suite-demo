@@ -2,7 +2,7 @@
 
 - **Send-backs** (pull requests a reviewer asked to change before merging): 1 of 6 pull requests on `e2e/` (17%), and 5 of 50 pull requests on the earlier `playwright/` (10%).
 - **Your AI reviewer**: your team changed the code for 18 of its 40 comments on test files. They give 3 candidate conventions for your reviewer to confirm.
-- **The tests**: Playwright's free test agents, 10 findings at 8.2 to 40.4 minutes a ticket; with the setup, 0 at 1.5 to 1.7.
+- **The tests**: Playwright's free test agents, 10 findings at 8.2 to 40.4 minutes a ticket; with conventions the AI wrote itself, 1 at 8.6 to 12.8; with the setup, 0 at 1.5 to 1.7.
 - **The plan**: three additions to your repository: your conventions written where Claude Code reads them, a skill that writes each test to them, and a skill that checks each test before a person sees it.
 - **Next step**: do the plan yourself for free, or have the setup put in under the guarantee. The options are at the end.
 
@@ -129,14 +129,14 @@ What the setup adds that the free route doesn't:
 
 ## The next step
 
-1. **Do the plan in-house, free.** Paste this into your AI tool in your repository and commit what it writes where the tool reads it every time:
+1. **Write your conventions down yourself, free.** Paste this into your AI tool in your repository and commit what it writes where the tool reads it every time:
 
    > Read this repository's e2e suite and write the conventions a reviewer on this team would enforce for new end-to-end tests, as a section to add to AGENTS.md.
 
 2. **The setup, €4,950**, with the repo check's €950 credited in full if you go ahead within 30 days, under the guarantee: it passes when your own engineer would merge each test, it runs green in your CI, and it fails when the feature it covers is broken on purpose. If it doesn't pass, you don't pay.
 3. **The setup and six months' upkeep, €9,950.**
 
-The cost of waiting: 6 send-backs × \_\_\_ hours each × \_\_\_ per hour = **\_\_\_**, over 2025-05-23 to 2026-10-07.
+The cost of waiting is the cost line under What your reviewers send back today, filled in with your own hours and rate.
 
 ## What this sample is not
 
