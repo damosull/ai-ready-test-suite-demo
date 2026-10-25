@@ -20,8 +20,9 @@ comparison with v1.2 are in `evidence/kit-proof/`; branches `repo-check/*`.
 sees, on Saleor. Saleor's real review history (`e2e/` and the earlier `playwright/`, read-only via
 `gh`; run folders `~/checks/saleor-dashboard/history-4-e2e/` and `history-5-playwright/`, outside
 this repo), the questions for the reviewer, and tickets 06-08 replayed through qa-setup-kit's
-`repo-check/report.py`. Every figure is from a run file or RESULTS.md. To regenerate it, fill the
-runner's report from those run folders and the v1.2 evidence; don't hand-edit numbers.
+`repo-check/report.py`. Every figure is from a run file or RESULTS.md. To regenerate it, run
+qa-setup-kit's `repo-check/examples/saleor-sample/rebuild.sh`, which holds every input (see its
+README); don't hand-edit numbers.
 
 Outside read before publishing (2026-10-25, fixes approved by Damien, on `main`): README
 disclosures (the setup carries CONVENTIONS.md and CHECKLIST.md too; reviewer is the same model;
