@@ -76,8 +76,9 @@ The repo is public (2026-10-25) and linked from https://damodoesthings.com/ai-te
    stacks on this Mac also need memory). Prove a parallel run gives the same results as a serial
    one before relying on it. Then add the method, generically, to
    qa-setup-kit.
-2. Before publishing: someone other than the author reads RESULTS.md and the disclosures in
-   SCORING.md.
+2. Damien to confirm this is closed: an outside read of RESULTS.md and SCORING.md's disclosures
+   was asked for before publishing. "Outside read before publishing" in State above looks like it,
+   but the repo went public without this item being ticked off.
 3. Once the repo is public, set demo/graphic/social-card.png as the repo's social preview (GitHub →
    Settings → General → Social preview).
 
