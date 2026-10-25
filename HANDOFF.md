@@ -71,9 +71,9 @@ Nothing is published. The repo is private; Damien decides when it goes public.
 
 1. **Parallel stacks before the next big run.** Two or three isolated e2e stacks: git worktrees,
    port and compose-project offsets in `e2e/config.ts` (via an env var, defaulting to today's
-   values), Docker Desktop memory raised from 7.65 GB (one stack uses about 2.5 GB; fleet-pilot's
-   Supabase stack also takes about 3.4 GB when running). Prove a parallel run gives the same
-   results as a serial one before relying on it. Then add the method, generically, to
+   values), Docker Desktop memory raised from 7.65 GB (one stack uses about 2.5 GB; other Docker
+   stacks on this Mac also need memory). Prove a parallel run gives the same results as a serial
+   one before relying on it. Then add the method, generically, to
    qa-setup-kit.
 2. Offer-page link: `<!-- LINK: offer page, added when it exists -->` at the end of the README
    Results section.
@@ -96,17 +96,3 @@ Nothing is published. The repo is private; Damien decides when it goes public.
 - Pre-registered the fourth arm (`25051f9`, pushed before generation), wrote the conventions once
   in a clean export of the Saleor commit, ran tickets 06-08 as round 4, tallied with
   `demo/tally4.py`. The MCP cap never fired.
-
-## GitHub Actions incident (2026-10-24, 08:23-08:35 UTC)
-
-Pushing the imported repository triggered Saleor's own workflows three times: QA, CodeQL Advanced,
-Knip, and Deploy Dashboard to main staging. Actions were then disabled on the repo.
-
-- 12 runs, 33 jobs, about 86 runner minutes, about 103 billable minutes with per-job rounding
-  (Linux, 1x). Worked out from job start and end times; GitHub's billing-usage API needs a token
-  scope this machine's `gh` does not have.
-- The staging deploy job ran three times and failed at "Configure AWS Credentials". The role ARN
-  was empty (`arn:aws:iam:::role/`) because the repo has no secrets or variables, so AWS refused
-  the request. The build job before it built the dashboard and stored it as an Actions artifact on
-  the repo (since deleted); nothing left GitHub.
-- The Slack notification step failed with no webhook configured. Nothing was sent.
