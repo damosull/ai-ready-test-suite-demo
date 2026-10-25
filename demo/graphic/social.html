@@ -1,0 +1,91 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Fraunces;font-weight:700;src:url(fonts/fraunces-700.woff2)}
+@font-face{font-family:Atkinson;font-weight:400;src:url(fonts/atkinson-400.woff2)}
+@font-face{font-family:Atkinson;font-weight:700;src:url(fonts/atkinson-700.woff2)}
+:root{--ink:#0f1f26;--ink-soft:#34474f;--muted:#4a5d64;--rule:#dbe3e1;--grey:#9bb0ac;--teal:#0a7770;--teal-dark:#075a55;--mint:#d9f1ee;--paper:#ffffff;--surface:#f5f7f6}
+*{margin:0;box-sizing:border-box}
+html,body{width:1280px;height:640px}
+body{background:var(--surface);font-family:Atkinson,sans-serif;color:var(--ink);padding:40px 56px 28px}
+h1{font-family:Fraunces,serif;font-size:46px;line-height:1.12;letter-spacing:-.01em;max-width:none;white-space:nowrap}
+h1 .t{color:var(--teal-dark)}
+.sub{margin-top:14px;font-size:24px;color:var(--muted)}
+.grid{margin-top:18px;display:grid;grid-template-columns:470px 1fr;column-gap:0}
+.head{padding-right:28px !important;font-size:22px;font-weight:700;color:var(--ink-soft);padding:0 0 10px;border-bottom:1px solid var(--rule)}
+.row{display:contents}
+.cell{padding-right:28px;height:64px;display:flex;align-items:center;border-bottom:1px solid var(--rule)}
+.lab{font-size:27px;color:var(--ink-soft)}
+.row.hl .cell{background:var(--mint);border-bottom-color:var(--mint)}
+.row.hl .lab{font-weight:700;color:var(--teal-dark)}
+.row.hl .cell:first-child{padding-left:16px;margin-left:-16px;border-radius:8px 0 0 8px}
+.row.hl .cell:last-child{border-radius:0 8px 8px 0;margin-right:-16px}
+.bars{position:relative;width:100%;height:100%;display:flex;align-items:center;gap:10px}
+.track{display:flex;gap:2px;height:30px}
+.seg{height:30px}
+.seg.b{background:#b91c1c;border-radius:4px 0 0 4px}
+.seg.m{background:var(--grey)}
+.seg:last-child{border-radius:0 4px 4px 0}
+.seg:only-child{border-radius:4px}
+.val{font-size:20px;color:var(--ink);white-space:nowrap}
+.val b{font-family:Fraunces,serif;font-size:36px}
+.val small{font-size:21px;color:var(--muted)}
+.hl .val b{color:var(--teal-dark)}
+.range{position:absolute;height:6px;border-radius:3px;background:var(--grey);top:50%;transform:translateY(-50%)}
+.range::before,.range::after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:inherit;top:-3px;box-shadow:0 0 0 2px var(--surface)}
+.range::before{left:-6px}.range::after{right:-6px}
+.hl .range{background:var(--teal);box-shadow:none}
+.hl .range::before,.hl .range::after{box-shadow:0 0 0 2px var(--mint)}
+.rlab{position:absolute;top:50%;transform:translateY(-50%);font-family:Fraunces,serif;font-size:22px;white-space:nowrap}
+.hl .rlab{font-weight:700;color:var(--teal-dark)}
+.axis{position:relative;height:24px;font-family:Fraunces,serif;font-size:14px;color:var(--muted)}
+.axis span{position:absolute;transform:translateX(-50%);top:6px}
+.foot{margin-top:16px;display:flex;font-size:15px !important;justify-content:space-between;gap:24px;font-size:16px;color:var(--muted);line-height:1.35}
+.n{font-family:Fraunces,serif}.foot strong{color:var(--ink-soft)}
+</style></head>
+<body>
+<h1>Your AI tool wrote its own conventions:<br>findings fell from 10 to 1.<br><span class="t">The setup took them to 0.</span></h1>
+<p class="sub">Findings a reviewer would send back, 3 held-out tickets, Saleor's Playwright suite</p>
+
+<div class="grid" id="g">
+  <div class="head"></div>
+  <div class="head"></div>
+  
+</div>
+
+<div class="foot" style="font-size:22px !important"><div>A demonstration, not a study. Every test and verdict is public.</div><div><strong>github.com/damosull/ai-ready-test-suite-demo</strong></div></div>
+
+<script>
+const rows=[
+ {l:"Playwright's free test agents",b:1,m:9,lo:8,hi:40,r:"8 to 40*"},
+ {l:"+ conventions the AI wrote itself",b:0,m:1,lo:8.6,hi:12.8,r:"9 to 13"},
+ {l:"+ conventions an expert wrote",b:0,m:2,lo:6,hi:40,r:"6 to 40*"},
+ {l:"With the setup",b:0,m:0,lo:1.5,hi:1.7,r:"1.5 to 1.7",hl:1},
+];
+const g=document.getElementById('g'),U=40,MAX=42;
+for(const x of rows){
+  const row=document.createElement('div');row.className='row'+(x.hl?' hl':'');
+  let segs='';
+  if(x.b) segs+=`<div class="seg b" style="width:${x.b*U-2}px"></div>`;
+  if(x.m) segs+=`<div class="seg m" style="width:${x.m*U-2}px"></div>`;
+  const tot=x.b+x.m;
+  const note=x.b?` <small>1 blocking, 9 minor</small>`:'';
+  row.innerHTML=`<div class="cell lab">${x.l}</div>
+   <div class="cell"><div class="bars">${segs?`<div class="track">${segs}</div>`:''}<span class="val"><b>${tot}</b>${note}</span></div></div>
+   `;
+  g.appendChild(row);
+  const m=null;
+  requestAnimationFrame(()=>{});
+  x.el=m;
+}
+
+document.fonts.ready.then(()=>{
+  for(const x of []){
+    const w=x.el.clientWidth-90, s=v=>v/MAX*w;
+    x.el.innerHTML=`<div class="range" style="left:${s(x.lo)}px;width:${Math.max(s(x.hi)-s(x.lo),2)}px"></div><span class="rlab" style="left:${s(x.hi)+16}px">${x.r}</span>`;
+  }
+  
+  document.body.dataset.ready=1;
+});
+</script>
+</body></html>

@@ -5,7 +5,7 @@ given conventions the AI tool wrote for itself, the same agents given convention
 someone who knows the suite, and an AI setup tailored to the suite. All on tickets none of them
 was built for, reviewed blind against the team's own conventions.
 
-<!-- RESULTS GRAPHIC: placeholder. Four-arm totals for the held-out tickets go here. -->
+<img src="demo/graphic/results.png" width="100%" alt="Findings a reviewer would send back, and minutes a ticket, over three held-out tickets. Playwright's free test agents: 10 findings (1 blocking, 9 minor), 8 to 40 minutes. Plus conventions the AI wrote itself: 1 finding, 9 to 13 minutes. Plus conventions an expert wrote: 2 findings, 6 to 40 minutes. With the setup: 0 findings, 1.5 to 1.7 minutes. The 40-minute sessions each lost 30 minutes to a tool call that hung. Every side's tests passed 240 runs out of 240 and failed when the feature was broken.">
 
 ## Results
 

@@ -66,11 +66,12 @@ Nothing is published. The repo is private; Damien decides when it goes public.
    Supabase stack also takes about 3.4 GB when running). Prove a parallel run gives the same
    results as a serial one before relying on it. Then add the method, generically, to
    qa-setup-kit.
-2. Results graphic: placeholder comment near the top of README.md (now four arms).
-3. Offer-page link: `<!-- LINK: offer page, added when it exists -->` at the end of the README
+2. Offer-page link: `<!-- LINK: offer page, added when it exists -->` at the end of the README
    Results section.
-4. Before publishing: someone other than the author reads RESULTS.md and the disclosures in
+3. Before publishing: someone other than the author reads RESULTS.md and the disclosures in
    SCORING.md.
+4. Once the repo is public, set demo/graphic/social-card.png as the repo's social preview (GitHub →
+   Settings → General → Social preview).
 
 ## Open problems
 
