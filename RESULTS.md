@@ -61,9 +61,9 @@ breaks. Numbers come from [`demo/tally4.py`](demo/tally4.py).
 
 Pass rule, `with-setup` against `baseline`: zero blockers yes; at most half its findings (0 vs 10) yes; green 3/3 yes. **PASS**
 
-Pass rule, `with-setup` against `ai-conventions`: zero blockers yes; at most half its findings (0 vs 1) yes; green 3/3 yes. **PASS**
+Pass rule, `with-setup` against `ai-conventions`: zero blockers yes; at most half its findings (0 vs 1) yes; green 3/3 yes. **PASS**, by one minor finding, too small to call.
 
-Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at most half its findings (0 vs 2) yes; green 3/3 yes. **PASS**
+Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at most half its findings (0 vs 2) yes; green 3/3 yes. **PASS**, by two minor findings, too small to call.
 
 #### `ai-conventions` against `baseline-plus-rules`
 
@@ -182,7 +182,7 @@ against. Reviews in v1.1 see the whole change, not only `e2e/`. Numbers come fro
 
 Pass rule, `with-setup` against `baseline`: zero blockers yes; at most half its findings (0 vs 10) yes; green 3/3 yes. **PASS**
 
-Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at most half its findings (0 vs 2) yes; green 3/3 yes. **PASS**
+Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at most half its findings (0 vs 2) yes; green 3/3 yes. **PASS**, by two minor findings, too small to call.
 
 **Verdict.** `with-setup` passes the pass rule against both arms on the held-out tickets: no
 blockers, green 3/3, and fewer than half the findings of `baseline` (0 against 10) and of

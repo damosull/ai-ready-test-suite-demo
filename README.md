@@ -3,9 +3,10 @@
 A side-by-side test on a real open-source suite: Playwright's free test agents, the same agents
 given conventions the AI tool wrote for itself, the same agents given conventions written by
 someone who knows the suite, and an AI setup tailored to the suite. All on tickets none of them
-was built for, reviewed blind against the team's own conventions.
+was built for, reviewed blind against conventions the author drew from the suite's existing tests
+(not reviewed by Saleor).
 
-<img src="demo/graphic/results.png" width="100%" alt="Findings a reviewer would send back, and minutes a ticket, over three held-out tickets. Playwright's free test agents: 10 findings (1 blocking, 9 minor), 8 to 40 minutes. Plus conventions the AI wrote itself: 1 finding, 9 to 13 minutes. Plus conventions an expert wrote: 2 findings, 6 to 40 minutes. With the setup: 0 findings, 1.5 to 1.7 minutes. The 40-minute sessions each lost 30 minutes to a tool call that hung. Every side's tests passed 240 runs out of 240 and failed when the feature was broken.">
+<img src="demo/graphic/results.png" width="100%" alt="Findings a reviewer would send back, and minutes a ticket, over three held-out tickets. Playwright's free test agents: 10 findings (1 blocking, 9 minor), 8 to 40 minutes. Plus conventions the AI wrote itself: 1 finding, 9 to 13 minutes. Plus conventions an expert wrote: 2 findings, 6 to 40 minutes. With the setup: 0 findings, 1.5 to 1.7 minutes. The 40-minute sessions each lost 30 minutes to a tool call that hung. Every arm passed 60 of 60 (240 in all) and failed when the feature was broken.">
 
 ## Results
 
@@ -15,8 +16,9 @@ Versions: Version 1 is tickets 01 to 05, two arms, rounds 1 and 2; v1.1 is held-
 Three held-out tickets (customers, products, discounts) on the Saleor Dashboard's end-to-end
 suite. One AI-written test change per ticket per arm, every change reviewed by a fresh AI reviewer
 that did not know which arm wrote it. The reviewer is the same model as the generator (Claude
-Opus 5.5), in a fresh session told nothing about the arms. A planner comment left in a test can
-still show which arm wrote it.
+Opus 5.5), in a fresh session told nothing about the arms. The agent arms' changes include the
+Planner's plan files under `specs/`, which the tailored setup's do not, so from round 3, when the
+reviewer saw the whole change, it could tell the tailored setup from the agent arms.
 
 |                                                  | Playwright agents | Agents + AI-written conventions | Agents + expert conventions | Tailored setup |
 | ------------------------------------------------ | ----------------- | ------------------------------- | --------------------------- | -------------- |
@@ -52,7 +54,10 @@ an element by position. With conventions, from either source, they mostly did no
 The first version of this demo used five order-management tickets and two arms. Its results,
 including the tailored setup's failed first round and what was changed, stay in
 [RESULTS.md](RESULTS.md) below the headline. On those five tickets the totals were baseline 1 + 12,
-expert conventions 0 + 1, tailored setup 0 + 0. The AI-written conventions were not run on them.
+expert conventions 0 + 1 (from a whole-change review, while the other two arms had a
+test-folder-only review), tailored setup 0 + 0, with ticket 01 marked because the setup was not
+written blind to its baseline output ([SCORING.md, "Disclosure: ticket 01"](SCORING.md#disclosure-ticket-01)).
+The AI-written conventions were not run on them.
 
 I sell this setup, fitted to a team's own suite. This repo is how it's measured. Start with a repo
 check:
@@ -138,11 +143,12 @@ The tailored setup was written from the same [CONVENTIONS.md](CONVENTIONS.md), a
 `review-test` skill checks against the same [CHECKLIST.md](CHECKLIST.md) the reviewer scores with,
 so it too was scored against rules it carries. It was revised once, after failing round 1 on
 tickets 01 to 05, then frozen before tickets 06 to 08 were run. All eight tickets were written by
-the author.
+the author, and so were CONVENTIONS.md and CHECKLIST.md.
 
 ## Credit
 
 The application and its end-to-end suite are [Saleor Dashboard](https://github.com/saleor/saleor-dashboard)
-by Saleor Commerce, used under the BSD-3-Clause licence (see [LICENSE](LICENSE)). The suite's
-conventions, which this demo only writes down, are theirs. Saleor's own README is kept as
+by Saleor Commerce, used under the BSD-3-Clause licence (see [LICENSE](LICENSE)). The suite and
+its patterns are theirs. The conventions written down here were drawn by the author from the
+suite's existing tests and were not reviewed by Saleor. Saleor's own README is kept as
 [README.saleor.md](README.saleor.md). This repository is not affiliated with or endorsed by Saleor.
