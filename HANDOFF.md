@@ -32,7 +32,7 @@ baseline-plus-rules (06 5.8, 07 10.3, 08 39.5 min, transcript wall-clock) and th
 range corrected to 6 to 40; notes under SCORING.md's title and v1.1 "no round 4"; SAMPLE-REPORT.md
 regenerated with qa-setup-kit's new stability cell ("60/60 (20 runs on each of 3 tickets)").
 
-Second outside read (2026-10-27, branch `outside-read-2`): an independent read of README.md,
+Second outside read (2026-10-27, live on `main` at `377cc3d`): an independent read of README.md,
 RESULTS.md and SCORING.md. Fixes applied: the README says the agent arms' changes carry the
 Planner's `specs/` plan files, so from round 3 the reviewer could tell the tailored setup from the
 agent arms; the conventions were drawn by the author from the suite's tests, not reviewed by Saleor,
