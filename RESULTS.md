@@ -253,7 +253,7 @@ were reviewed on the `e2e/` part of each change, round 3 on the whole change.
 
 Pass rule, `with-setup` against `baseline`: zero blockers yes; at most half its findings (0 vs 13) yes; green 3/3 yes. **PASS**
 
-Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at most half its findings (0 vs 1) yes; green 3/3 yes. **PASS**
+Pass rule, `with-setup` against `baseline-plus-rules`: zero blockers yes; at most half its findings (0 vs 1) yes; green 3/3 yes. **PASS**, by one minor finding, too small to call.
 
 ### Every failed item, v1.1 comparison
 
